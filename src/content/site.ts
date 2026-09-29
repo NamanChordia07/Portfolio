@@ -41,10 +41,17 @@ export const claims = {
     value: "32k",
     source: "About 8k labelled number and direction claims per template family, four families, three synthetic domains.",
   },
-  plTests: { value: "58 tests", source: "pytest suite, 93% line coverage, mypy --strict (September 2026)." },
+  plTests: {
+    value: "71 tests",
+    source: "pytest suite, 95% line coverage, mypy --strict; both challenge sets run as regression tests (September 2026).",
+  },
   throughput: {
-    value: "~7,700 claims/s",
-    source: "Single-threaded verification on a 2.1 GHz cloud vCPU, measured on the held-out corpus.",
+    value: "~5,000–6,200 claims/s",
+    source: "Single-threaded verification on a 2.1 GHz Xeon cloud vCPU across the four template families, about 2–2.5 ms per report (run of 29 Sep 2026).",
+  },
+  challengeHeldout: {
+    value: "62 of 65",
+    source: "Hand-written held-out challenge cases passed on the first run, before any fix: 100% recall, 87.9% precision (4 false positives, 0 missed errors). All 65 pass after the fixes.",
   },
   ablation: {
     value: "24–29%",

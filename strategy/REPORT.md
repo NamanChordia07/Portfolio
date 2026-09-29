@@ -78,7 +78,7 @@ Spring Boot work), and the relevant-coursework line.
 - minimal repair; guarded generation loop with Gemini and Claude providers (official SDKs);
 - CLI (exit code gating), MCP server (4 tools), HTML provenance report;
 - benchmark: 3 domains, 9 error types, independent ground truth, dev + 3 held-out families, 3 ablations, naive baseline;
-- 62 tests, 93% coverage, `mypy --strict`, `ruff`, CI.
+- 71 tests, 95% coverage, `mypy --strict`, `ruff`, CI; two hand-labelled challenge sets (held-out first run: 62/65, recall 100%, precision 87.9%).
 
 Measured, first run per held-out family: **98.9–100% of injected errors caught at 1.1–4.5% false
 alarms, vs 16–20% for a naive lookup**; the naive lookup catches **0%** of direction, basis, entity,

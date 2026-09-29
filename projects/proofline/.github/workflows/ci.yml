@@ -19,4 +19,5 @@ jobs:
       - run: mypy
       - run: pytest
       - run: proofline demo
+      - run: proofline challenge --set original && proofline challenge --set heldout
       - run: proofline bench --n 50 --families dev,heldout

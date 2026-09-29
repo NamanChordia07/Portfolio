@@ -16,10 +16,12 @@ from pathlib import Path
 from typing import Any
 
 from ..facts import DatasetSpec, FactSheet, compute_facts
-from ..verify import Status, Verdict, VerifyOptions, verify_text
+from ..verify import Verdict, VerifyOptions, verify_text
 from .datasets import DATASETS
 
-DEFAULT_PATH = Path(__file__).resolve().parents[3] / "benchmarks" / "challenge.yaml"
+BENCHMARKS = Path(__file__).resolve().parents[3] / "benchmarks"
+DEFAULT_PATH = BENCHMARKS / "challenge.yaml"
+CHALLENGE_SETS = {"original": DEFAULT_PATH, "heldout": BENCHMARKS / "challenge_heldout.yaml"}
 
 
 @dataclass
@@ -130,9 +132,7 @@ def run_challenge(path: Path = DEFAULT_PATH, options: VerifyOptions | None = Non
             "p95": round(latencies[int(0.95 * (len(latencies) - 1))], 3),
             "max": round(latencies[-1], 3),
         },
-        "categories": {
-            cat: {"cases": len(rs), "passed": sum(r.passed for r in rs)} for cat, rs in sorted(by_cat.items())
-        },
+        "categories": {cat: {"cases": len(rs), "passed": sum(r.passed for r in rs)} for cat, rs in sorted(by_cat.items())},
         "failures": [
             {
                 "id": r.id,
@@ -177,5 +177,5 @@ def to_markdown(res: dict[str, Any]) -> str:
             detail = "; ".join(f"`{t['token']}` expected {t['expected']}, got {t['got']}" for t in fl["tokens"])
             if fl["spurious"]:
                 detail += ("; " if detail else "") + f"spurious: {', '.join(fl['spurious'])}"
-            lines.append(f"- `{fl['id']}` \"{fl['text']}\": {detail}")
+            lines.append(f'- `{fl["id"]}` "{fl["text"]}": {detail}')
     return "\n".join(lines)

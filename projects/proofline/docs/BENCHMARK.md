@@ -36,6 +36,8 @@ Can the verifier find wrong numbers in report prose without flagging correct one
 | 4 | Wrote `heldout2`; ran once → `results/heldout2_first_run.json`. One construction ("2.3% (2.2% last month)") caused almost all false alarms; fixed. |
 | 5 | Wrote `heldout3`; ran once. Found a **benchmark** bug: one template hard-coded "lifted", so falling metrics were labelled clean while the verifier (correctly) flagged them. Fixed the labels with the extractor untouched → `results/heldout3_first_run_corrected_labels.json`. The uncorrected file is kept too. |
 | 6 | Added common verbs found missing ("raised", "lowered"); `results/current.*` is the state after all fixes, where every family has been seen. |
+| 7 | Wrote the hand-labelled challenge set (`benchmarks/challenge.yaml`, see below); ran once → `results/challenge_first_run.json`; fixed what it exposed. |
+| 8 | Wrote a second, held-out challenge set in new phrasings (`benchmarks/challenge_heldout.yaml`); ran once → `results/challenge_heldout_first_run.json`; fixed what it exposed; re-ran the template families to confirm no regression. |
 
 ## Generalisation (first run per held-out family)
 
@@ -70,6 +72,52 @@ From `proofline bench --n 200` (full tables in [results/current.md](results/curr
 | heldout2 | 100.0% | 0.03% | 100.0% | 99.9% | 0.05% |
 | heldout3 | 99.9% | 1.11% | 87.2% | 98.4% | 1.16% |
 
+The same runs as a gate decision (a claim is flagged if it is contradicted **or** left
+unverifiable, so an unverifiable correct claim counts as a false positive), with latency:
+
+| family | precision | recall | F1 | accuracy | FP | FN | p50 per report | p95 per report | claims/s |
+|---|---|---|---|---|---|---|---|---|---|
+| dev | 98.6% | 100.0% | 0.993 | 99.86% | 12 | 0 | 2.2 ms | 4.1 ms | ~6,200 |
+| heldout | 99.8% | 100.0% | 0.999 | 99.97% | 2 | 0 | 2.0 ms | 3.3 ms | ~6,200 |
+| heldout2 | 99.8% | 100.0% | 0.999 | 99.98% | 2 | 0 | 2.5 ms | 5.4 ms | ~5,000 |
+| heldout3 | 91.5% | 99.9% | 0.955 | 98.99% | 75 | 1 | 2.1 ms | 3.7 ms | ~5,600 |
+
+Latency is single-threaded wall time for `verify_text` on one report (about 13 claims) on a
+2.1 GHz Xeon cloud vCPU; it varies by roughly ±20% between runs.
+
+## Hand-labelled challenge sets
+
+Template families test many sentences built from a few constructions. The challenge sets
+test many constructions, one or two sentences each, written by hand against the fact
+sheets and labelled with what a careful analyst would conclude from the data, not with what
+Proofline outputs. Thirteen categories: basics, points vs percent, currency and scale
+(K/M, lakh/crore, $ vs ₹ vs €), absolute numbers, wrong entity, wrong period or basis, wrong
+direction, lower-is-better metrics, hedges and rounding, missing evidence, ambiguity
+(a change with no stated comparison), context (headings, anaphora, lists) and identifiers
+(Week 32, FY26, Tower 2).
+
+Scored per labelled claim. "Flag" = contradicted or unverifiable, the positive class.
+
+| set | cases | claims | first run: cases passed | status accuracy | precision | recall | F1 | FP | FN | p50 per case | after fixes |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| original ([challenge.yaml](../benchmarks/challenge.yaml)) | 68 | 78 | 63/68 | 94.9% | 100.0% | 94.1% | 0.970 | 0 | 2 | 0.38 ms | 68/68 |
+| held-out ([challenge_heldout.yaml](../benchmarks/challenge_heldout.yaml)) | 65 | 79 | 62/65 | 94.9% | 87.9% | 100.0% | 0.935 | 4 | 0 | 0.51 ms | 65/65 |
+
+What the first runs exposed:
+
+- **Original set.** A change with no stated comparison ("Occupancy rose 1.1%") was accepted
+  because it matched *some* basis; it is now `unverifiable/ambiguous` when more than one
+  basis exists. "Spa revenue" and "Weekend churn" were checked as room revenue and churn
+  (a qualifier word now makes an unknown metric). A level equal to last period's value
+  was diagnosed as a wrong value instead of a stale period (`wrong_basis`).
+- **Held-out set.** No error was missed; all failures were false positives. "Sold 1,017
+  rooms" (a metric name split around its number) was unattributed; "topped $460K" was read
+  as a change instead of a lower bound; "(Tower 2)" was read as a claim.
+
+Both sets now pass completely, so neither is an unbiased test any more; the first-run rows
+above are the honest generalisation numbers. The next held-out set should come from real
+model output (`proofline eval-llm`), labelled by hand.
+
 Per error type, the naive lookup detects 0% of `wrong_direction`, `unit_confusion`,
 `wrong_basis`, `wrong_entity` and `wrong_metric` errors in every family; Proofline detects
 99-100% of each.
@@ -86,5 +134,7 @@ Per error type, the naive lookup detects 0% of `wrong_direction`, `unit_confusio
 
 ```bash
 pip install -e ".[dev]"
-proofline bench --n 200 --out docs/results/current.md --json docs/results/current.json   # ~25 s
+proofline bench --n 200 --out docs/results/current.md --json docs/results/current.json   # ~40 s
+proofline challenge --set original                                                        # exit 1 on any failed case
+proofline challenge --set heldout
 ```

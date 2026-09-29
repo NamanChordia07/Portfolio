@@ -102,3 +102,23 @@ def test_unstated_basis_checks_every_basis(hotel):
     assert verify_text("Rooms sold rose 8.4%.", hotel).passed
     v = verdicts("Rooms sold rose 9.9%.", hotel)["9.9%"]
     assert v.status is Status.CONTRADICTED and "no comparison basis stated" in v.message
+
+
+@pytest.mark.parametrize(
+    "text, token, status",
+    [
+        ("Harbor View sold 1,017 rooms, 67 fewer than the prior week.", "1,017", Status.SUPPORTED),
+        ("Harbor View sold 1,017 rooms, 67 fewer than the prior week.", "67", Status.SUPPORTED),
+        ("Portfolio room revenue topped $460K.", "$460K", Status.SUPPORTED),
+        ("Portfolio room revenue topped $470K.", "$470K", Status.CONTRADICTED),
+    ],
+)
+def test_split_metric_names_and_hedge_verbs(hotel, text, token, status):
+    assert verdicts(text, hotel)[token].status is status
+
+
+def test_numbers_inside_names_are_not_claims(hotel):
+    assert set(verdicts("Harbor View (Tower 2) sold 1,017 rooms.", hotel)) == {"1,017"}
+    # An entity name followed by a count is still a claim.
+    listed = verdicts("Rooms sold by property: Cedar Lodge 434, Harbor View 1017.", hotel)
+    assert listed["434"].status is Status.SUPPORTED and listed["1017"].status is Status.SUPPORTED

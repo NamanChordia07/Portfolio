@@ -1088,6 +1088,56 @@
     "detected": 1.0,
     "naive": 0.2582
    }
-  ]
+  ],
+  "challenge": {
+   "challenge_first_run": {
+    "cases": 68,
+    "passed": 63,
+    "claims": 78,
+    "statusAccuracy": 0.9487,
+    "precision": 1.0,
+    "recall": 0.9412,
+    "f1": 0.9697,
+    "fp": 0,
+    "fn": 2,
+    "p50ms": 0.378
+   },
+   "challenge_heldout_first_run": {
+    "cases": 65,
+    "passed": 62,
+    "claims": 79,
+    "statusAccuracy": 0.9494,
+    "precision": 0.8788,
+    "recall": 1.0,
+    "f1": 0.9355,
+    "fp": 4,
+    "fn": 0,
+    "p50ms": 0.514
+   },
+   "challenge_current": {
+    "cases": 68,
+    "passed": 68,
+    "claims": 78,
+    "statusAccuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "fp": 0,
+    "fn": 0,
+    "p50ms": 0.444
+   },
+   "challenge_heldout_current": {
+    "cases": 65,
+    "passed": 65,
+    "claims": 79,
+    "statusAccuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "fp": 0,
+    "fn": 0,
+    "p50ms": 0.382
+   }
+  }
  }
 }

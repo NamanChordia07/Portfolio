@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 from enum import StrEnum
 
 from .facts import FactSheet, MetricType
-from .numbers import NumberMention, Unit, iter_numbers
+from .numbers import Hedge, NumberMention, Unit, iter_numbers
 
 
 class ClaimKind(StrEnum):
@@ -229,6 +229,10 @@ def _phrase_re(phrases: list[str]) -> re.Pattern[str] | None:
     return re.compile(rf"(?<![A-Za-z0-9])(?:{alt})(?![A-Za-z0-9])", re.IGNORECASE)
 
 
+_BLANKS = re.compile(r"[ \t]*")
+_NUMBER_WORD = r"(?:[$₹€£]\s?)?\d[\d,]*(?:\.\d+)?\s?(?:[kKmM]|thousand|million|lakh|crore)?"
+
+
 @dataclass
 class _Hit:
     start: int
@@ -257,6 +261,21 @@ class Lexicon:
             for p in (*b.phrases, *_DEFAULT_BASIS_PHRASES.get(canonical, ()), b.label):
                 self._basis_phrases.setdefault(p.lower(), b.id)
         self._metric_re = _phrase_re(list(self._metric_phrases))
+        # Two-word metric names can be split around the number: "rooms sold" -> "sold 1,017 rooms".
+        self._inverted: dict[tuple[str, str], str] = {}
+        for phrase, metric_id in self._metric_phrases.items():
+            words = phrase.split()
+            if len(words) == 2:
+                self._inverted.setdefault((words[1], words[0]), metric_id)
+        self._inverted_re = (
+            re.compile(
+                rf"(?<![A-Za-z0-9])(?P<verb>{'|'.join(sorted({re.escape(v) for v, _ in self._inverted}))})\s+"
+                rf"{_NUMBER_WORD}\s+(?P<noun>{'|'.join(sorted({re.escape(n) for _, n in self._inverted}))})(?![A-Za-z0-9])",
+                re.IGNORECASE,
+            )
+            if self._inverted
+            else None
+        )
         self._entity_re = _phrase_re(list(self._entity_phrases))
         self._basis_re = _phrase_re(list(self._basis_phrases))
 
@@ -269,7 +288,14 @@ class Lexicon:
         return self._hits(self._basis_re, self._basis_phrases, text)
 
     def metrics(self, text: str, mask: list[_Hit]) -> list[_Hit]:
-        return [h for h in self._hits(self._metric_re, self._metric_phrases, text) if not _overlaps(h, mask)]
+        hits = [h for h in self._hits(self._metric_re, self._metric_phrases, text) if not _overlaps(h, mask)]
+        # "sold 1,017 rooms" names the metric "rooms sold" with its words split around the number.
+        for m in self._inverted_re.finditer(text) if self._inverted_re else ():
+            metric_id = self._inverted.get((m.group("verb").lower(), m.group("noun").lower()))
+            h = _Hit(m.start("noun"), m.end("noun"), metric_id or "")
+            if metric_id and not _overlaps(h, mask + hits):
+                hits.append(h)
+        return sorted(hits, key=lambda h: h.start)
 
     def entities(self, text: str, mask: list[_Hit]) -> list[_Hit]:
         return [h for h in self._hits(self._entity_re, self._entity_phrases, text) if not _overlaps(h, mask)]
@@ -304,6 +330,22 @@ def _qualifier(text: str, hit: _Hit, entity_hits: list[_Hit]) -> str | None:
     if word.lower() in _QUALIFIER_OK or word.lower() in _DIRECTION_WORDS:
         return None
     return word
+
+
+def _names_a_thing(text: str, n: NumberMention, sentence_start: int, known: list[_Hit]) -> bool:
+    """A bare integer after a capitalised word mid-sentence is part of a name: "Tower 2", "Terminal 4".
+
+    Entity, metric and basis words are excluded, so "Enterprise 3" in a list of segments is still a claim.
+    """
+    if n.unit is not Unit.NONE or n.currency or n.scale != 1.0 or n.sign is not None or not n.text.isdigit():
+        return False
+    m = re.search(r"([A-Z][a-z]+)[ \t]+$", text[sentence_start : n.start])
+    if not m:
+        return False
+    word_start = sentence_start + m.start(1)
+    if not text[sentence_start:word_start].strip(" \t\n#*-•(\"'"):
+        return False  # first word of the sentence: "Sold 42 ..." is capitalised because it starts the sentence
+    return not any(h.start <= word_start < h.end for h in known)
 
 
 def _overlaps(h: _Hit, others: list[_Hit]) -> bool:
@@ -368,10 +410,12 @@ def extract_claims(text: str, sheet: FactSheet, options: ExtractOptions | None =
             # An unknown metric: claims about it are reported as unverifiable, never checked against a lookalike.
             h.value = f"?{q.lower()} {text[h.start : h.end].lower()}"
     numbers = list(iter_numbers(text))
+    # A verb that is itself the hedge ("topped $460K", "exceeded 70%") bounds a level; it is not a change.
+    hedge_verb_ends = {n.start for n in numbers if n.hedge is not Hedge.EXACT}
     direction_hits = [
         (m.start(), m.end(), _DIRECTION_WORDS[m.group(1).lower()])
         for m in _DIRECTION_RE.finditer(text)
-        if not _NOT_DIRECTION_AFTER.match(text, m.end())
+        if not _NOT_DIRECTION_AFTER.match(text, m.end()) and _BLANKS.match(text, m.end()).end() not in hedge_verb_ends  # type: ignore[union-attr]
     ]
 
     claims: list[Claim] = []
@@ -396,7 +440,9 @@ def extract_claims(text: str, sheet: FactSheet, options: ExtractOptions | None =
 
         s_metrics = [h for h in metric_hits if s <= h.start < e]
         s_bases = [h for h in basis_hits if s <= h.start < e]
-        s_numbers = [n for n in numbers if s <= n.start < e]
+        s_numbers = [
+            n for n in numbers if s <= n.start < e and not _names_a_thing(text, n, s, entity_hits + metric_hits + basis_hits)
+        ]
         s_dirs = [d for d in direction_hits if s <= d[0] < e]
         clauses = _clauses(text, s, e)
         sentence_claims: list[Claim] = []

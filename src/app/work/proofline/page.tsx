@@ -238,6 +238,14 @@ export default function ProoflinePage() {
               labels, not the verifier, and kept both result files.
             </p>
             <p>
+              <strong>A second, harder test.</strong> Templates give many sentences from a few constructions, so I also wrote challenge
+              sets by hand: one construction per case, labelled from the data, across thirteen categories from points-versus-percent and
+              lakh/crore to ambiguous comparisons and identifiers. A held-out set written after the first was fixed passed{" "}
+              <Claim claim={claims.challengeHeldout} /> cases on its first run. It missed no errors; the failures were false positives
+              (&ldquo;sold 1,017 rooms&rdquo;, &ldquo;topped $460K&rdquo;, &ldquo;Tower 2&rdquo;), each fixed with a general rule and
+              re-checked against the template families.
+            </p>
+            <p>
               <strong>What they don&apos;t say.</strong> The text is template-generated and the templates share an author with the
               extractor; injected error rates are chosen, not observed. The next measurement is a real model:{" "}
               <code>proofline eval-llm</code> reports first-draft versus guarded error rates for Gemini or Claude, and no real-model

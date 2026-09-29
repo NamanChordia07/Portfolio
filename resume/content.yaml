@@ -156,7 +156,7 @@ projects:
         in: [ai]
         text: >-
           Shipped as a Python library, CI-gating CLI and an MCP server agents can call, with a guarded Gemini/Claude loop
-          (draft, verify, targeted feedback, deterministic repair); 58 tests, 93% coverage, mypy --strict.
+          (draft, verify, targeted feedback, deterministic repair); 71 tests, 95% coverage, mypy --strict.
   - id: cluecode
     name: ClueCode
     link: { label: cluecode.in, url: "https://cluecode.in" }

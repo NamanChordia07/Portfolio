@@ -22,3 +22,4 @@ jobs:
       - run: mypy
       - run: pytest
       - run: proofline demo
+      - run: proofline challenge --set original && proofline challenge --set heldout

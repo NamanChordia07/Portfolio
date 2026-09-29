@@ -146,7 +146,7 @@ function WorkCard({ item, featured = false }: { item: WorkItem; featured?: boole
 function factLabel(slug: WorkItem["slug"], value: string) {
   if (slug === "proofline" && value === claims.recall.value) return "of injected numeric errors caught on held-out phrasing";
   if (slug === "proofline" && value === claims.naive.value) return "for a naive “is this number in the data?” check";
-  if (slug === "proofline" && value === claims.plTests.value) return "93% coverage, mypy --strict";
+  if (slug === "proofline" && value === claims.plTests.value) return "95% coverage, mypy --strict";
   if (slug === "cluecode") return "automated tests across web, desktop and E2E";
   if (slug === "enterprise-automation") return "of manual mailbox tracking removed";
   return "";

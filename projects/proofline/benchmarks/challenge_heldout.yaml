@@ -1,0 +1,155 @@
+# Held-out challenge set.
+#
+# Written after benchmarks/challenge.yaml had been used to fix Proofline, so that set is no longer
+# an unbiased test. These cases were written by hand from the fact sheets alone (values looked up in
+# the computed facts, never in verifier output), in phrasings that do not appear in the first set,
+# and run exactly once before any change to Proofline. The first-run result is kept in
+# docs/results/challenge_heldout_first_run.json whatever it shows.
+#
+# Same format as challenge.yaml:
+#   token  - the exact text of the number or direction word
+#   status - supported | contradicted | unverifiable
+#   reason - optional; checked only when given
+
+- {id: hb-01, category: basics, dataset: hotel_weekly, text: "Portfolio RevPAR was $108.77, down 3.6% on the prior week.",
+   expect: [{token: "$108.77", status: supported}, {token: "3.6%", status: supported}]}
+- {id: hb-02, category: basics, dataset: hotel_weekly, text: "Rooms sold reached 2,853, 222 more than a year ago.",
+   expect: [{token: "2,853", status: supported}, {token: "222", status: supported}]}
+- {id: hb-03, category: basics, dataset: retail_monthly, text: "Company-wide orders were 51,906, 1.6% short of budget.",
+   expect: [{token: "51,906", status: supported}, {token: "1.6%", status: supported}]}
+- {id: hb-04, category: basics, dataset: saas_monthly, text: "Across all segments MRR was $672,271, 1.4% ahead of plan.",
+   expect: [{token: "$672,271", status: supported}, {token: "1.4%", status: supported}]}
+- {id: hb-05, category: basics, dataset: retail_monthly, text: "West's AOV was ₹1,512, up 2.0% against budget.",
+   expect: [{token: "₹1,512", status: supported}, {token: "2.0%", status: supported}]}
+
+- {id: hp-01, category: points_vs_percent, dataset: hotel_weekly, text: "Portfolio occupancy was up 1.1% on forecast.",
+   expect: [{token: "1.1%", status: supported}]}
+- {id: hp-02, category: points_vs_percent, dataset: hotel_weekly, text: "Portfolio occupancy was up 0.7% on forecast.",
+   expect: [{token: "0.7%", status: contradicted, reason: unit_confusion}]}
+- {id: hp-03, category: points_vs_percent, dataset: retail_monthly, text: "East's conversion rate dropped 0.31 percentage points vs last month.",
+   expect: [{token: "0.31 percentage points", status: supported}]}
+- {id: hp-04, category: points_vs_percent, dataset: retail_monthly, text: "East's conversion rate dropped 9.6% vs last month.",
+   expect: [{token: "9.6%", status: supported}]}
+- {id: hp-05, category: points_vs_percent, dataset: saas_monthly, text: "Overall churn was 0.06 pts above last month.",
+   expect: [{token: "0.06 pts", status: supported}]}
+- {id: hp-06, category: points_vs_percent, dataset: saas_monthly, text: "Overall churn was 2.1 pts above last month.",
+   expect: [{token: "2.1 pts", status: contradicted, reason: unit_confusion}]}
+- {id: hp-07, category: points_vs_percent, dataset: retail_monthly, text: "West's return rate fell roughly 90 bps vs last year.",
+   expect: [{token: "90 bps", status: supported}]}
+
+- {id: hc-01, category: currency_and_scale, dataset: retail_monthly, text: "Company revenue came to ₹9.6 crore.",
+   expect: [{token: "₹9.6 crore", status: supported}]}
+- {id: hc-02, category: currency_and_scale, dataset: retail_monthly, text: "North revenue was ₹30.3 million.",
+   expect: [{token: "₹30.3 million", status: supported}]}
+- {id: hc-03, category: currency_and_scale, dataset: retail_monthly, text: "North revenue was ₹3.03 lakh.",
+   expect: [{token: "₹3.03 lakh", status: contradicted, reason: scale_error}]}
+- {id: hc-04, category: currency_and_scale, dataset: retail_monthly, text: "Company revenue was $9.59 crore.",
+   expect: [{token: "$9.59 crore", status: contradicted, reason: currency_mismatch}]}
+- {id: hc-05, category: currency_and_scale, dataset: hotel_weekly, text: "Harbor View room revenue was $152.6 thousand.",
+   expect: [{token: "$152.6 thousand", status: supported}]}
+- {id: hc-06, category: currency_and_scale, dataset: hotel_weekly, text: "Room revenue across the portfolio was $0.46M.",
+   expect: [{token: "$0.46M", status: supported}]}
+- {id: hc-07, category: currency_and_scale, dataset: saas_monthly, text: "Mid-Market MRR was $23.2K.",
+   expect: [{token: "$23.2K", status: contradicted, reason: scale_error}]}
+- {id: hc-08, category: currency_and_scale, dataset: saas_monthly, text: "SMB MRR was ₹77.7K.",
+   expect: [{token: "₹77.7K", status: contradicted, reason: currency_mismatch}]}
+
+- {id: ha-01, category: absolute_numbers, dataset: hotel_weekly, text: "Harbor View sold 1,017 rooms, 67 fewer than the prior week.",
+   expect: [{token: "1,017", status: supported}, {token: "67", status: supported}]}
+- {id: ha-02, category: absolute_numbers, dataset: retail_monthly, text: "South took 12,825 orders, 1,628 more than last year.",
+   expect: [{token: "12,825", status: supported}, {token: "1,628", status: supported}]}
+- {id: ha-03, category: absolute_numbers, dataset: saas_monthly, text: "SMB signed 42 new customers against a plan of 45.",
+   expect: [{token: "42", status: supported}, {token: "45", status: supported}]}
+- {id: ha-04, category: absolute_numbers, dataset: saas_monthly, text: "SMB signed 50 new customers this month.",
+   expect: [{token: "50", status: contradicted, reason: wrong_basis}]}
+- {id: ha-05, category: absolute_numbers, dataset: retail_monthly, text: "Orders fell by 4,088 month over month.",
+   expect: [{token: "4,088", status: supported}]}
+
+- {id: he-01, category: wrong_entity, dataset: hotel_weekly, text: "Parkside Suites' RevPAR rose 24.9% vs last year.",
+   expect: [{token: "24.9%", status: contradicted, reason: wrong_entity}]}
+- {id: he-02, category: wrong_entity, dataset: retail_monthly, text: "West's conversion rate was 2.88%.",
+   expect: [{token: "2.88%", status: contradicted, reason: wrong_entity}]}
+- {id: he-03, category: wrong_entity, dataset: saas_monthly, text: "SMB churn was 2.83%.",
+   expect: [{token: "2.83%", status: contradicted, reason: wrong_entity}]}
+
+- {id: hw-01, category: wrong_period_or_basis, dataset: hotel_weekly, text: "Portfolio RevPAR was 12.6% ahead of budget.",
+   expect: [{token: "12.6%", status: contradicted, reason: wrong_basis}]}
+- {id: hw-02, category: wrong_period_or_basis, dataset: retail_monthly, text: "Company revenue fell 1.1% vs last month.",
+   expect: [{token: "1.1%", status: contradicted, reason: wrong_basis}]}
+- {id: hw-03, category: wrong_period_or_basis, dataset: saas_monthly, text: "Mid-Market MRR beat plan by 1.5%.",
+   expect: [{token: "1.5%", status: contradicted, reason: wrong_basis}]}
+- {id: hw-04, category: wrong_period_or_basis, dataset: hotel_weekly, text: "Portfolio ADR was $167.85.",
+   expect: [{token: "$167.85", status: contradicted, reason: wrong_basis}]}
+- {id: hw-05, category: wrong_period_or_basis, dataset: retail_monthly, text: "Company-wide conversion rate was 2.94%.",
+   expect: [{token: "2.94%", status: contradicted, reason: wrong_basis}]}
+
+- {id: hd-01, category: wrong_direction, dataset: hotel_weekly, text: "Portfolio ADR slipped 3.8% year over year.",
+   expect: [{token: "3.8%", status: contradicted, reason: wrong_direction}]}
+- {id: hd-02, category: wrong_direction, dataset: retail_monthly, text: "Company AOV rose 2.7% vs last month.",
+   expect: [{token: "2.7%", status: contradicted, reason: wrong_direction}]}
+- {id: hd-03, category: wrong_direction, dataset: saas_monthly, text: "Enterprise churn eased vs last month.",
+   expect: [{token: "eased", status: contradicted, reason: wrong_direction}]}
+- {id: hd-04, category: wrong_direction, dataset: hotel_weekly, text: "Riverside Inn's ADR climbed vs last week.",
+   expect: [{token: "climbed", status: contradicted, reason: wrong_direction}]}
+
+- {id: hl-01, category: lower_is_better, dataset: retail_monthly, text: "West's return rate improved by 0.98 pts vs last month.",
+   expect: [{token: "0.98 pts", status: supported}]}
+- {id: hl-02, category: lower_is_better, dataset: retail_monthly, text: "East's return rate improved vs last month.",
+   expect: [{token: "improved", status: contradicted, reason: wrong_direction}]}
+- {id: hl-03, category: lower_is_better, dataset: saas_monthly, text: "Churn worsened across all segments vs plan.",
+   expect: [{token: "worsened", status: supported}]}
+- {id: hl-04, category: lower_is_better, dataset: saas_monthly, text: "Mid-Market churn deteriorated by 0.4 pts vs plan.",
+   expect: [{token: "0.4 pts", status: supported}]}
+
+- {id: hh-01, category: hedges_and_rounding, dataset: hotel_weekly, text: "RevPAR was roughly $109 across the portfolio.",
+   expect: [{token: "$109", status: supported}]}
+- {id: hh-02, category: hedges_and_rounding, dataset: hotel_weekly, text: "Portfolio room revenue topped $460K.",
+   expect: [{token: "$460K", status: supported}]}
+- {id: hh-03, category: hedges_and_rounding, dataset: hotel_weekly, text: "Portfolio room revenue was under $450K.",
+   expect: [{token: "$450K", status: contradicted}]}
+- {id: hh-04, category: hedges_and_rounding, dataset: saas_monthly, text: "Overall churn was 2.92%.",
+   expect: [{token: "2.92%", status: supported}]}
+- {id: hh-05, category: hedges_and_rounding, dataset: saas_monthly, text: "Overall churn was 2.93%.",
+   expect: [{token: "2.93%", status: contradicted, reason: wrong_value}]}
+- {id: hh-06, category: hedges_and_rounding, dataset: retail_monthly, text: "Conversion was 2.8% company-wide.",
+   expect: [{token: "2.8%", status: supported}]}
+
+- {id: hm-01, category: missing_evidence, dataset: hotel_weekly, text: "Food and beverage revenue was $38,200.",
+   expect: [{token: "$38,200", status: unverifiable}]}
+- {id: hm-02, category: missing_evidence, dataset: retail_monthly, text: "Average delivery time was 2.4 days.",
+   expect: [{token: "2.4", status: unverifiable}]}
+- {id: hm-03, category: missing_evidence, dataset: saas_monthly, text: "Net revenue retention was 104%.",
+   expect: [{token: "104%", status: unverifiable}]}
+- {id: hm-04, category: missing_evidence, dataset: hotel_weekly, text: "The Harbor View spa booked 312 treatments.",
+   expect: [{token: "312", status: unverifiable}]}
+
+- {id: hx-01, category: ambiguous, dataset: hotel_weekly, text: "Portfolio RevPAR increased 1.6%.",
+   expect: [{token: "1.6%", status: unverifiable, reason: ambiguous}]}
+- {id: hx-02, category: ambiguous, dataset: saas_monthly, text: "MRR rose 1.4%.",
+   expect: [{token: "1.4%", status: unverifiable, reason: ambiguous}]}
+- {id: hx-03, category: ambiguous, dataset: saas_monthly, text: "MRR rose 9%.",
+   expect: [{token: "9%", status: contradicted}]}
+- {id: hx-04, category: ambiguous, dataset: retail_monthly, text: "Margins held up well this month.",
+   expect: []}
+
+- {id: hk-01, category: context, dataset: hotel_weekly, text: "Riverside Inn had a strong week: RevPAR of $110.44, up 24.9% on last year, and ADR of $171.08.",
+   expect: [{token: "$110.44", status: supported}, {token: "24.9%", status: supported}, {token: "$171.08", status: supported}]}
+- {id: hk-02, category: context, dataset: retail_monthly, text: "## South\nRevenue was ₹2.75 crore, 17.6% above last year. Orders grew 14.5% over the same period.",
+   expect: [{token: "₹2.75 crore", status: supported}, {token: "17.6%", status: supported}, {token: "14.5%", status: supported}]}
+- {id: hk-03, category: context, dataset: saas_monthly, text: "Mid-Market was the bright spot. Its MRR reached $232.4K, 7.8% ahead of plan.",
+   expect: [{token: "$232.4K", status: supported}, {token: "7.8%", status: supported}]}
+- {id: hk-04, category: context, dataset: hotel_weekly, text: "Cedar Lodge ran 6.5 pts below budget on occupancy, at 68.9%.",
+   expect: [{token: "6.5 pts", status: supported}, {token: "68.9%", status: supported}]}
+- {id: hk-05, category: context, dataset: retail_monthly, text: "Orders: 51,906 (vs 55,994 last month).",
+   expect: [{token: "51,906", status: supported}, {token: "55,994", status: supported}]}
+- {id: hk-06, category: context, dataset: hotel_weekly, text: "Harbor View RevPAR rose 13.6% year over year; Parkside Suites managed 4.3%.",
+   expect: [{token: "13.6%", status: supported}, {token: "4.3%", status: supported}]}
+
+- {id: hi-01, category: identifiers, dataset: hotel_weekly, text: "Harbor View (Tower 2) sold 1,017 rooms.",
+   expect: [{token: "1,017", status: supported}]}
+- {id: hi-02, category: identifiers, dataset: saas_monthly, text: "In August 2026, overall MRR was $672.3K.",
+   expect: [{token: "$672.3K", status: supported}]}
+- {id: hi-03, category: identifiers, dataset: retail_monthly, text: "The Q2 reforecast (v3) is due on 15 September.",
+   expect: []}
+- {id: hi-04, category: identifiers, dataset: hotel_weekly, text: "Week 32 occupancy at Riverside Inn was 64.6%.",
+   expect: [{token: "64.6%", status: supported}]}

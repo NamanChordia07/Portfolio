@@ -201,8 +201,7 @@ def verify_claim(claim: Claim, sheet: FactSheet, opts: VerifyOptions | None = No
         consistent = [
             f
             for f in candidates
-            if _admits(n, f, o.policy, signed)
-            and (claim.direction in (None, 0) or _sign(f.value, 1e-12) in (0, claim.direction))
+            if _admits(n, f, o.policy, signed) and (claim.direction in (None, 0) or _sign(f.value, 1e-12) in (0, claim.direction))
         ]
         if consistent:
             labels = sorted({sheet.bases[f.basis].label for f in consistent if f.basis})
@@ -273,7 +272,9 @@ def verify_claim(claim: Claim, sheet: FactSheet, opts: VerifyOptions | None = No
             wrong.reason = Reason.WRONG_BASIS
             wrong.alternatives = alt
             label = sheet.bases[alt[0].basis].label if alt[0].basis else "comparison"
-            wrong.message = f"{n.text} is the {label} figure ({alt[0].id}), not {sheet.period} ({_fmt(primary.value, primary.unit)})"
+            wrong.message = (
+                f"{n.text} is the {label} figure ({alt[0].id}), not {sheet.period} ({_fmt(primary.value, primary.unit)})"
+            )
             return wrong
 
     if claim.basis is not None:

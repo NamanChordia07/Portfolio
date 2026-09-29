@@ -1,67 +1,67 @@
 {
-  "cases": 68,
-  "cases_passed": 68,
-  "tokens": 78,
+  "cases": 65,
+  "cases_passed": 65,
+  "tokens": 79,
   "status_accuracy": 1.0,
   "reason_accuracy": 1.0,
   "missed": 0,
   "spurious": 0,
   "flag": {
-    "tp": 34,
+    "tp": 29,
     "fp": 0,
     "fn": 0,
-    "tn": 44,
+    "tn": 50,
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
     "accuracy": 1.0
   },
   "confusion": {
-    "contradicted->contradicted": 26,
-    "supported->supported": 44,
-    "unverifiable->unverifiable": 8
+    "contradicted->contradicted": 23,
+    "supported->supported": 50,
+    "unverifiable->unverifiable": 6
   },
   "latency_ms": {
-    "p50": 0.444,
-    "p95": 1.616,
-    "max": 7.611
+    "p50": 0.382,
+    "p95": 0.928,
+    "max": 1.661
   },
   "categories": {
     "absolute_numbers": {
-      "cases": 4,
-      "passed": 4
-    },
-    "ambiguous": {
       "cases": 5,
       "passed": 5
+    },
+    "ambiguous": {
+      "cases": 4,
+      "passed": 4
     },
     "basics": {
       "cases": 5,
       "passed": 5
     },
     "context": {
-      "cases": 7,
-      "passed": 7
+      "cases": 6,
+      "passed": 6
     },
     "currency_and_scale": {
-      "cases": 10,
-      "passed": 10
+      "cases": 8,
+      "passed": 8
     },
     "hedges_and_rounding": {
-      "cases": 5,
-      "passed": 5
+      "cases": 6,
+      "passed": 6
     },
     "identifiers": {
-      "cases": 3,
-      "passed": 3
+      "cases": 4,
+      "passed": 4
     },
     "lower_is_better": {
-      "cases": 5,
-      "passed": 5
+      "cases": 4,
+      "passed": 4
     },
     "missing_evidence": {
-      "cases": 5,
-      "passed": 5
+      "cases": 4,
+      "passed": 4
     },
     "points_vs_percent": {
       "cases": 7,
