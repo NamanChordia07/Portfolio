@@ -1,4 +1,4 @@
-# Used once Proofline lives in its own repository (see the root README of the Portfolio repo).
+# CI for the standalone Proofline repository. In the Portfolio monorepo, .github/workflows/proofline.yml runs the same checks.
 name: ci
 
 on: [push, pull_request]

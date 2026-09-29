@@ -26,7 +26,8 @@ Cybersecurity is kept as one line (and it quietly strengthens ClueCode's securit
 - Resume headline (AI): *Applied AI Engineer · LLM Systems, Evaluation & Automation*
 - Resume headline (SDE): *Software Engineer · Backend, Full-Stack & Automation*
 - Website: *"I build automation and AI systems for messy, real-world workflows, and the checks that make them safe to ship."*
-- Suggested LinkedIn headline: *Software Engineer, AI & Automation at IDeaS (a SAS company) · Building Proofline · Shipped ClueCode*
+- Suggested LinkedIn headline: *AI & Automation Developer at IDeaS (a SAS company) · LLM pipelines and the checks that make them safe (Proofline) · Shipped ClueCode*
+- LinkedIn experience: one IDeaS entry with three positions (Software Developer Intern, Jan–Jun 2025; Business Intelligence & Automation Intern, Jul–Oct 2025; AI & Automation Developer, Nov 2025–present) so the promotion path is visible. Reuse the resume bullets; keep client names, internal URLs and system internals out.
 
 ## 3. Experience discovered
 

@@ -24,7 +24,7 @@ Design notes:
 - **Concept: every number has a receipt.** Figures on the site render through `Claim`, which shows its
   source on hover or keyboard focus (a bottom card on phones). It is the Proofline idea applied to the site itself.
 - **Real output, not mock-ups.** The Proofline case study embeds the verifier's actual output, exported by
-  `python -m proofline.export_demo src/content/proofline-demo.json` (run from `projects/proofline`).
+  `python -m proofline.export_demo ../../src/content/proofline-demo.json --html docs/demo` (run from `projects/proofline`).
 - Typography-led, quiet layout: Geist Sans and Mono, one accent colour used only for verified states, light
   and dark themes (system default, stored choice, no flash), CSS-only load-in motion that respects reduced motion.
 - Static pages, per-route Open Graph images, sitemap, robots, JSON-LD `Person`, canonical URLs, strict security headers.
