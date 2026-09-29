@@ -1,0 +1,1494 @@
+{
+  "n_per_dataset": 200,
+  "seed": 20260929,
+  "families": {
+    "dev": {
+      "proofline": {
+        "slots": 8763,
+        "error_slots": 859,
+        "error_recall": 1.0,
+        "error_recall_contradicted": 0.8161,
+        "false_alarm_rate": 0.0015,
+        "clean_supported_rate": 0.9985,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.9832,
+        "clean_report_pass_rate": 1.0,
+        "corrupt_report_detection_rate": 1.0,
+        "reports": {
+          "clean": 256,
+          "corrupted": 344
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 94,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9574
+          },
+          "rounding_drift": {
+            "n": 51,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.902
+          },
+          "wrong_direction": {
+            "n": 129,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9845
+          },
+          "unit_confusion": {
+            "n": 9,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 109,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9358
+          },
+          "wrong_entity": {
+            "n": 228,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9254
+          },
+          "wrong_metric": {
+            "n": 66,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9848
+          },
+          "scale_error": {
+            "n": 15,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 158,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "fixed_tolerance": {
+        "slots": 8763,
+        "error_slots": 859,
+        "error_recall": 0.9919,
+        "error_recall_contradicted": 0.8079,
+        "false_alarm_rate": 0.2119,
+        "clean_supported_rate": 0.7881,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.293,
+        "clean_report_pass_rate": 0.0859,
+        "corrupt_report_detection_rate": 0.9971,
+        "reports": {
+          "clean": 256,
+          "corrupted": 344
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 94,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9574
+          },
+          "rounding_drift": {
+            "n": 51,
+            "detected": 0.9216,
+            "contradicted": 0.9216,
+            "diagnosis_accuracy": 0.9574
+          },
+          "wrong_direction": {
+            "n": 129,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.7287
+          },
+          "unit_confusion": {
+            "n": 9,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.1111
+          },
+          "wrong_basis": {
+            "n": 109,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.7156
+          },
+          "wrong_entity": {
+            "n": 228,
+            "detected": 0.9868,
+            "contradicted": 0.9868,
+            "diagnosis_accuracy": 0.7556
+          },
+          "wrong_metric": {
+            "n": 66,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.8333
+          },
+          "scale_error": {
+            "n": 15,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 158,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "no_context": {
+        "slots": 8763,
+        "error_slots": 859,
+        "error_recall": 0.9907,
+        "error_recall_contradicted": 0.6589,
+        "false_alarm_rate": 0.1099,
+        "clean_supported_rate": 0.6823,
+        "clean_unverifiable_rate": 0.2077,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.3944,
+        "clean_report_pass_rate": 0.2969,
+        "corrupt_report_detection_rate": 0.9971,
+        "reports": {
+          "clean": 256,
+          "corrupted": 344
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 94,
+            "detected": 0.9894,
+            "contradicted": 0.8617,
+            "diagnosis_accuracy": 0.963
+          },
+          "rounding_drift": {
+            "n": 51,
+            "detected": 1.0,
+            "contradicted": 0.9608,
+            "diagnosis_accuracy": 0.9184
+          },
+          "wrong_direction": {
+            "n": 129,
+            "detected": 1.0,
+            "contradicted": 0.7674,
+            "diagnosis_accuracy": 0.7677
+          },
+          "unit_confusion": {
+            "n": 9,
+            "detected": 1.0,
+            "contradicted": 0.4444,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 109,
+            "detected": 1.0,
+            "contradicted": 0.7339,
+            "diagnosis_accuracy": 0.7125
+          },
+          "wrong_entity": {
+            "n": 228,
+            "detected": 0.9693,
+            "contradicted": 0.8158,
+            "diagnosis_accuracy": 0.9462
+          },
+          "wrong_metric": {
+            "n": 66,
+            "detected": 1.0,
+            "contradicted": 0.8182,
+            "diagnosis_accuracy": 0.8704
+          },
+          "scale_error": {
+            "n": 15,
+            "detected": 1.0,
+            "contradicted": 0.8667,
+            "diagnosis_accuracy": 0.8462
+          },
+          "fabricated": {
+            "n": 158,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "no_basis": {
+        "slots": 8763,
+        "error_slots": 859,
+        "error_recall": 0.8719,
+        "error_recall_contradicted": 0.6682,
+        "false_alarm_rate": 0.0206,
+        "clean_supported_rate": 0.9298,
+        "clean_unverifiable_rate": 0.0496,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.7788,
+        "clean_report_pass_rate": 0.75,
+        "corrupt_report_detection_rate": 0.9041,
+        "reports": {
+          "clean": 256,
+          "corrupted": 344
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 94,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9362
+          },
+          "rounding_drift": {
+            "n": 51,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.8039
+          },
+          "wrong_direction": {
+            "n": 129,
+            "detected": 0.9922,
+            "contradicted": 0.9147,
+            "diagnosis_accuracy": 0.9831
+          },
+          "unit_confusion": {
+            "n": 9,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 109,
+            "detected": 0.0367,
+            "contradicted": 0.0183,
+            "diagnosis_accuracy": 0.0
+          },
+          "wrong_entity": {
+            "n": 228,
+            "detected": 0.9868,
+            "contradicted": 0.9649,
+            "diagnosis_accuracy": 0.95
+          },
+          "wrong_metric": {
+            "n": 66,
+            "detected": 0.9848,
+            "contradicted": 0.9848,
+            "diagnosis_accuracy": 0.9077
+          },
+          "scale_error": {
+            "n": 15,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 158,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "naive_lookup": {
+        "slots": 8763,
+        "error_slots": 859,
+        "error_recall": 0.1944,
+        "error_recall_contradicted": 0.1944,
+        "false_alarm_rate": 0.0,
+        "clean_supported_rate": 1.0,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 1.0,
+        "clean_report_pass_rate": 1.0,
+        "corrupt_report_detection_rate": 0.3547,
+        "reports": {
+          "clean": 256,
+          "corrupted": 344
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 94,
+            "detected": 0.7553,
+            "contradicted": 0.7553,
+            "diagnosis_accuracy": null
+          },
+          "rounding_drift": {
+            "n": 51,
+            "detected": 0.4902,
+            "contradicted": 0.4902,
+            "diagnosis_accuracy": null
+          },
+          "wrong_direction": {
+            "n": 129,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "unit_confusion": {
+            "n": 9,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_basis": {
+            "n": 109,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_entity": {
+            "n": 228,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_metric": {
+            "n": 66,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "scale_error": {
+            "n": 15,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": null
+          },
+          "fabricated": {
+            "n": 158,
+            "detected": 0.3544,
+            "contradicted": 0.3544,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "repair": {
+        "error_slots_fixed": 0.9971,
+        "clean_slots_broken": 0.0028,
+        "repairable_error_slots": 701
+      }
+    },
+    "heldout": {
+      "proofline": {
+        "slots": 7716,
+        "error_slots": 854,
+        "error_recall": 1.0,
+        "error_recall_contradicted": 0.8103,
+        "false_alarm_rate": 0.0003,
+        "clean_supported_rate": 0.9997,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.9971,
+        "clean_report_pass_rate": 1.0,
+        "corrupt_report_detection_rate": 1.0,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 114,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9386
+          },
+          "rounding_drift": {
+            "n": 65,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9231
+          },
+          "wrong_direction": {
+            "n": 126,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "unit_confusion": {
+            "n": 6,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 116,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9741
+          },
+          "wrong_entity": {
+            "n": 173,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9653
+          },
+          "wrong_metric": {
+            "n": 81,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.963
+          },
+          "scale_error": {
+            "n": 11,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 162,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "fixed_tolerance": {
+        "slots": 7716,
+        "error_slots": 854,
+        "error_recall": 0.9965,
+        "error_recall_contradicted": 0.8068,
+        "false_alarm_rate": 0.2266,
+        "clean_supported_rate": 0.7734,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.307,
+        "clean_report_pass_rate": 0.0789,
+        "corrupt_report_detection_rate": 1.0,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 114,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9386
+          },
+          "rounding_drift": {
+            "n": 65,
+            "detected": 0.9692,
+            "contradicted": 0.9692,
+            "diagnosis_accuracy": 0.9524
+          },
+          "wrong_direction": {
+            "n": 126,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.6508
+          },
+          "unit_confusion": {
+            "n": 6,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.0
+          },
+          "wrong_basis": {
+            "n": 116,
+            "detected": 0.9914,
+            "contradicted": 0.9914,
+            "diagnosis_accuracy": 0.7217
+          },
+          "wrong_entity": {
+            "n": 173,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.711
+          },
+          "wrong_metric": {
+            "n": 81,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.8889
+          },
+          "scale_error": {
+            "n": 11,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 162,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "no_context": {
+        "slots": 7716,
+        "error_slots": 854,
+        "error_recall": 0.9918,
+        "error_recall_contradicted": 0.4028,
+        "false_alarm_rate": 0.0784,
+        "clean_supported_rate": 0.3908,
+        "clean_unverifiable_rate": 0.5307,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.39,
+        "clean_report_pass_rate": 0.4173,
+        "corrupt_report_detection_rate": 1.0,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 114,
+            "detected": 1.0,
+            "contradicted": 0.4561,
+            "diagnosis_accuracy": 0.9808
+          },
+          "rounding_drift": {
+            "n": 65,
+            "detected": 1.0,
+            "contradicted": 0.5846,
+            "diagnosis_accuracy": 0.9474
+          },
+          "wrong_direction": {
+            "n": 126,
+            "detected": 0.9921,
+            "contradicted": 0.6349,
+            "diagnosis_accuracy": 0.8625
+          },
+          "unit_confusion": {
+            "n": 6,
+            "detected": 1.0,
+            "contradicted": 0.1667,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 116,
+            "detected": 1.0,
+            "contradicted": 0.4483,
+            "diagnosis_accuracy": 0.5769
+          },
+          "wrong_entity": {
+            "n": 173,
+            "detected": 0.9653,
+            "contradicted": 0.4277,
+            "diagnosis_accuracy": 0.9054
+          },
+          "wrong_metric": {
+            "n": 81,
+            "detected": 1.0,
+            "contradicted": 0.5185,
+            "diagnosis_accuracy": 0.8095
+          },
+          "scale_error": {
+            "n": 11,
+            "detected": 1.0,
+            "contradicted": 0.4545,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 162,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "no_basis": {
+        "slots": 7716,
+        "error_slots": 854,
+        "error_recall": 0.8759,
+        "error_recall_contradicted": 0.6604,
+        "false_alarm_rate": 0.0456,
+        "clean_supported_rate": 0.8894,
+        "clean_unverifiable_rate": 0.065,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.6431,
+        "clean_report_pass_rate": 0.5827,
+        "corrupt_report_detection_rate": 0.9581,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 114,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.8333
+          },
+          "rounding_drift": {
+            "n": 65,
+            "detected": 0.9846,
+            "contradicted": 0.9846,
+            "diagnosis_accuracy": 0.8438
+          },
+          "wrong_direction": {
+            "n": 126,
+            "detected": 0.9841,
+            "contradicted": 0.873,
+            "diagnosis_accuracy": 1.0
+          },
+          "unit_confusion": {
+            "n": 6,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 116,
+            "detected": 0.1293,
+            "contradicted": 0.0862,
+            "diagnosis_accuracy": 0.0
+          },
+          "wrong_entity": {
+            "n": 173,
+            "detected": 0.9942,
+            "contradicted": 0.9827,
+            "diagnosis_accuracy": 0.9471
+          },
+          "wrong_metric": {
+            "n": 81,
+            "detected": 0.9877,
+            "contradicted": 0.9753,
+            "diagnosis_accuracy": 0.8987
+          },
+          "scale_error": {
+            "n": 11,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.8182
+          },
+          "fabricated": {
+            "n": 162,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "naive_lookup": {
+        "slots": 7716,
+        "error_slots": 854,
+        "error_recall": 0.185,
+        "error_recall_contradicted": 0.185,
+        "false_alarm_rate": 0.0,
+        "clean_supported_rate": 1.0,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 1.0,
+        "clean_report_pass_rate": 1.0,
+        "corrupt_report_detection_rate": 0.3683,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 114,
+            "detected": 0.6404,
+            "contradicted": 0.6404,
+            "diagnosis_accuracy": null
+          },
+          "rounding_drift": {
+            "n": 65,
+            "detected": 0.4615,
+            "contradicted": 0.4615,
+            "diagnosis_accuracy": null
+          },
+          "wrong_direction": {
+            "n": 126,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "unit_confusion": {
+            "n": 6,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_basis": {
+            "n": 116,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_entity": {
+            "n": 173,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_metric": {
+            "n": 81,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "scale_error": {
+            "n": 11,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": null
+          },
+          "fabricated": {
+            "n": 162,
+            "detected": 0.2716,
+            "contradicted": 0.2716,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "repair": {
+        "error_slots_fixed": 1.0,
+        "clean_slots_broken": 0.0006,
+        "repairable_error_slots": 692
+      }
+    },
+    "heldout2": {
+      "proofline": {
+        "slots": 8348,
+        "error_slots": 899,
+        "error_recall": 1.0,
+        "error_recall_contradicted": 0.8009,
+        "false_alarm_rate": 0.0003,
+        "clean_supported_rate": 0.9997,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.9972,
+        "clean_report_pass_rate": 1.0,
+        "corrupt_report_detection_rate": 1.0,
+        "reports": {
+          "clean": 238,
+          "corrupted": 362
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 112,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.8929
+          },
+          "rounding_drift": {
+            "n": 48,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.875
+          },
+          "wrong_direction": {
+            "n": 102,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "unit_confusion": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 143,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.972
+          },
+          "wrong_entity": {
+            "n": 194,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9639
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.978
+          },
+          "scale_error": {
+            "n": 14,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 179,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "fixed_tolerance": {
+        "slots": 8348,
+        "error_slots": 899,
+        "error_recall": 0.9922,
+        "error_recall_contradicted": 0.7931,
+        "false_alarm_rate": 0.2392,
+        "clean_supported_rate": 0.7608,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.2858,
+        "clean_report_pass_rate": 0.0798,
+        "corrupt_report_detection_rate": 0.9972,
+        "reports": {
+          "clean": 238,
+          "corrupted": 362
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 112,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9554
+          },
+          "rounding_drift": {
+            "n": 48,
+            "detected": 0.9583,
+            "contradicted": 0.9583,
+            "diagnosis_accuracy": 0.913
+          },
+          "wrong_direction": {
+            "n": 102,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.7059
+          },
+          "unit_confusion": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.125
+          },
+          "wrong_basis": {
+            "n": 143,
+            "detected": 0.993,
+            "contradicted": 0.993,
+            "diagnosis_accuracy": 0.7324
+          },
+          "wrong_entity": {
+            "n": 194,
+            "detected": 0.9794,
+            "contradicted": 0.9794,
+            "diagnosis_accuracy": 0.7684
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.8242
+          },
+          "scale_error": {
+            "n": 14,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 179,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "no_context": {
+        "slots": 8348,
+        "error_slots": 899,
+        "error_recall": 0.9944,
+        "error_recall_contradicted": 0.5373,
+        "false_alarm_rate": 0.0358,
+        "clean_supported_rate": 0.4844,
+        "clean_unverifiable_rate": 0.4798,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.644,
+        "clean_report_pass_rate": 0.6345,
+        "corrupt_report_detection_rate": 1.0,
+        "reports": {
+          "clean": 238,
+          "corrupted": 362
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 112,
+            "detected": 1.0,
+            "contradicted": 0.6696,
+            "diagnosis_accuracy": 0.9067
+          },
+          "rounding_drift": {
+            "n": 48,
+            "detected": 1.0,
+            "contradicted": 0.6875,
+            "diagnosis_accuracy": 0.8485
+          },
+          "wrong_direction": {
+            "n": 102,
+            "detected": 1.0,
+            "contradicted": 0.7647,
+            "diagnosis_accuracy": 0.9231
+          },
+          "unit_confusion": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 0.6875,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 143,
+            "detected": 1.0,
+            "contradicted": 0.7622,
+            "diagnosis_accuracy": 0.8257
+          },
+          "wrong_entity": {
+            "n": 194,
+            "detected": 0.9742,
+            "contradicted": 0.6082,
+            "diagnosis_accuracy": 0.9153
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 1.0,
+            "contradicted": 0.5385,
+            "diagnosis_accuracy": 0.9592
+          },
+          "scale_error": {
+            "n": 14,
+            "detected": 1.0,
+            "contradicted": 0.7143,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 179,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "no_basis": {
+        "slots": 8348,
+        "error_slots": 899,
+        "error_recall": 0.8687,
+        "error_recall_contradicted": 0.6296,
+        "false_alarm_rate": 0.0542,
+        "clean_supported_rate": 0.8837,
+        "clean_unverifiable_rate": 0.062,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.5835,
+        "clean_report_pass_rate": 0.4874,
+        "corrupt_report_detection_rate": 0.9392,
+        "reports": {
+          "clean": 238,
+          "corrupted": 362
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 112,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.8304
+          },
+          "rounding_drift": {
+            "n": 48,
+            "detected": 0.9792,
+            "contradicted": 0.9792,
+            "diagnosis_accuracy": 0.8511
+          },
+          "wrong_direction": {
+            "n": 102,
+            "detected": 1.0,
+            "contradicted": 0.8431,
+            "diagnosis_accuracy": 1.0
+          },
+          "unit_confusion": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9375
+          },
+          "wrong_basis": {
+            "n": 143,
+            "detected": 0.2028,
+            "contradicted": 0.0629,
+            "diagnosis_accuracy": 0.0
+          },
+          "wrong_entity": {
+            "n": 194,
+            "detected": 0.9948,
+            "contradicted": 0.9948,
+            "diagnosis_accuracy": 0.9275
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 0.978,
+            "contradicted": 0.978,
+            "diagnosis_accuracy": 0.8989
+          },
+          "scale_error": {
+            "n": 14,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9286
+          },
+          "fabricated": {
+            "n": 179,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "naive_lookup": {
+        "slots": 8348,
+        "error_slots": 899,
+        "error_recall": 0.1769,
+        "error_recall_contradicted": 0.1769,
+        "false_alarm_rate": 0.0,
+        "clean_supported_rate": 1.0,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 1.0,
+        "clean_report_pass_rate": 1.0,
+        "corrupt_report_detection_rate": 0.3425,
+        "reports": {
+          "clean": 238,
+          "corrupted": 362
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 112,
+            "detected": 0.6161,
+            "contradicted": 0.6161,
+            "diagnosis_accuracy": null
+          },
+          "rounding_drift": {
+            "n": 48,
+            "detected": 0.625,
+            "contradicted": 0.625,
+            "diagnosis_accuracy": null
+          },
+          "wrong_direction": {
+            "n": 102,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "unit_confusion": {
+            "n": 16,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_basis": {
+            "n": 143,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_entity": {
+            "n": 194,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "scale_error": {
+            "n": 14,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": null
+          },
+          "fabricated": {
+            "n": 179,
+            "detected": 0.257,
+            "contradicted": 0.257,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "repair": {
+        "error_slots_fixed": 0.9986,
+        "clean_slots_broken": 0.0005,
+        "repairable_error_slots": 720
+      }
+    },
+    "heldout3": {
+      "proofline": {
+        "slots": 7554,
+        "error_slots": 813,
+        "error_recall": 0.9988,
+        "error_recall_contradicted": 0.7749,
+        "false_alarm_rate": 0.0111,
+        "clean_supported_rate": 0.9889,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.8936,
+        "clean_report_pass_rate": 0.8722,
+        "corrupt_report_detection_rate": 1.0,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 108,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9352
+          },
+          "rounding_drift": {
+            "n": 50,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9
+          },
+          "wrong_direction": {
+            "n": 86,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9884
+          },
+          "unit_confusion": {
+            "n": 19,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 98,
+            "detected": 0.9898,
+            "contradicted": 0.9898,
+            "diagnosis_accuracy": 0.9072
+          },
+          "wrong_entity": {
+            "n": 163,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9509
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9231
+          },
+          "scale_error": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 182,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "fixed_tolerance": {
+        "slots": 7554,
+        "error_slots": 813,
+        "error_recall": 0.9951,
+        "error_recall_contradicted": 0.7712,
+        "false_alarm_rate": 0.2408,
+        "clean_supported_rate": 0.7592,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.2787,
+        "clean_report_pass_rate": 0.0977,
+        "corrupt_report_detection_rate": 1.0,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 108,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9537
+          },
+          "rounding_drift": {
+            "n": 50,
+            "detected": 0.94,
+            "contradicted": 0.94,
+            "diagnosis_accuracy": 0.9149
+          },
+          "wrong_direction": {
+            "n": 86,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.6163
+          },
+          "unit_confusion": {
+            "n": 19,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.0526
+          },
+          "wrong_basis": {
+            "n": 98,
+            "detected": 0.9898,
+            "contradicted": 0.9898,
+            "diagnosis_accuracy": 0.6701
+          },
+          "wrong_entity": {
+            "n": 163,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.816
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.7253
+          },
+          "scale_error": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "fabricated": {
+            "n": 182,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "no_context": {
+        "slots": 7554,
+        "error_slots": 813,
+        "error_recall": 0.9852,
+        "error_recall_contradicted": 0.6224,
+        "false_alarm_rate": 0.0847,
+        "clean_supported_rate": 0.6023,
+        "clean_unverifiable_rate": 0.313,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.4698,
+        "clean_report_pass_rate": 0.5075,
+        "corrupt_report_detection_rate": 0.997,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 108,
+            "detected": 1.0,
+            "contradicted": 0.7685,
+            "diagnosis_accuracy": 0.9277
+          },
+          "rounding_drift": {
+            "n": 50,
+            "detected": 1.0,
+            "contradicted": 0.84,
+            "diagnosis_accuracy": 0.9286
+          },
+          "wrong_direction": {
+            "n": 86,
+            "detected": 1.0,
+            "contradicted": 0.8605,
+            "diagnosis_accuracy": 1.0
+          },
+          "unit_confusion": {
+            "n": 19,
+            "detected": 1.0,
+            "contradicted": 0.7895,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 98,
+            "detected": 0.9796,
+            "contradicted": 0.7959,
+            "diagnosis_accuracy": 0.7949
+          },
+          "wrong_entity": {
+            "n": 163,
+            "detected": 0.9387,
+            "contradicted": 0.7669,
+            "diagnosis_accuracy": 0.936
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 1.0,
+            "contradicted": 0.8462,
+            "diagnosis_accuracy": 0.8831
+          },
+          "scale_error": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 0.75,
+            "diagnosis_accuracy": 0.8333
+          },
+          "fabricated": {
+            "n": 182,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "no_basis": {
+        "slots": 7554,
+        "error_slots": 813,
+        "error_recall": 0.8954,
+        "error_recall_contradicted": 0.6716,
+        "false_alarm_rate": 0.0614,
+        "clean_supported_rate": 0.9386,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 0.5687,
+        "clean_report_pass_rate": 0.4925,
+        "corrupt_report_detection_rate": 0.9581,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 108,
+            "detected": 0.9907,
+            "contradicted": 0.9907,
+            "diagnosis_accuracy": 0.8692
+          },
+          "rounding_drift": {
+            "n": 50,
+            "detected": 0.98,
+            "contradicted": 0.98,
+            "diagnosis_accuracy": 0.8776
+          },
+          "wrong_direction": {
+            "n": 86,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9884
+          },
+          "unit_confusion": {
+            "n": 19,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 1.0
+          },
+          "wrong_basis": {
+            "n": 98,
+            "detected": 0.1837,
+            "contradicted": 0.1837,
+            "diagnosis_accuracy": 0.0
+          },
+          "wrong_entity": {
+            "n": 163,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.9141
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 0.967,
+            "contradicted": 0.967,
+            "diagnosis_accuracy": 0.7955
+          },
+          "scale_error": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": 0.875
+          },
+          "fabricated": {
+            "n": 182,
+            "detected": 1.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "naive_lookup": {
+        "slots": 7554,
+        "error_slots": 813,
+        "error_recall": 0.203,
+        "error_recall_contradicted": 0.203,
+        "false_alarm_rate": 0.0,
+        "clean_supported_rate": 1.0,
+        "clean_unverifiable_rate": 0.0,
+        "clean_missed_rate": 0.0,
+        "flag_precision": 1.0,
+        "clean_report_pass_rate": 1.0,
+        "corrupt_report_detection_rate": 0.3802,
+        "reports": {
+          "clean": 266,
+          "corrupted": 334
+        },
+        "per_type": {
+          "wrong_value": {
+            "n": 108,
+            "detected": 0.6852,
+            "contradicted": 0.6852,
+            "diagnosis_accuracy": null
+          },
+          "rounding_drift": {
+            "n": 50,
+            "detected": 0.56,
+            "contradicted": 0.56,
+            "diagnosis_accuracy": null
+          },
+          "wrong_direction": {
+            "n": 86,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "unit_confusion": {
+            "n": 19,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_basis": {
+            "n": 98,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_entity": {
+            "n": 163,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "wrong_metric": {
+            "n": 91,
+            "detected": 0.0,
+            "contradicted": 0.0,
+            "diagnosis_accuracy": null
+          },
+          "scale_error": {
+            "n": 16,
+            "detected": 1.0,
+            "contradicted": 1.0,
+            "diagnosis_accuracy": null
+          },
+          "fabricated": {
+            "n": 182,
+            "detected": 0.2582,
+            "contradicted": 0.2582,
+            "diagnosis_accuracy": null
+          }
+        }
+      },
+      "repair": {
+        "error_slots_fixed": 0.9842,
+        "clean_slots_broken": 0.0116,
+        "repairable_error_slots": 631
+      }
+    }
+  }
+}

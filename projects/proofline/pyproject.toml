@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "proofline"
+version = "0.1.0"
+description = "Verify every number in LLM-written business reports against the data, diagnose what went wrong, and repair it."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Naman Chordia" }]
+dependencies = []  # the verifier is pure standard library
+
+[project.optional-dependencies]
+yaml = ["pyyaml>=6"]
+gemini = ["google-genai>=1.0"]
+claude = ["anthropic>=0.70"]
+mcp = ["mcp>=2.2"]
+dev = ["pytest>=8", "hypothesis>=6", "ruff>=0.6", "mypy>=1.10", "pyyaml>=6", "mcp>=2.2", "anyio>=4"]
+
+[project.scripts]
+proofline = "proofline.cli:main"
+proofline-mcp = "proofline.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 130
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003", "E501", "B023", "SIM108", "SIM905"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src/proofline"]
+exclude = ["src/proofline/providers/(claude|gemini)\\.py$"]
+warn_unused_ignores = false
+
+[[tool.mypy.overrides]]
+module = ["yaml", "mcp.*", "google.*", "anthropic"]
+ignore_missing_imports = true
