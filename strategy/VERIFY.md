@@ -9,7 +9,7 @@ single biggest improvement still available.
 
 | # | Claim on the resume | Question | If different |
 |---|---|---|---|
-| 1 | "Business Intelligence & Automation **Intern**, Jul 2025 – Present" | Is this still your title? Were you converted (e.g. Associate / Software / Automation Engineer)? | Use the real title. An "intern" title for 14+ months after graduating is the first thing a screener will question. |
+| 1 | ~~Intern title~~ | **Resolved.** Full-time AI & Automation Developer since Nov 2025 (BI & Automation Intern Jul–Oct 2025). | Done: resumes and site updated. |
 | 2 | Forecast-review pipeline "Dockerised, through SIT/UAT" | Did it reach production? How many clients or reports has it produced? | Say "deployed to production" only if true; add volume. |
 | 3 | "LLM-written commentary (Microsoft AI Builder)" | Was AI Builder the model interface? Any other models (Gemini, Azure OpenAI)? | Name what you used. |
 | 4 | G3 Playwright checks "across Salesforce, the product UI and database, in Docker" | Is the Salesforce part automated, or read from an export? Is the DB check a direct query? | Adjust the verbs. |

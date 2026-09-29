@@ -17,7 +17,7 @@ export const site = {
   description:
     "Software engineer building automation and AI systems for real-world workflows, and the checks that make them safe to ship. Proofline, ClueCode, and enterprise automation at IDeaS (a SAS company).",
   openTo: "Forward Deployed, Applied AI and Software Engineering roles, in India, remote or international.",
-  currently: "Business Intelligence & Automation at IDeaS Revenue Solutions (a SAS company)",
+  currently: "AI & Automation Developer at IDeaS Revenue Solutions (a SAS company)",
 } as const;
 
 export const claims = {
@@ -72,12 +72,18 @@ export const experience: Job[] = [
     url: "https://ideas.com",
     roles: [
       {
-        title: "Business Intelligence & Automation Intern",
-        dates: "Jul 2025 – Present",
+        title: "AI & Automation Developer",
+        dates: "Nov 2025 – Present",
         points: [
-          "Built a Python pipeline that generates client forecast-review reports (forecast vs. projections) as PDF, Word and Excel with LLM-written commentary; modular services, Dockerised, through SIT and UAT.",
+          "Built a Python pipeline that generates client forecast-review reports (forecast vs. projections) as PDF, Word and Excel with LLM-written commentary; modular services, Dockerised, through SIT, UAT and hypercare.",
           "Automated end-to-end checks of client setup on the G3 revenue-management platform with Playwright, validating account numbers and integration types across Salesforce, the product UI and its database.",
           "Built a Streamlit analytics tool (pandas, Altair) for best-available-rate trends and pricing-decision validation, structured as configuration, validation, calculation and chart services.",
+        ],
+      },
+      {
+        title: "Business Intelligence & Automation Intern",
+        dates: "Jul 2025 – Oct 2025",
+        points: [
           "Automated a shared customer-care mailbox with scheduled Power Automate flows that log client and system emails to Excel and reconcile replies from Sent Items.",
         ],
       },

@@ -2,9 +2,12 @@
 
 ## Questions you will get, and how to answer them honestly
 
-**"Why are you still an intern after 14 months?"** (only if the title is still Intern)
-Answer with the facts: when the role started, what changed in scope, what the conversion
-status is. Do not dodge. If you were converted, fix the resume instead.
+**"Walk me through your time at IDeaS."**
+Three steps, one company: Software Developer Intern (Jan–Jun 2025, dashboard modernisation in
+Angular and Spring Boot), Business Intelligence & Automation Intern (Jul–Oct 2025, mailbox and
+reporting automation), then full-time AI & Automation Developer from November 2025 (forecast-review
+pipeline with LLM commentary, Playwright configuration checks, pricing analytics). Say what the
+conversion changed: you went from assigned tasks to owning pipelines through SIT, UAT and hypercare.
 
 **"ClueCode reads screens during interviews. Is it a cheating tool?"**
 - It is an ordinary visible window. It does not hide from screen sharing, recording or

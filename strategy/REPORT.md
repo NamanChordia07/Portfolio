@@ -36,7 +36,8 @@ Hospital-Inventory group repos. Findings:
 
 | Area | What the evidence supports |
 |---|---|
-| IDeaS, BI & Automation (Jul 2025 – present) | Forecast-review report pipeline (Python; PDF/Word/Excel; charts; AI Builder commentary; Docker; SIT/UAT; standard vs limited-history builds). G3 configuration checks with Playwright across Salesforce/UI/DB in Docker. Streamlit pricing analytics (BAR trends, property/chain extraction, decision validation; modular services). Power Automate care-mailbox automation (~3 h saved). |
+| IDeaS, AI & Automation Developer (full-time, Nov 2025 – present) | Forecast-review report pipeline (Python; PDF/Word/Excel; charts; AI Builder commentary; Docker; SIT/UAT/hypercare; standard vs limited-history builds). G3 configuration checks with Playwright across Salesforce/UI/DB in Docker. Streamlit pricing analytics (BAR trends, property/chain extraction, decision validation; modular services). |
+| IDeaS, BI & Automation Intern (Jul – Oct 2025) | Power Automate care-mailbox automation (~3 h saved). |
 | IDeaS, Software Developer Intern (Jan – Jun 2025) | At-a-Glance JSP/Struts → Angular + Spring Boot; REST APIs; SQL/Streams optimisation; date-range APIs; SQL-migration feature toggle. |
 | IFM Engineering (Jul – Dec 2024) | Security audits (XSS, SQLi, misconfiguration), scan automation. |
 | ClueCode (Sep 2026, live) | Verified from the repo: Electron 44 + Next.js 16 + Neon/Drizzle + Better Auth + Razorpay; DB-enforced session leases; signed idempotent webhooks; DPAPI BYOK; strict Electron security; threat model; 279 recorded passing test runs (~200 declarations). |
@@ -129,7 +130,7 @@ screen, but experience length and DSA will decide.
 real integration work at IDeaS.
 
 **What looks weak or will be challenged:**
-1. "Intern, Jul 2025 – Present" (14+ months). Fix the title if it changed.
+1. ~~Intern title~~ Resolved: full-time AI & Automation Developer since Nov 2025, now on every resume and the site.
 2. Few work metrics. Add volumes and time saved (list in `VERIFY.md`).
 3. Both projects dated September 2026. Expect "did AI write this?"; prepare as in `INTERVIEW_PREP.md`.
 4. ClueCode's category (screen-reading AI overlay). Change the site copy before applying (see `AUDIT.md`).
@@ -166,7 +167,7 @@ project name is free; otherwise update `NEXT_PUBLIC_SITE_URL` and the resume lin
 
 ## 15. Interview risks
 
-See `strategy/INTERVIEW_PREP.md`. Top five: the intern title; ClueCode's category; AI-assisted
+See `strategy/INTERVIEW_PREP.md`. Top four: ClueCode's category; AI-assisted
 authorship of recent projects; a synthetic benchmark; confidentiality when describing IDeaS work.
 
 ## 16. Skills to strengthen next

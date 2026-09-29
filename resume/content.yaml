@@ -25,8 +25,8 @@ variants:
     file: Naman_Chordia_FDE_Resume
     headline: Software Engineer · Enterprise Automation, Integration & Applied AI
     summary: >-
-      Engineer who turns enterprise workflows into deployed automation: LLM-assisted report pipelines, Playwright
-      checks across Salesforce and product systems, internal tools at IDeaS (a SAS company); shipped a production SaaS solo.
+      AI & Automation Developer at IDeaS (a SAS company) who turns enterprise workflows into deployed automation:
+      LLM-assisted report pipelines, Playwright checks across Salesforce and product systems; shipped a production SaaS solo.
     sections: [summary, experience, projects, skills, education, leadership]
   ai:
     file: Naman_Chordia_AI_Engineer_Resume
@@ -48,20 +48,20 @@ experience:
   - company: IDeaS Revenue Solutions (a SAS company)
     location: Pune, India
     roles:
-      - title: Business Intelligence & Automation Intern
-        dates: Jul 2025 – Present
+      - title: AI & Automation Developer
+        dates: Nov 2025 – Present
         bullets:
           - id: forecast_review
             rank: { fde: 1, ai: 1, sde: 1 }
             fde: >-
               Built a Python pipeline that generates client forecast-review reports (forecast vs. projections) as PDF,
-              Word and Excel with LLM-written commentary (Microsoft AI Builder); modular services, Dockerised, through SIT/UAT.
+              Word and Excel with LLM-written commentary (Microsoft AI Builder); modular services, Dockerised, through SIT, UAT and hypercare.
             ai: >-
               Added LLM-written narrative (Microsoft AI Builder) to a Python forecast-review pipeline that computes
-              forecast vs. projections and renders PDF, Word and Excel reports; Dockerised through SIT/UAT.
+              forecast vs. projections and renders PDF, Word and Excel reports; Dockerised through SIT, UAT and hypercare.
             sde: >-
               Engineered a modular Python report service (data, calculation, chart and merge modules) that generates
-              forecast-review reports as PDF, Word and Excel with LLM commentary; Dockerised through SIT/UAT.
+              forecast-review reports as PDF, Word and Excel with LLM commentary; Dockerised through SIT, UAT and hypercare.
           - id: g3_playwright
             rank: { fde: 2, ai: 3, sde: 2 }
             fde: >-
@@ -73,11 +73,6 @@ experience:
             sde: >-
               Wrote Playwright end-to-end automation that checks client configuration (account numbers, integration
               types) across Salesforce, the G3 revenue-management UI and its database, in Docker.
-          - id: care_mailbox
-            rank: { fde: 3, ai: 4, sde: 4 }
-            text: >-
-              Automated a shared customer-care mailbox with scheduled Power Automate flows: client and system emails (chain
-              codes, timestamps) logged to Excel, replies reconciled from Sent Items, saving the team ~3 hours of manual tracking.
           - id: pricing_app
             rank: { fde: 4, ai: 2, sde: 3 }
             fde: >-
@@ -89,6 +84,14 @@ experience:
             sde: >-
               Built a Streamlit analytics app (pandas, Altair) for best-available-rate trends and pricing-decision
               validation, split into config, validation, calculation and chart services so new analyses plug in cleanly.
+      - title: Business Intelligence & Automation Intern
+        dates: Jul 2025 – Oct 2025
+        bullets:
+          - id: care_mailbox
+            rank: { fde: 3, ai: 4, sde: 4 }
+            text: >-
+              Automated a shared customer-care mailbox with scheduled Power Automate flows: client and system emails (chain
+              codes, timestamps) logged to Excel, replies reconciled from Sent Items, saving the team ~3 hours of manual tracking.
       - title: Software Developer Intern
         dates: Jan 2025 – Jun 2025
         bullets:
