@@ -165,7 +165,7 @@ export default function ProoflinePage() {
             held-out family in a different voice and ran it once before looking at failures. Those first runs are the honest numbers.
           </p>
         </Prose>
-        <div className="mt-8 overflow-x-auto rounded-xl border border-line">
+        <div className="mt-8 overflow-x-auto rounded-xl border border-line" tabIndex={0} role="region" aria-label="Benchmark results, first run per held-out family">
           <table className="w-full min-w-[620px] text-left text-sm">
             <caption className="sr-only">First run on each held-out family</caption>
             <thead className="bg-sunk font-mono text-[11px] uppercase tracking-wider text-subtle">
@@ -204,7 +204,7 @@ export default function ProoflinePage() {
         </p>
 
         <h3 className="mt-12 font-medium text-fg">By error type (heldout3, current engine)</h3>
-        <div className="mt-4 overflow-x-auto rounded-xl border border-line">
+        <div className="mt-4 overflow-x-auto rounded-xl border border-line" tabIndex={0} role="region" aria-label="Detection by error type">
           <table className="w-full min-w-[520px] text-left text-sm">
             <thead className="bg-sunk font-mono text-[11px] uppercase tracking-wider text-subtle">
               <tr>
