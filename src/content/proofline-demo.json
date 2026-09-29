@@ -1,0 +1,1093 @@
+{
+ "samples": [
+  {
+   "id": "hotel",
+   "title": "Hotel portfolio, weekly (USD)",
+   "dataset": "hotel_weekly",
+   "period": "2026-W32",
+   "currency": "USD",
+   "facts": 325,
+   "text": "## Portfolio\nOccupancy rose 5.2% to 66.8% vs last year, while ADR grew 3.8% year over year.\nRoom revenue reached $464.4K, 3.2% behind budget, and RevPAR improved vs last week.\nRooms sold were 1.1% ahead of last year.\n\n## Harbor View\nHarbor View's RevPAR climbed 13.6% vs last year to $99.09. Its ADR of $171.08 was 6.5% above forecast.\nOccupancy was 66.3%, down 4.4 pts week over week. Guest satisfaction rose to 4.6 out of 5.\n",
+   "counts": {
+    "supported": 8,
+    "contradicted": 5,
+    "unverifiable": 2
+   },
+   "claims": [
+    {
+     "start": 28,
+     "end": 32,
+     "text": "5.2%",
+     "kind": "delta",
+     "metric": "occupancy",
+     "entity": "portfolio",
+     "basis": "last_year",
+     "status": "contradicted",
+     "reason": "unit_confusion",
+     "message": "5.2% matches the change in percentage points (occupancy:portfolio:delta_abs:last_year); as written it should be 8.44%",
+     "factId": "occupancy:portfolio:delta_pct:last_year",
+     "derivation": "(level - last year) / |last year| x 100 = (66.815 - 61.6159) / 61.6159 x 100"
+    },
+    {
+     "start": 36,
+     "end": 41,
+     "text": "66.8%",
+     "kind": "level",
+     "metric": "occupancy",
+     "entity": "portfolio",
+     "basis": null,
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "occupancy:portfolio:level",
+     "derivation": "sum(rooms_sold) / sum(rooms_available) x 100 for all entities, 2026-W32"
+    },
+    {
+     "start": 71,
+     "end": 75,
+     "text": "3.8%",
+     "kind": "delta",
+     "metric": "adr",
+     "entity": "portfolio",
+     "basis": "last_year",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "adr:portfolio:delta_pct:last_year",
+     "derivation": "(level - last year) / |last year| x 100 = (162.7919 - 156.8231) / 156.8231 x 100"
+    },
+    {
+     "start": 113,
+     "end": 120,
+     "text": "$464.4K",
+     "kind": "level",
+     "metric": "room_revenue",
+     "entity": "portfolio",
+     "basis": null,
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "room_revenue:portfolio:level",
+     "derivation": "sum(room_revenue) for all entities, 2026-W32"
+    },
+    {
+     "start": 122,
+     "end": 126,
+     "text": "3.2%",
+     "kind": "delta",
+     "metric": "room_revenue",
+     "entity": "portfolio",
+     "basis": "budget",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "room_revenue:portfolio:delta_pct:budget",
+     "derivation": "(level - budget) / |budget| x 100 = (464445.4 - 480002.59) / 480002.59 x 100"
+    },
+    {
+     "start": 153,
+     "end": 161,
+     "text": "improved",
+     "kind": "direction",
+     "metric": "revpar",
+     "entity": "portfolio",
+     "basis": "prior",
+     "status": "contradicted",
+     "reason": "wrong_direction",
+     "message": "says up, but revpar:portfolio:delta_abs:prior is -4.05",
+     "factId": "revpar:portfolio:delta_abs:prior",
+     "derivation": "level - last week = 108.7694 - 112.8146"
+    },
+    {
+     "start": 192,
+     "end": 196,
+     "text": "1.1%",
+     "kind": "delta",
+     "metric": "rooms_sold",
+     "entity": "portfolio",
+     "basis": "last_year",
+     "status": "contradicted",
+     "reason": "wrong_basis",
+     "message": "1.1% matches rooms_sold:portfolio:delta_pct:forecast, not the stated basis (rooms_sold:portfolio:delta_pct:last_year = 8.44%)",
+     "factId": "rooms_sold:portfolio:delta_pct:last_year",
+     "derivation": "(level - last year) / |last year| x 100 = (2853 - 2631) / 2631 x 100"
+    },
+    {
+     "start": 262,
+     "end": 267,
+     "text": "13.6%",
+     "kind": "delta",
+     "metric": "revpar",
+     "entity": "harbor-view",
+     "basis": "last_year",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "revpar:harbor-view:delta_pct:last_year",
+     "derivation": "(level - last year) / |last year| x 100 = (99.0856 - 87.2218) / 87.2218 x 100"
+    },
+    {
+     "start": 284,
+     "end": 290,
+     "text": "$99.09",
+     "kind": "level",
+     "metric": "revpar",
+     "entity": "harbor-view",
+     "basis": null,
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "revpar:harbor-view:level",
+     "derivation": "sum(room_revenue) / sum(rooms_available) for Harbor View, 2026-W32"
+    },
+    {
+     "start": 303,
+     "end": 310,
+     "text": "$171.08",
+     "kind": "level",
+     "metric": "adr",
+     "entity": "harbor-view",
+     "basis": null,
+     "status": "contradicted",
+     "reason": "wrong_entity",
+     "message": "$171.08 is the figure for Riverside Inn, not Harbor View",
+     "factId": "adr:harbor-view:level",
+     "derivation": "sum(room_revenue) / sum(rooms_sold) for Harbor View, 2026-W32"
+    },
+    {
+     "start": 315,
+     "end": 319,
+     "text": "6.5%",
+     "kind": "delta",
+     "metric": "adr",
+     "entity": "harbor-view",
+     "basis": "forecast",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "adr:harbor-view:delta_pct:forecast",
+     "derivation": "(level - forecast) / |forecast| x 100 = (150.0412 - 140.8572) / 140.8572 x 100"
+    },
+    {
+     "start": 350,
+     "end": 355,
+     "text": "66.3%",
+     "kind": "level",
+     "metric": "occupancy",
+     "entity": "harbor-view",
+     "basis": null,
+     "status": "contradicted",
+     "reason": "wrong_value",
+     "message": "66.3% does not match occupancy:harbor-view:level = 66.04%",
+     "factId": "occupancy:harbor-view:level",
+     "derivation": "sum(rooms_sold) / sum(rooms_available) x 100 for Harbor View, 2026-W32"
+    },
+    {
+     "start": 362,
+     "end": 369,
+     "text": "4.4 pts",
+     "kind": "delta",
+     "metric": "occupancy",
+     "entity": "harbor-view",
+     "basis": "prior",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "occupancy:harbor-view:delta_abs:prior",
+     "derivation": "level - last week = 66.039 - 70.3896"
+    },
+    {
+     "start": 413,
+     "end": 416,
+     "text": "4.6",
+     "kind": "level",
+     "metric": null,
+     "entity": "harbor-view",
+     "basis": null,
+     "status": "unverifiable",
+     "reason": "no_metric",
+     "message": "no metric could be attributed to this number",
+     "factId": null,
+     "derivation": null
+    },
+    {
+     "start": 424,
+     "end": 425,
+     "text": "5",
+     "kind": "level",
+     "metric": null,
+     "entity": "harbor-view",
+     "basis": null,
+     "status": "unverifiable",
+     "reason": "no_metric",
+     "message": "no metric could be attributed to this number",
+     "factId": null,
+     "derivation": null
+    }
+   ],
+   "repaired": {
+    "text": "## Portfolio\nOccupancy rose 5.2 pts to 66.8% vs last year, while ADR grew 3.8% year over year.\nRoom revenue reached $464.4K, 3.2% behind budget, and RevPAR worsened vs last week.\nRooms sold were 8.4% ahead of last year.\n\n## Harbor View\nHarbor View's RevPAR climbed 13.6% vs last year to $99.09. Its ADR of $150.04 was 6.5% above forecast.\nOccupancy was 66.0%, down 4.4 pts week over week. Guest satisfaction rose to 4.6 out of 5.\n",
+    "edits": [
+     {
+      "start": 28,
+      "end": 32,
+      "before": "5.2%",
+      "after": "5.2 pts",
+      "reason": "unit"
+     },
+     {
+      "start": 153,
+      "end": 161,
+      "before": "improved",
+      "after": "worsened",
+      "reason": "direction"
+     },
+     {
+      "start": 192,
+      "end": 196,
+      "before": "1.1%",
+      "after": "8.4%",
+      "reason": "wrong_basis"
+     },
+     {
+      "start": 303,
+      "end": 310,
+      "before": "$171.08",
+      "after": "$150.04",
+      "reason": "wrong_entity"
+     },
+     {
+      "start": 350,
+      "end": 355,
+      "before": "66.3%",
+      "after": "66.0%",
+      "reason": "wrong_value"
+     }
+    ],
+    "counts": {
+     "supported": 13,
+     "contradicted": 0,
+     "unverifiable": 2
+    }
+   }
+  },
+  {
+   "id": "retail",
+   "title": "Retail regions, monthly (INR)",
+   "dataset": "retail_monthly",
+   "period": "2026-08",
+   "currency": "INR",
+   "facts": 250,
+   "text": "## Company\nRevenue reached ₹9.59 crore in August, up 8.8% year over year but 1.1% behind budget. Orders fell 7.3% vs last month, and the return rate improved to 6.4%, down 0.6 pts month over month. Conversion rate slipped 0.2% vs last month.\n\n## Regions\nEast beat budget on revenue by 12.1%, with sales of ₹14.99 lakh. North's AOV slipped 2.5% vs last month.\n",
+   "counts": {
+    "supported": 8,
+    "contradicted": 3,
+    "unverifiable": 0
+   },
+   "claims": [
+    {
+     "start": 27,
+     "end": 38,
+     "text": "₹9.59 crore",
+     "kind": "level",
+     "metric": "revenue",
+     "entity": "company",
+     "basis": null,
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "revenue:company:level",
+     "derivation": "sum(revenue) for all entities, 2026-08"
+    },
+    {
+     "start": 53,
+     "end": 57,
+     "text": "8.8%",
+     "kind": "delta",
+     "metric": "revenue",
+     "entity": "company",
+     "basis": "last_year",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "revenue:company:delta_pct:last_year",
+     "derivation": "(level - last year) / |last year| x 100 = (95945589.00 - 88171000.00) / 88171000.00 x 100"
+    },
+    {
+     "start": 77,
+     "end": 81,
+     "text": "1.1%",
+     "kind": "delta",
+     "metric": "revenue",
+     "entity": "company",
+     "basis": "budget",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "revenue:company:delta_pct:budget",
+     "derivation": "(level - budget) / |budget| x 100 = (95945589.00 - 96993049.00) / 96993049.00 x 100"
+    },
+    {
+     "start": 109,
+     "end": 113,
+     "text": "7.3%",
+     "kind": "delta",
+     "metric": "orders",
+     "entity": "company",
+     "basis": "prior",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "orders:company:delta_pct:prior",
+     "derivation": "(level - last month) / |last month| x 100 = (51906 - 55994) / 55994 x 100"
+    },
+    {
+     "start": 149,
+     "end": 157,
+     "text": "improved",
+     "kind": "direction",
+     "metric": "return_rate",
+     "entity": "company",
+     "basis": "prior",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "return_rate:company:delta_abs:prior",
+     "derivation": "level - last month = 6.4289 - 7.0508"
+    },
+    {
+     "start": 161,
+     "end": 165,
+     "text": "6.4%",
+     "kind": "level",
+     "metric": "return_rate",
+     "entity": "company",
+     "basis": null,
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "return_rate:company:level",
+     "derivation": "sum(returns) / sum(orders) x 100 for all entities, 2026-08"
+    },
+    {
+     "start": 172,
+     "end": 179,
+     "text": "0.6 pts",
+     "kind": "delta",
+     "metric": "return_rate",
+     "entity": "company",
+     "basis": "prior",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "return_rate:company:delta_abs:prior",
+     "derivation": "level - last month = 6.4289 - 7.0508"
+    },
+    {
+     "start": 222,
+     "end": 226,
+     "text": "0.2%",
+     "kind": "delta",
+     "metric": "conversion_rate",
+     "entity": "company",
+     "basis": "prior",
+     "status": "contradicted",
+     "reason": "unit_confusion",
+     "message": "0.2% matches the change in percentage points (conversion_rate:company:delta_abs:prior); as written it should be -5.78%",
+     "factId": "conversion_rate:company:delta_pct:prior",
+     "derivation": "(level - last month) / |last month| x 100 = (2.7664 - 2.9363) / 2.9363 x 100"
+    },
+    {
+     "start": 285,
+     "end": 290,
+     "text": "12.1%",
+     "kind": "delta",
+     "metric": "revenue",
+     "entity": "east",
+     "basis": "budget",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "revenue:east:delta_pct:budget",
+     "derivation": "(level - budget) / |budget| x 100 = (14994109.00 - 13377277.00) / 13377277.00 x 100"
+    },
+    {
+     "start": 306,
+     "end": 317,
+     "text": "₹14.99 lakh",
+     "kind": "level",
+     "metric": "revenue",
+     "entity": "east",
+     "basis": null,
+     "status": "contradicted",
+     "reason": "scale_error",
+     "message": "₹14.99 lakh is off by a factor of 10 from revenue:east:level = 14,994,109.00",
+     "factId": "revenue:east:level",
+     "derivation": "sum(revenue) for East, 2026-08"
+    },
+    {
+     "start": 339,
+     "end": 343,
+     "text": "2.5%",
+     "kind": "delta",
+     "metric": "aov",
+     "entity": "north",
+     "basis": "prior",
+     "status": "contradicted",
+     "reason": "wrong_entity",
+     "message": "2.5% is the figure for East, not North",
+     "factId": "aov:north:delta_pct:prior",
+     "derivation": "(level - last month) / |last month| x 100 = (2101.6554 - 2151.0533) / 2151.0533 x 100"
+    }
+   ],
+   "repaired": {
+    "text": "## Company\nRevenue reached ₹9.59 crore in August, up 8.8% year over year but 1.1% behind budget. Orders fell 7.3% vs last month, and the return rate improved to 6.4%, down 0.6 pts month over month. Conversion rate slipped 0.2 pts vs last month.\n\n## Regions\nEast beat budget on revenue by 12.1%, with sales of ₹149.94 lakh. North's AOV slipped 2.3% vs last month.\n",
+    "edits": [
+     {
+      "start": 222,
+      "end": 226,
+      "before": "0.2%",
+      "after": "0.2 pts",
+      "reason": "unit"
+     },
+     {
+      "start": 306,
+      "end": 317,
+      "before": "₹14.99 lakh",
+      "after": "₹149.94 lakh",
+      "reason": "scale_error"
+     },
+     {
+      "start": 339,
+      "end": 343,
+      "before": "2.5%",
+      "after": "2.3%",
+      "reason": "wrong_entity"
+     }
+    ],
+    "counts": {
+     "supported": 11,
+     "contradicted": 0,
+     "unverifiable": 0
+    }
+   }
+  },
+  {
+   "id": "saas",
+   "title": "SaaS segments, monthly (USD)",
+   "dataset": "saas_monthly",
+   "period": "2026-08",
+   "currency": "USD",
+   "facts": 84,
+   "text": "MRR finished August at $672.3K, 1.4% ahead of plan but down 1.7% month over month. New customers came in at 56 against a plan of 59. Churn improved vs last month.\n\n## Segments\nEnterprise MRR grew 3.5% vs last month. Mid-Market was the bright spot: MRR rose 7.8% vs plan, while churn rose 0.4 pts. SMB added 42 new customers, 16.0% fewer than last month.\n",
+   "counts": {
+    "supported": 9,
+    "contradicted": 2,
+    "unverifiable": 0
+   },
+   "claims": [
+    {
+     "start": 23,
+     "end": 30,
+     "text": "$672.3K",
+     "kind": "level",
+     "metric": "mrr",
+     "entity": "all-segments",
+     "basis": null,
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "mrr:all-segments:level",
+     "derivation": "sum(mrr) for all entities, 2026-08"
+    },
+    {
+     "start": 32,
+     "end": 36,
+     "text": "1.4%",
+     "kind": "delta",
+     "metric": "mrr",
+     "entity": "all-segments",
+     "basis": "budget",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "mrr:all-segments:delta_pct:budget",
+     "derivation": "(level - plan) / |plan| x 100 = (672271 - 663100) / 663100 x 100"
+    },
+    {
+     "start": 60,
+     "end": 64,
+     "text": "1.7%",
+     "kind": "delta",
+     "metric": "mrr",
+     "entity": "all-segments",
+     "basis": "prior",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "mrr:all-segments:delta_pct:prior",
+     "derivation": "(level - last month) / |last month| x 100 = (672271 - 683974) / 683974 x 100"
+    },
+    {
+     "start": 108,
+     "end": 110,
+     "text": "56",
+     "kind": "level",
+     "metric": "new_customers",
+     "entity": "all-segments",
+     "basis": null,
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "new_customers:all-segments:level",
+     "derivation": "sum(new_customers) for all entities, 2026-08"
+    },
+    {
+     "start": 129,
+     "end": 131,
+     "text": "59",
+     "kind": "base",
+     "metric": "new_customers",
+     "entity": "all-segments",
+     "basis": "budget",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "new_customers:all-segments:base:budget",
+     "derivation": "sum(new_customers) for all entities, 2026-08 (plan, columns *_plan)"
+    },
+    {
+     "start": 139,
+     "end": 147,
+     "text": "improved",
+     "kind": "direction",
+     "metric": "churn_rate",
+     "entity": "all-segments",
+     "basis": "prior",
+     "status": "contradicted",
+     "reason": "wrong_direction",
+     "message": "says down, but churn_rate:all-segments:delta_abs:prior is 0.06 pts",
+     "factId": "churn_rate:all-segments:delta_abs:prior",
+     "derivation": "level - last month = 2.921 - 2.862"
+    },
+    {
+     "start": 196,
+     "end": 200,
+     "text": "3.5%",
+     "kind": "delta",
+     "metric": "mrr",
+     "entity": "enterprise",
+     "basis": "prior",
+     "status": "contradicted",
+     "reason": "wrong_direction",
+     "message": "says up, but mrr:enterprise:delta_pct:prior is -3.50%",
+     "factId": "mrr:enterprise:delta_pct:prior",
+     "derivation": "(level - last month) / |last month| x 100 = (362137 - 375271) / 375271 x 100"
+    },
+    {
+     "start": 257,
+     "end": 261,
+     "text": "7.8%",
+     "kind": "delta",
+     "metric": "mrr",
+     "entity": "mid-market",
+     "basis": "budget",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "mrr:mid-market:delta_pct:budget",
+     "derivation": "(level - plan) / |plan| x 100 = (232400 - 215546) / 215546 x 100"
+    },
+    {
+     "start": 288,
+     "end": 295,
+     "text": "0.4 pts",
+     "kind": "delta",
+     "metric": "churn_rate",
+     "entity": "mid-market",
+     "basis": "budget",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "churn_rate:mid-market:delta_abs:budget",
+     "derivation": "level - plan = 2.834 - 2.4291"
+    },
+    {
+     "start": 307,
+     "end": 309,
+     "text": "42",
+     "kind": "level",
+     "metric": "new_customers",
+     "entity": "smb",
+     "basis": null,
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "new_customers:smb:level",
+     "derivation": "sum(new_customers) for SMB, 2026-08"
+    },
+    {
+     "start": 325,
+     "end": 330,
+     "text": "16.0%",
+     "kind": "delta",
+     "metric": "new_customers",
+     "entity": "smb",
+     "basis": "prior",
+     "status": "supported",
+     "reason": "ok",
+     "message": "",
+     "factId": "new_customers:smb:delta_pct:prior",
+     "derivation": "(level - last month) / |last month| x 100 = (42 - 50) / 50 x 100"
+    }
+   ],
+   "repaired": {
+    "text": "MRR finished August at $672.3K, 1.4% ahead of plan but down 1.7% month over month. New customers came in at 56 against a plan of 59. Churn worsened vs last month.\n\n## Segments\nEnterprise MRR declined 3.5% vs last month. Mid-Market was the bright spot: MRR rose 7.8% vs plan, while churn rose 0.4 pts. SMB added 42 new customers, 16.0% fewer than last month.\n",
+    "edits": [
+     {
+      "start": 139,
+      "end": 147,
+      "before": "improved",
+      "after": "worsened",
+      "reason": "direction"
+     },
+     {
+      "start": 191,
+      "end": 195,
+      "before": "grew",
+      "after": "declined",
+      "reason": "direction"
+     }
+    ],
+    "counts": {
+     "supported": 11,
+     "contradicted": 0,
+     "unverifiable": 0
+    }
+   }
+  }
+ ],
+ "benchmark": {
+  "firstRuns": [
+   {
+    "family": "heldout",
+    "system": "proofline",
+    "claims": 7745,
+    "errors": 842,
+    "recall": 0.9893,
+    "falseAlarms": 0.0187,
+    "precision": 0.8287,
+    "cleanReportsPass": 0.7923,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout",
+    "system": "fixed_tolerance",
+    "claims": 7745,
+    "errors": 842,
+    "recall": 0.9798,
+    "falseAlarms": 0.2461,
+    "precision": 0.2661,
+    "cleanReportsPass": 0.0769,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout",
+    "system": "no_context",
+    "claims": 7745,
+    "errors": 842,
+    "recall": 0.9857,
+    "falseAlarms": 0.0843,
+    "precision": 0.3356,
+    "cleanReportsPass": 0.4462,
+    "unverifiableClean": 0.5162
+   },
+   {
+    "family": "heldout",
+    "system": "no_basis",
+    "claims": 7745,
+    "errors": 842,
+    "recall": 0.861,
+    "falseAlarms": 0.059,
+    "precision": 0.5508,
+    "cleanReportsPass": 0.4538,
+    "unverifiableClean": 0.0349
+   },
+   {
+    "family": "heldout",
+    "system": "naive_lookup",
+    "claims": 7745,
+    "errors": 842,
+    "recall": 0.1615,
+    "falseAlarms": 0.0,
+    "precision": 1.0,
+    "cleanReportsPass": 1.0,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout2",
+    "system": "proofline",
+    "claims": 8380,
+    "errors": 845,
+    "recall": 1.0,
+    "falseAlarms": 0.0454,
+    "precision": 0.6699,
+    "cleanReportsPass": 0.5263,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout2",
+    "system": "fixed_tolerance",
+    "claims": 8380,
+    "errors": 845,
+    "recall": 0.9941,
+    "falseAlarms": 0.2865,
+    "precision": 0.2419,
+    "cleanReportsPass": 0.0526,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout2",
+    "system": "no_context",
+    "claims": 8380,
+    "errors": 845,
+    "recall": 0.9964,
+    "falseAlarms": 0.0839,
+    "precision": 0.4043,
+    "cleanReportsPass": 0.2857,
+    "unverifiableClean": 0.4719
+   },
+   {
+    "family": "heldout2",
+    "system": "no_basis",
+    "claims": 8380,
+    "errors": 845,
+    "recall": 0.8769,
+    "falseAlarms": 0.0549,
+    "precision": 0.5758,
+    "cleanReportsPass": 0.4586,
+    "unverifiableClean": 0.0674
+   },
+   {
+    "family": "heldout2",
+    "system": "naive_lookup",
+    "claims": 8380,
+    "errors": 845,
+    "recall": 0.1775,
+    "falseAlarms": 0.0,
+    "precision": 1.0,
+    "cleanReportsPass": 1.0,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout3",
+    "system": "proofline",
+    "claims": 7554,
+    "errors": 813,
+    "recall": 0.9889,
+    "falseAlarms": 0.0111,
+    "precision": 0.8924,
+    "cleanReportsPass": 0.8722,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout3",
+    "system": "fixed_tolerance",
+    "claims": 7554,
+    "errors": 813,
+    "recall": 0.9877,
+    "falseAlarms": 0.2408,
+    "precision": 0.2767,
+    "cleanReportsPass": 0.0977,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout3",
+    "system": "no_context",
+    "claims": 7554,
+    "errors": 813,
+    "recall": 0.9754,
+    "falseAlarms": 0.0847,
+    "precision": 0.4659,
+    "cleanReportsPass": 0.5075,
+    "unverifiableClean": 0.313
+   },
+   {
+    "family": "heldout3",
+    "system": "no_basis",
+    "claims": 7554,
+    "errors": 813,
+    "recall": 0.8856,
+    "falseAlarms": 0.0611,
+    "precision": 0.5663,
+    "cleanReportsPass": 0.5,
+    "unverifiableClean": 0.0
+   },
+   {
+    "family": "heldout3",
+    "system": "naive_lookup",
+    "claims": 7554,
+    "errors": 813,
+    "recall": 0.203,
+    "falseAlarms": 0.0,
+    "precision": 1.0,
+    "cleanReportsPass": 1.0,
+    "unverifiableClean": 0.0
+   }
+  ],
+  "perType": [
+   {
+    "family": "dev",
+    "type": "wrong_value",
+    "n": 94,
+    "detected": 1.0,
+    "naive": 0.7553
+   },
+   {
+    "family": "dev",
+    "type": "rounding_drift",
+    "n": 51,
+    "detected": 1.0,
+    "naive": 0.4902
+   },
+   {
+    "family": "dev",
+    "type": "wrong_direction",
+    "n": 129,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "dev",
+    "type": "unit_confusion",
+    "n": 9,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "dev",
+    "type": "wrong_basis",
+    "n": 109,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "dev",
+    "type": "wrong_entity",
+    "n": 228,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "dev",
+    "type": "wrong_metric",
+    "n": 66,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "dev",
+    "type": "scale_error",
+    "n": 15,
+    "detected": 1.0,
+    "naive": 1.0
+   },
+   {
+    "family": "dev",
+    "type": "fabricated",
+    "n": 158,
+    "detected": 1.0,
+    "naive": 0.3544
+   },
+   {
+    "family": "heldout",
+    "type": "wrong_value",
+    "n": 114,
+    "detected": 1.0,
+    "naive": 0.6404
+   },
+   {
+    "family": "heldout",
+    "type": "rounding_drift",
+    "n": 65,
+    "detected": 1.0,
+    "naive": 0.4615
+   },
+   {
+    "family": "heldout",
+    "type": "wrong_direction",
+    "n": 126,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout",
+    "type": "unit_confusion",
+    "n": 6,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout",
+    "type": "wrong_basis",
+    "n": 116,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout",
+    "type": "wrong_entity",
+    "n": 173,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout",
+    "type": "wrong_metric",
+    "n": 81,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout",
+    "type": "scale_error",
+    "n": 11,
+    "detected": 1.0,
+    "naive": 1.0
+   },
+   {
+    "family": "heldout",
+    "type": "fabricated",
+    "n": 162,
+    "detected": 1.0,
+    "naive": 0.2716
+   },
+   {
+    "family": "heldout2",
+    "type": "wrong_value",
+    "n": 112,
+    "detected": 1.0,
+    "naive": 0.6161
+   },
+   {
+    "family": "heldout2",
+    "type": "rounding_drift",
+    "n": 48,
+    "detected": 1.0,
+    "naive": 0.625
+   },
+   {
+    "family": "heldout2",
+    "type": "wrong_direction",
+    "n": 102,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout2",
+    "type": "unit_confusion",
+    "n": 16,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout2",
+    "type": "wrong_basis",
+    "n": 143,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout2",
+    "type": "wrong_entity",
+    "n": 194,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout2",
+    "type": "wrong_metric",
+    "n": 91,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout2",
+    "type": "scale_error",
+    "n": 14,
+    "detected": 1.0,
+    "naive": 1.0
+   },
+   {
+    "family": "heldout2",
+    "type": "fabricated",
+    "n": 179,
+    "detected": 1.0,
+    "naive": 0.257
+   },
+   {
+    "family": "heldout3",
+    "type": "wrong_value",
+    "n": 108,
+    "detected": 1.0,
+    "naive": 0.6852
+   },
+   {
+    "family": "heldout3",
+    "type": "rounding_drift",
+    "n": 50,
+    "detected": 1.0,
+    "naive": 0.56
+   },
+   {
+    "family": "heldout3",
+    "type": "wrong_direction",
+    "n": 86,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout3",
+    "type": "unit_confusion",
+    "n": 19,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout3",
+    "type": "wrong_basis",
+    "n": 98,
+    "detected": 0.9898,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout3",
+    "type": "wrong_entity",
+    "n": 163,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout3",
+    "type": "wrong_metric",
+    "n": 91,
+    "detected": 1.0,
+    "naive": 0.0
+   },
+   {
+    "family": "heldout3",
+    "type": "scale_error",
+    "n": 16,
+    "detected": 1.0,
+    "naive": 1.0
+   },
+   {
+    "family": "heldout3",
+    "type": "fabricated",
+    "n": 182,
+    "detected": 1.0,
+    "naive": 0.2582
+   }
+  ]
+ }
+}

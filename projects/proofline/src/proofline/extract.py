@@ -139,7 +139,7 @@ for _w in (
     "rose rise rises rising risen up increased increase increases increasing grew grow grows growing grown "
     "growth gained gain gains gaining climbed climb climbing jumped jump jumps surged surge surging higher "
     "ahead above exceeded exceeding beat beating outperformed advanced expanded expanding lifted lift uplift "
-    "picked strengthened stronger topped rebounded recovered accelerated upturn raised boosted added"
+    "picked strengthened stronger topped rebounded recovered accelerated upturn raised boosted"
 ).split():
     _DIRECTION_WORDS[_w] = _UP
 for _w in (
@@ -147,7 +147,7 @@ for _w in (
     "declining dropped drop drops dropping slipped slip slipping dipped dip dipping lower below behind "
     "missed trailed trailing shrank shrink shrinking contracted contraction contracting reduced reduction "
     "softened softer softening eased easing weakened weaker weakening slid slide sliding lost loss "
-    "plunged plunge tumbled retreated slowed downturn lowered trimmed"
+    "plunged plunge tumbled retreated slowed downturn lowered trimmed fewer"
 ).split():
     _DIRECTION_WORDS[_w] = _DOWN
 for _w in "flat unchanged steady stable level-pegging".split():
@@ -169,7 +169,7 @@ _DELTA_NOUN = (
 )
 _DELTA_NOUN_OF_BEFORE = re.compile(rf"(?:(?:{_DELTA_NOUN})\s+of|\bby)\s+(?:a|an|the)?\s*$", re.IGNORECASE)
 _DELTA_AFTER = re.compile(
-    rf"^[\s-]*(?:{_DELTA_NOUN}|higher|lower|more|less|above|below|ahead|behind|up|down|better|worse|"
+    rf"^[\s-]*(?:{_DELTA_NOUN}|higher|lower|more|less|fewer|above|below|ahead|behind|up|down|better|worse|"
     r"stronger|weaker|increase|improvement)\b",
     re.IGNORECASE,
 )

@@ -233,7 +233,7 @@ def verify_claim(claim: Claim, sheet: FactSheet, opts: VerifyOptions | None = No
             wrong.message = f"{n.text} matches {meant} ({alt[0].id}); as written it should be {_fmt(primary.value, primary.unit)}"
             return wrong
 
-    for factor in (1e3, 1e-3, 1e6, 1e-6, 100.0, 0.01, 1e2 * 1e3):
+    for factor in (1e3, 1e-3, 1e6, 1e-6, 100.0, 0.01, 10.0, 0.1):  # K/M, lakh/crore and digit-shift slips
         for f in candidates:
             if f.value != 0 and n.admits(abs(f.value) * factor, o.policy):
                 wrong.reason = Reason.SCALE_ERROR

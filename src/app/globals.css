@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+/* ---------- design tokens ---------- */
+:root {
+  --bg: #fafaf8;
+  --bg-elev: #ffffff;
+  --bg-sunk: #f2f1ee;
+  --fg: #121316;
+  --fg-muted: #555a63;
+  --fg-subtle: #61656e;
+  --line: #e4e3df;
+  --line-strong: #cfcdc7;
+  --accent: #0b6e57;
+  --accent-soft: #e2f3ee;
+  --ok: #0b6e57;
+  --ok-soft: #dcf1e9;
+  --bad: #b42318;
+  --bad-soft: #fde4e1;
+  --unk: #8a5a00;
+  --unk-soft: #fbefd2;
+  --shadow: 0 1px 2px rgb(16 18 22 / 0.04), 0 8px 24px -12px rgb(16 18 22 / 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0c0e;
+    --bg-elev: #131519;
+    --bg-sunk: #0f1013;
+    --fg: #ececef;
+    --fg-muted: #a6a9b0;
+    --fg-subtle: #858993;
+    --line: #23262c;
+    --line-strong: #33373e;
+    --accent: #4fd1ae;
+    --accent-soft: #0f2a24;
+    --ok: #4fd1ae;
+    --ok-soft: #0f2d25;
+    --bad: #ff8a80;
+    --bad-soft: #3a1714;
+    --unk: #f0c261;
+    --unk-soft: #33280f;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b0c0e;
+  --bg-elev: #131519;
+  --bg-sunk: #0f1013;
+  --fg: #ececef;
+  --fg-muted: #a6a9b0;
+  --fg-subtle: #858993;
+  --line: #23262c;
+  --line-strong: #33373e;
+  --accent: #4fd1ae;
+  --accent-soft: #0f2a24;
+  --ok: #4fd1ae;
+  --ok-soft: #0f2d25;
+  --bad: #ff8a80;
+  --bad-soft: #3a1714;
+  --unk: #f0c261;
+  --unk-soft: #33280f;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-elev: var(--bg-elev);
+  --color-sunk: var(--bg-sunk);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-unk: var(--unk);
+  --color-unk-soft: var(--unk-soft);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* ---------- base ---------- */
+html {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  line-height: 1.65;
+}
+html,
+body {
+  overflow-x: clip;
+}
+::selection {
+  background: var(--accent-soft);
+  color: var(--fg);
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* long-form text in case studies */
+.prose-body p {
+  margin-block: 0 1.05em;
+  color: var(--fg-muted);
+}
+.prose-body strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+.prose-body ul {
+  margin-block: 0 1.1em;
+  padding-left: 1.1em;
+  list-style: disc;
+  color: var(--fg-muted);
+}
+.prose-body li {
+  margin-block: 0.35em;
+  padding-left: 0.2em;
+}
+.prose-body li::marker {
+  color: var(--fg-subtle);
+}
+.prose-body code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--bg-sunk);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0.08em 0.35em;
+  color: var(--fg);
+}
+.prose-body a,
+.link {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 150ms ease;
+}
+.prose-body a:hover,
+.link:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* verified-claim tooltip: out of layout until shown, so it can never widen the page */
+.claim-tip {
+  display: none;
+  transform: translate(-50%, 0);
+  pointer-events: none;
+  transition:
+    opacity 140ms ease,
+    display 140ms allow-discrete;
+}
+.claim:hover .claim-tip,
+.claim:focus .claim-tip,
+.claim:focus-within .claim-tip {
+  display: block;
+  opacity: 1;
+}
+@starting-style {
+  .claim:hover .claim-tip,
+  .claim:focus .claim-tip,
+  .claim:focus-within .claim-tip {
+    opacity: 0;
+  }
+}
+/* on small screens the source appears as a card pinned to the bottom of the viewport */
+@media (max-width: 640px) {
+  .claim-tip {
+    position: fixed;
+    inset: auto 16px 16px 16px;
+    width: auto;
+    margin: 0;
+    transform: none;
+  }
+}
+
+/* grid paper texture for the hero, very faint */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 75%);
+  opacity: 0.55;
+}
+
+/* load-in motion: subtle, CSS-only, disabled by the reduced-motion rule above */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal {
+  animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media print {
+  .reveal {
+    animation: none;
+  }
+}
