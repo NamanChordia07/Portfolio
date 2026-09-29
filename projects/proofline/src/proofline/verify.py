@@ -81,6 +81,9 @@ class VerifyOptions:
     diagnose: bool = True
     unit_confusion: bool = True
     flat_pct: float = 1.0  # a relative change under this is "flat"
+    # A change with no stated comparison ("occupancy rose 8.4%") that is true for some bases but not others:
+    # "ambiguous" reports it as unverifiable and names the bases it matches; "any" accepts it.
+    unstated_basis: str = "ambiguous"
 
 
 @dataclass
@@ -158,7 +161,8 @@ def verify_claim(claim: Claim, sheet: FactSheet, opts: VerifyOptions | None = No
         return Verdict(claim, Status.UNVERIFIABLE, Reason.NO_METRIC, message="no metric could be attributed to this number")
     metric = sheet.metrics.get(claim.metric)
     if metric is None:
-        return Verdict(claim, Status.UNVERIFIABLE, Reason.NO_METRIC, message=f"metric {claim.metric!r} is not in the data")
+        name = claim.metric.lstrip("?")
+        return Verdict(claim, Status.UNVERIFIABLE, Reason.NO_METRIC, message=f"'{name}' is not a metric in the data")
     entity = claim.entity or sheet.total_entity
     bases: list[str | None] = [claim.basis] if claim.basis else [*sheet.bases] or [None]
 
@@ -187,6 +191,28 @@ def verify_claim(claim: Claim, sheet: FactSheet, opts: VerifyOptions | None = No
     if not candidates:
         what = f"{claim.kind.value} of {claim.metric} for {entity}" + (f" vs {claim.basis}" if claim.basis else "")
         return Verdict(claim, Status.UNVERIFIABLE, Reason.NO_MATCHING_FACT, message=f"no fact for {what}")
+
+    if (
+        o.unstated_basis == "ambiguous"
+        and claim.kind is ClaimKind.DELTA
+        and claim.basis is None
+        and len({f.basis for f in candidates}) > 1
+    ):
+        consistent = [
+            f
+            for f in candidates
+            if _admits(n, f, o.policy, signed)
+            and (claim.direction in (None, 0) or _sign(f.value, 1e-12) in (0, claim.direction))
+        ]
+        if consistent:
+            labels = sorted({sheet.bases[f.basis].label for f in consistent if f.basis})
+            return Verdict(
+                claim,
+                Status.UNVERIFIABLE,
+                Reason.AMBIGUOUS,
+                alternatives=consistent,
+                message=f"true vs {', '.join(labels)}, but the comparison is not stated",
+            )
 
     for f in candidates:
         if _admits(n, f, o.policy, signed):
@@ -239,6 +265,16 @@ def verify_claim(claim: Claim, sheet: FactSheet, opts: VerifyOptions | None = No
                 wrong.reason = Reason.SCALE_ERROR
                 wrong.message = f"{n.text} is off by a factor of {1 / factor:g} from {f.id} = {_fmt(f.value, f.unit)}"
                 return wrong
+
+    if claim.kind is ClaimKind.LEVEL:
+        # A current-period figure that is really a comparison-period one: "came in at 65" (last month's).
+        alt = matches([f for b in sheet.bases for f in sheet.find(claim.metric, entity, FactKind.BASE, b)])
+        if alt:
+            wrong.reason = Reason.WRONG_BASIS
+            wrong.alternatives = alt
+            label = sheet.bases[alt[0].basis].label if alt[0].basis else "comparison"
+            wrong.message = f"{n.text} is the {label} figure ({alt[0].id}), not {sheet.period} ({_fmt(primary.value, primary.unit)})"
+            return wrong
 
     if claim.basis is not None:
         other_bases = [b for b in sheet.bases if b != claim.basis]

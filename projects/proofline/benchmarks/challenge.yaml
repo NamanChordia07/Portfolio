@@ -1,0 +1,162 @@
+# Hand-labelled challenge set.
+#
+# Unlike the template benchmark, every case here was written by hand against the fact sheets of
+# the three synthetic datasets, and the expected verdict is what a careful analyst would conclude
+# from the data, NOT what Proofline currently outputs. Some cases encode behaviour Proofline did
+# not have when the set was written (see docs/BENCHMARK.md, "Challenge set"). Results are reported
+# as they come out, failures included.
+#
+# expect: every claim the verifier should find, in order of appearance.
+#   token  - the exact text of the number or direction word
+#   status - supported | contradicted | unverifiable
+#   reason - optional; checked only when given (contradicted and ambiguous cases)
+# A case with `expect: []` must produce no claims at all.
+
+- {id: basic-01, category: basics, dataset: hotel_weekly, text: "Portfolio occupancy was 66.8%.",
+   expect: [{token: "66.8%", status: supported}]}
+- {id: basic-02, category: basics, dataset: hotel_weekly, text: "Occupancy rose 5.2 pts vs last year.",
+   expect: [{token: "5.2 pts", status: supported}]}
+- {id: basic-03, category: basics, dataset: hotel_weekly, text: "RevPAR grew 12.6% year over year to $108.77.",
+   expect: [{token: "12.6%", status: supported}, {token: "$108.77", status: supported}]}
+- {id: basic-04, category: basics, dataset: hotel_weekly, text: "Room revenue came in at $464.4K, 3.2% below budget.",
+   expect: [{token: "$464.4K", status: supported}, {token: "3.2%", status: supported}]}
+- {id: basic-05, category: basics, dataset: hotel_weekly, text: "Rooms sold fell 17 week over week.",
+   expect: [{token: "17", status: supported}]}
+
+- {id: pts-01, category: points_vs_percent, dataset: hotel_weekly, text: "Occupancy rose 5.2% vs last year.",
+   expect: [{token: "5.2%", status: contradicted, reason: unit_confusion}]}
+- {id: pts-02, category: points_vs_percent, dataset: hotel_weekly, text: "Occupancy rose 8.4% vs last year.",
+   expect: [{token: "8.4%", status: supported}]}
+- {id: pts-03, category: points_vs_percent, dataset: hotel_weekly, text: "Harbor View's occupancy fell 4.4% week over week.",
+   expect: [{token: "4.4%", status: contradicted, reason: unit_confusion}]}
+- {id: pts-04, category: points_vs_percent, dataset: saas_monthly, text: "Mid-Market churn rose 16.7% vs plan.",
+   expect: [{token: "16.7%", status: supported}]}
+- {id: pts-05, category: points_vs_percent, dataset: saas_monthly, text: "Mid-Market churn rose 0.4 pts vs plan.",
+   expect: [{token: "0.4 pts", status: supported}]}
+- {id: pts-06, category: points_vs_percent, dataset: retail_monthly, text: "The return rate fell 0.6% vs last month.",
+   expect: [{token: "0.6%", status: contradicted, reason: unit_confusion}]}
+- {id: pts-07, category: points_vs_percent, dataset: hotel_weekly, text: "Occupancy rose 520 bps vs last year.",
+   expect: [{token: "520 bps", status: supported}]}
+
+- {id: cur-01, category: currency_and_scale, dataset: retail_monthly, text: "Revenue reached ₹9.59 crore.",
+   expect: [{token: "₹9.59 crore", status: supported}]}
+- {id: cur-02, category: currency_and_scale, dataset: retail_monthly, text: "Revenue reached ₹959.5 lakh.",
+   expect: [{token: "₹959.5 lakh", status: supported}]}
+- {id: cur-03, category: currency_and_scale, dataset: retail_monthly, text: "Revenue reached ₹95.9 lakh.",
+   expect: [{token: "₹95.9 lakh", status: contradicted, reason: scale_error}]}
+- {id: cur-04, category: currency_and_scale, dataset: retail_monthly, text: "Revenue reached ₹9.59 lakh.",
+   expect: [{token: "₹9.59 lakh", status: contradicted, reason: scale_error}]}
+- {id: cur-05, category: currency_and_scale, dataset: hotel_weekly, text: "Room revenue was $464.4M.",
+   expect: [{token: "$464.4M", status: contradicted, reason: scale_error}]}
+- {id: cur-06, category: currency_and_scale, dataset: hotel_weekly, text: "Room revenue was €464.4K.",
+   expect: [{token: "€464.4K", status: contradicted, reason: currency_mismatch}]}
+- {id: cur-07, category: currency_and_scale, dataset: retail_monthly, text: "East revenue was Rs 1,49,94,109.",
+   expect: [{token: "Rs 1,49,94,109", status: supported}]}
+- {id: cur-08, category: currency_and_scale, dataset: saas_monthly, text: "MRR was $672K.",
+   expect: [{token: "$672K", status: supported}]}
+- {id: cur-09, category: currency_and_scale, dataset: saas_monthly, text: "MRR was $0.67M.",
+   expect: [{token: "$0.67M", status: supported}]}
+- {id: cur-10, category: currency_and_scale, dataset: saas_monthly, text: "MRR was $6.72M.",
+   expect: [{token: "$6.72M", status: contradicted, reason: scale_error}]}
+
+- {id: abs-01, category: absolute_numbers, dataset: hotel_weekly, text: "Rooms sold totalled 2,853.",
+   expect: [{token: "2,853", status: supported}]}
+- {id: abs-02, category: absolute_numbers, dataset: retail_monthly, text: "Orders were 51,906, up 4,512 year over year.",
+   expect: [{token: "51,906", status: supported}, {token: "4,512", status: supported}]}
+- {id: abs-03, category: absolute_numbers, dataset: saas_monthly, text: "SMB added 42 new customers.",
+   expect: [{token: "42", status: supported}]}
+- {id: abs-04, category: absolute_numbers, dataset: saas_monthly, text: "New customers came in at 65.",
+   expect: [{token: "65", status: contradicted, reason: wrong_basis}]}
+
+- {id: ent-01, category: wrong_entity, dataset: hotel_weekly, text: "Harbor View's ADR was $171.08.",
+   expect: [{token: "$171.08", status: contradicted, reason: wrong_entity}]}
+- {id: ent-02, category: wrong_entity, dataset: retail_monthly, text: "North's AOV slipped 2.5% vs last month.",
+   expect: [{token: "2.5%", status: contradicted, reason: wrong_entity}]}
+- {id: ent-03, category: wrong_entity, dataset: saas_monthly, text: "Enterprise MRR was $232.4K.",
+   expect: [{token: "$232.4K", status: contradicted, reason: wrong_entity}]}
+
+- {id: per-01, category: wrong_period_or_basis, dataset: hotel_weekly, text: "Rooms sold were 1.1% ahead of last year.",
+   expect: [{token: "1.1%", status: contradicted, reason: wrong_basis}]}
+- {id: per-02, category: wrong_period_or_basis, dataset: hotel_weekly, text: "Room revenue rose 12.6% vs last week.",
+   expect: [{token: "12.6%", status: contradicted, reason: wrong_basis}]}
+- {id: per-03, category: wrong_period_or_basis, dataset: hotel_weekly, text: "Occupancy was down 3.4% versus last year.",
+   expect: [{token: "3.4%", status: contradicted, reason: wrong_basis}]}
+- {id: per-04, category: wrong_period_or_basis, dataset: hotel_weekly, text: "Riverside Inn's RevPAR rose 24.9% vs budget.",
+   expect: [{token: "24.9%", status: contradicted, reason: wrong_basis}]}
+- {id: per-05, category: wrong_period_or_basis, dataset: saas_monthly, text: "MRR fell 1.7% vs plan.",
+   expect: [{token: "1.7%", status: contradicted, reason: wrong_basis}]}
+
+- {id: dir-01, category: wrong_direction, dataset: hotel_weekly, text: "RevPAR improved vs last week.",
+   expect: [{token: "improved", status: contradicted, reason: wrong_direction}]}
+- {id: dir-02, category: wrong_direction, dataset: hotel_weekly, text: "ADR fell 3.8% vs last year.",
+   expect: [{token: "3.8%", status: contradicted, reason: wrong_direction}]}
+- {id: dir-03, category: wrong_direction, dataset: saas_monthly, text: "Enterprise MRR grew 3.5% vs last month.",
+   expect: [{token: "3.5%", status: contradicted, reason: wrong_direction}]}
+- {id: dir-04, category: wrong_direction, dataset: hotel_weekly, text: "Cedar Lodge's ADR rose 1.2% vs last year.",
+   expect: [{token: "1.2%", status: contradicted, reason: wrong_direction}]}
+
+- {id: pol-01, category: lower_is_better, dataset: retail_monthly, text: "The return rate improved vs last month.",
+   expect: [{token: "improved", status: supported}]}
+- {id: pol-02, category: lower_is_better, dataset: retail_monthly, text: "The return rate worsened vs last month.",
+   expect: [{token: "worsened", status: contradicted, reason: wrong_direction}]}
+- {id: pol-03, category: lower_is_better, dataset: retail_monthly, text: "North's return rate deteriorated vs last year.",
+   expect: [{token: "deteriorated", status: supported}]}
+- {id: pol-04, category: lower_is_better, dataset: saas_monthly, text: "Churn improved vs last month.",
+   expect: [{token: "improved", status: contradicted, reason: wrong_direction}]}
+- {id: pol-05, category: lower_is_better, dataset: saas_monthly, text: "SMB churn improved vs plan.",
+   expect: [{token: "improved", status: supported}]}
+
+- {id: hdg-01, category: hedges_and_rounding, dataset: hotel_weekly, text: "Occupancy was about 67%.",
+   expect: [{token: "67%", status: supported}]}
+- {id: hdg-02, category: hedges_and_rounding, dataset: hotel_weekly, text: "Occupancy was nearly 67%.",
+   expect: [{token: "67%", status: supported}]}
+- {id: hdg-03, category: hedges_and_rounding, dataset: hotel_weekly, text: "RevPAR was over $110.",
+   expect: [{token: "$110", status: contradicted}]}
+- {id: hdg-04, category: hedges_and_rounding, dataset: hotel_weekly, text: "Occupancy was 66.9%.",
+   expect: [{token: "66.9%", status: contradicted, reason: wrong_value}]}
+- {id: hdg-05, category: hedges_and_rounding, dataset: hotel_weekly, text: "ADR was $163.",
+   expect: [{token: "$163", status: supported}]}
+
+- {id: mis-01, category: missing_evidence, dataset: hotel_weekly, text: "Guest satisfaction reached 4.6 out of 5.",
+   expect: [{token: "4.6", status: unverifiable}, {token: "5", status: unverifiable}]}
+- {id: mis-02, category: missing_evidence, dataset: hotel_weekly, text: "Spa revenue rose 8% vs last year.",
+   expect: [{token: "8%", status: unverifiable}]}
+- {id: mis-03, category: missing_evidence, dataset: hotel_weekly, text: "Marketing spend was $84,000.",
+   expect: [{token: "$84,000", status: unverifiable}]}
+- {id: mis-04, category: missing_evidence, dataset: hotel_weekly, text: "Staff turnover fell 3.4% vs last year.",
+   expect: [{token: "3.4%", status: unverifiable}]}
+- {id: mis-05, category: missing_evidence, dataset: saas_monthly, text: "Weekend churn rose 0.4 pts vs plan.",
+   expect: [{token: "0.4 pts", status: unverifiable}]}
+
+- {id: amb-01, category: ambiguous, dataset: hotel_weekly, text: "Occupancy rose 1.1%.",
+   expect: [{token: "1.1%", status: unverifiable, reason: ambiguous}]}
+- {id: amb-02, category: ambiguous, dataset: hotel_weekly, text: "Occupancy rose 8.4%.",
+   expect: [{token: "8.4%", status: unverifiable, reason: ambiguous}]}
+- {id: amb-03, category: ambiguous, dataset: hotel_weekly, text: "Occupancy rose 12%.",
+   expect: [{token: "12%", status: contradicted}]}
+- {id: amb-04, category: ambiguous, dataset: hotel_weekly, text: "ADR moved 3.8% year over year.",
+   expect: [{token: "3.8%", status: supported}]}
+- {id: amb-05, category: ambiguous, dataset: hotel_weekly, text: "Revenue was strong.",
+   expect: []}
+
+- {id: ctx-01, category: context, dataset: hotel_weekly, text: "## Harbor View\nRevPAR climbed 13.6% vs last year. It was up 5.7% against the forecast.",
+   expect: [{token: "13.6%", status: supported}, {token: "5.7%", status: supported}]}
+- {id: ctx-02, category: context, dataset: hotel_weekly, text: "Parkside Suites posted occupancy of 69.3%. It rose 7.2 pts week over week.",
+   expect: [{token: "69.3%", status: supported}, {token: "7.2 pts", status: supported}]}
+- {id: ctx-03, category: context, dataset: hotel_weekly, text: "Cedar Lodge's ADR fell 8.5% week over week, while RevPAR rose 5.7% vs last year.",
+   expect: [{token: "8.5%", status: supported}, {token: "5.7%", status: supported}]}
+- {id: ctx-04, category: context, dataset: retail_monthly, text: "Revenue rose 8.8% year over year and orders 9.5%.",
+   expect: [{token: "8.8%", status: supported}, {token: "9.5%", status: supported}]}
+- {id: ctx-05, category: context, dataset: hotel_weekly, text: "Occupancy rose from 61.6% to 66.8% vs last year.",
+   expect: [{token: "rose", status: supported}, {token: "61.6%", status: supported}, {token: "66.8%", status: supported}]}
+- {id: ctx-06, category: context, dataset: hotel_weekly, text: "Occupancy came in at 66.8% versus a budget of 69.2%.",
+   expect: [{token: "66.8%", status: supported}, {token: "69.2%", status: supported}]}
+- {id: ctx-07, category: context, dataset: hotel_weekly, text: "Occupancy of 66.8% (69.2% budget).",
+   expect: [{token: "66.8%", status: supported}, {token: "69.2%", status: supported}]}
+
+- {id: idn-01, category: identifiers, dataset: hotel_weekly, text: "In Week 32, occupancy was 66.8%.",
+   expect: [{token: "66.8%", status: supported}]}
+- {id: idn-02, category: identifiers, dataset: hotel_weekly, text: "Q3 planning starts next month.",
+   expect: []}
+- {id: idn-03, category: identifiers, dataset: saas_monthly, text: "In FY26, MRR reached $672.3K.",
+   expect: [{token: "$672.3K", status: supported}]}

@@ -1,0 +1,152 @@
+{
+  "cases": 68,
+  "cases_passed": 63,
+  "tokens": 78,
+  "status_accuracy": 0.9487,
+  "reason_accuracy": 0.9583,
+  "missed": 0,
+  "spurious": 0,
+  "flag": {
+    "tp": 32,
+    "fp": 0,
+    "fn": 2,
+    "tn": 44,
+    "precision": 1.0,
+    "recall": 0.9412,
+    "f1": 0.9697,
+    "accuracy": 0.9744
+  },
+  "confusion": {
+    "contradicted->contradicted": 26,
+    "supported->supported": 44,
+    "unverifiable->contradicted": 2,
+    "unverifiable->supported": 2,
+    "unverifiable->unverifiable": 4
+  },
+  "latency_ms": {
+    "p50": 0.378,
+    "p95": 0.744,
+    "max": 5.459
+  },
+  "categories": {
+    "absolute_numbers": {
+      "cases": 4,
+      "passed": 3
+    },
+    "ambiguous": {
+      "cases": 5,
+      "passed": 3
+    },
+    "basics": {
+      "cases": 5,
+      "passed": 5
+    },
+    "context": {
+      "cases": 7,
+      "passed": 7
+    },
+    "currency_and_scale": {
+      "cases": 10,
+      "passed": 10
+    },
+    "hedges_and_rounding": {
+      "cases": 5,
+      "passed": 5
+    },
+    "identifiers": {
+      "cases": 3,
+      "passed": 3
+    },
+    "lower_is_better": {
+      "cases": 5,
+      "passed": 5
+    },
+    "missing_evidence": {
+      "cases": 5,
+      "passed": 3
+    },
+    "points_vs_percent": {
+      "cases": 7,
+      "passed": 7
+    },
+    "wrong_direction": {
+      "cases": 4,
+      "passed": 4
+    },
+    "wrong_entity": {
+      "cases": 3,
+      "passed": 3
+    },
+    "wrong_period_or_basis": {
+      "cases": 5,
+      "passed": 5
+    }
+  },
+  "failures": [
+    {
+      "id": "abs-04",
+      "text": "New customers came in at 65.",
+      "tokens": [
+        {
+          "token": "65",
+          "expected": "contradicted/wrong_basis",
+          "got": "contradicted/wrong_value",
+          "message": "65 does not match new_customers:all-segments:level = 56.00"
+        }
+      ],
+      "spurious": []
+    },
+    {
+      "id": "mis-02",
+      "text": "Spa revenue rose 8% vs last year.",
+      "tokens": [
+        {
+          "token": "8%",
+          "expected": "unverifiable",
+          "got": "contradicted/wrong_metric",
+          "message": "8% is Occupancy, not Room revenue"
+        }
+      ],
+      "spurious": []
+    },
+    {
+      "id": "mis-05",
+      "text": "Weekend churn rose 0.4 pts vs plan.",
+      "tokens": [
+        {
+          "token": "0.4 pts",
+          "expected": "unverifiable",
+          "got": "contradicted/wrong_entity",
+          "message": "0.4 pts is the figure for Mid-Market, not All segments"
+        }
+      ],
+      "spurious": []
+    },
+    {
+      "id": "amb-01",
+      "text": "Occupancy rose 1.1%.",
+      "tokens": [
+        {
+          "token": "1.1%",
+          "expected": "unverifiable/ambiguous",
+          "got": "supported/ok",
+          "message": ""
+        }
+      ],
+      "spurious": []
+    },
+    {
+      "id": "amb-02",
+      "text": "Occupancy rose 8.4%.",
+      "tokens": [
+        {
+          "token": "8.4%",
+          "expected": "unverifiable/ambiguous",
+          "got": "supported/ok",
+          "message": ""
+        }
+      ],
+      "spurious": []
+    }
+  ]
+}

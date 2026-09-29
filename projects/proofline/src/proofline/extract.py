@@ -275,6 +275,37 @@ class Lexicon:
         return [h for h in self._hits(self._entity_re, self._entity_phrases, text) if not _overlaps(h, mask)]
 
 
+# Words that may sit right before a generic metric word ("revenue", "churn") without changing
+# which metric it is. Anything else ("Spa revenue", "Weekend churn") names a different metric.
+_QUALIFIER_OK = set(
+    """the a an its their our his her this that these those which whose what and or but nor while whereas
+    with without of for in on at by from to as into than via per across within over under after before during
+    was were is are be been being has had have did do does ran saw posted recorded reported delivered generated
+    achieved drove reached closed finished ended kept held maintained hit landed came totalled totaled averaged
+    total overall net gross weekly monthly daily quarterly annual yearly average combined blended aggregate
+    portfolio company business group all strong weak record solid flat steady also still only both""".split()
+)
+
+
+def _qualifier(text: str, hit: _Hit, entity_hits: list[_Hit]) -> str | None:
+    """The word that turns a generic metric word into a different metric, e.g. "Spa" in "Spa revenue"."""
+    matched = text[hit.start : hit.end]
+    if " " in matched.strip() or not any(c.islower() for c in matched):
+        return None  # multi-word phrases and acronyms (ADR, MRR) are specific already
+    before = text[: hit.start]
+    m = re.search(r"([A-Za-z][A-Za-z'’-]*)[ \t]+$", before)
+    if not m:
+        return None  # start of text, or preceded by punctuation or a number
+    word = m.group(1)
+    if word.endswith(("'s", "’s", "'", "’")):
+        return None  # a possessive names whose metric it is: "Harbor View's occupancy"
+    if any(e.end == m.end(1) for e in entity_hits):
+        return None  # "Harbor View revenue"
+    if word.lower() in _QUALIFIER_OK or word.lower() in _DIRECTION_WORDS:
+        return None
+    return word
+
+
 def _overlaps(h: _Hit, others: list[_Hit]) -> bool:
     return any(h.start < o.end and o.start < h.end for o in others)
 
@@ -331,6 +362,11 @@ def extract_claims(text: str, sheet: FactSheet, options: ExtractOptions | None =
     basis_hits = lex.bases(text) if opts.use_basis else []
     metric_hits = lex.metrics(text, basis_hits)
     entity_hits = lex.entities(text, basis_hits + metric_hits)
+    for h in metric_hits:
+        q = _qualifier(text, h, entity_hits)
+        if q:
+            # An unknown metric: claims about it are reported as unverifiable, never checked against a lookalike.
+            h.value = f"?{q.lower()} {text[h.start : h.end].lower()}"
     numbers = list(iter_numbers(text))
     direction_hits = [
         (m.start(), m.end(), _DIRECTION_WORDS[m.group(1).lower()])
