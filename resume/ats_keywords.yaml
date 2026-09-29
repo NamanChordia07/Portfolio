@@ -1,0 +1,26 @@
+# Keyword sets distilled from 2026 job descriptions (see ../strategy/RESEARCH.md for sources):
+#   FDE - OpenAI Forward Deployed Engineer, Anthropic FDE (Applied AI), Palantir FDSE (new grad),
+#         India FDE postings (Glassdoor/Indeed summaries)
+#   AI  - Applied AI / AI Engineer postings and 2026 hiring guides (LLM apps, agents, evals)
+#   SDE - Google SWE early career (India), Microsoft SWE (India, 0-2 yrs), Amazon SDE I
+#
+# "core" terms appear in most postings for the role; "stretch" terms appear in some.
+# The check reports which terms the resume covers. Missing terms are NOT to be stuffed in:
+# they are either genuine gaps (see ../strategy/REPORT.md, "skills to strengthen") or
+# deliberately omitted because there is no evidence behind them.
+
+fde:
+  core: [Python, TypeScript, Java, SQL, APIs, REST, integration, deploy, production, automation, workflows,
+         LLM, evaluation, end to end, Docker, debugging, data, pipeline, customer, enterprise, stakeholders]
+  stretch: [MCP, agents, prompt, Salesforce, Playwright, PostgreSQL, full-stack, frontend, backend, cloud,
+            prototype, AWS, GCP, Azure, Kubernetes, RAG]
+ai:
+  core: [Python, LLM, evaluation, benchmark, production, APIs, guardrails, TypeScript, Docker, prompt,
+         agents, streaming, latency, Gemini, Claude]
+  stretch: [MCP, multimodal, RAG, embeddings, vector database, fine-tuning, OpenAI, FastAPI, observability,
+            tool use, cost, LangChain, LangGraph, PyTorch, hallucination]
+sde:
+  core: [Java, Python, TypeScript, JavaScript, SQL, REST, APIs, Spring Boot, PostgreSQL, MySQL, testing,
+         Git, Docker, Linux, debugging, backend, frontend, React, Angular]
+  stretch: [system design, distributed systems, microservices, data structures, algorithms, C++, AWS, Azure,
+            GCP, Kubernetes, CI/CD, GitHub Actions, scalability, performance, object-oriented]

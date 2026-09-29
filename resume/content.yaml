@@ -1,0 +1,217 @@
+# Single source of truth for all three resumes.
+# Edit here, then run:  python build.py --check   (writes dist/*.pdf, dist/*.docx and ../public/resume/*.pdf)
+#                       python layout.py dist/*.html  (line count and last-line fill per bullet)
+#                       python ats_check.py           (parse test + keyword coverage report)
+#
+# Every bullet is a claim you must be able to defend in an interview. Items listed in
+# ../strategy/VERIFY.md are phrased conservatively because I could not confirm the detail;
+# tighten them (and add real numbers) once confirmed.
+#
+# Bullet fields:  text (default) | fde / ai / sde (variant-specific wording)
+#                 in: [variants that include it] (default: all) | rank: {variant: order}
+
+person:
+  name: Naman Chordia
+  location: Pune, India
+  phone: "+91 87999 55051"
+  email: namanchordia88@gmail.com
+  links:
+    - { label: namanchordia.vercel.app, url: "https://namanchordia.vercel.app" }
+    - { label: github.com/NamanChordia07, url: "https://github.com/NamanChordia07" }
+    - { label: linkedin.com/in/naman-chordia, url: "https://www.linkedin.com/in/naman-chordia" }
+
+variants:
+  fde:
+    file: Naman_Chordia_FDE_Resume
+    headline: Software Engineer · Enterprise Automation, Integration & Applied AI
+    summary: >-
+      Engineer who turns enterprise workflows into deployed automation: LLM-assisted report pipelines, Playwright
+      checks across Salesforce and product systems, internal tools at IDeaS (a SAS company); shipped a production SaaS solo.
+    sections: [summary, experience, projects, skills, education, leadership]
+  ai:
+    file: Naman_Chordia_AI_Engineer_Resume
+    headline: Applied AI Engineer · LLM Systems, Evaluation & Automation
+    summary: >-
+      Applied AI engineer who makes LLM output trustworthy enough to ship: Proofline (report verification benchmarked
+      on 32k labelled claims), LLM commentary in IDeaS (a SAS company) report automation, a production multimodal Gemini app.
+    sections: [summary, projects, experience, skills, education, leadership]
+  sde:
+    file: Naman_Chordia_SDE_Resume
+    headline: Software Engineer · Backend, Full-Stack & Automation
+    summary: >-
+      Software engineer across Java/Spring Boot and Angular (modernization at IDeaS, a SAS company), Python
+      automation and TypeScript full-stack; designed and shipped ClueCode, a subscription app with a
+      Next.js/Postgres backend and 270+ tests.
+    sections: [summary, experience, projects, skills, education, leadership]
+
+experience:
+  - company: IDeaS Revenue Solutions (a SAS company)
+    location: Pune, India
+    roles:
+      - title: Business Intelligence & Automation Intern
+        dates: Jul 2025 – Present
+        bullets:
+          - id: forecast_review
+            rank: { fde: 1, ai: 1, sde: 1 }
+            fde: >-
+              Built a Python pipeline that generates client forecast-review reports (forecast vs. projections) as PDF,
+              Word and Excel with LLM-written commentary (Microsoft AI Builder); modular services, Dockerised, through SIT/UAT.
+            ai: >-
+              Added LLM-written narrative (Microsoft AI Builder) to a Python forecast-review pipeline that computes
+              forecast vs. projections and renders PDF, Word and Excel reports; Dockerised through SIT/UAT.
+            sde: >-
+              Engineered a modular Python report service (data, calculation, chart and merge modules) that generates
+              forecast-review reports as PDF, Word and Excel with LLM commentary; Dockerised through SIT/UAT.
+          - id: g3_playwright
+            rank: { fde: 2, ai: 3, sde: 2 }
+            fde: >-
+              Automated end-to-end checks of client setup on the G3 revenue-management platform with Playwright,
+              validating account numbers and integration types across Salesforce, the product UI and database, in Docker.
+            ai: >-
+              Built Playwright browser automation that validates client setup across Salesforce, the G3
+              revenue-management UI and its database, in Dockerised test environments.
+            sde: >-
+              Wrote Playwright end-to-end automation that checks client configuration (account numbers, integration
+              types) across Salesforce, the G3 revenue-management UI and its database, in Docker.
+          - id: care_mailbox
+            rank: { fde: 3, ai: 4, sde: 4 }
+            text: >-
+              Automated a shared customer-care mailbox with scheduled Power Automate flows: client and system emails (chain
+              codes, timestamps) logged to Excel, replies reconciled from Sent Items, saving the team ~3 hours of manual tracking.
+          - id: pricing_app
+            rank: { fde: 4, ai: 2, sde: 3 }
+            fde: >-
+              Built a Streamlit tool (pandas, Altair) that automates best-available-rate trends, property/chain extraction
+              and pricing-decision validation over Excel exports, split into config, validation, calculation and chart services.
+            ai: >-
+              Built a Streamlit analytics app (pandas, Altair) that automates best-available-rate trend analysis,
+              property/chain extraction and pricing-decision validation over Excel exports.
+            sde: >-
+              Built a Streamlit analytics app (pandas, Altair) for best-available-rate trends and pricing-decision
+              validation, split into config, validation, calculation and chart services so new analyses plug in cleanly.
+      - title: Software Developer Intern
+        dates: Jan 2025 – Jun 2025
+        bullets:
+          - id: at_a_glance
+            rank: { fde: 1, ai: 1, sde: 1 }
+            text: >-
+              Migrated the legacy JSP/Struts "At-a-Glance" dashboard of an enterprise revenue-management product to
+              Angular and Spring Boot, building Angular components and REST APIs over optimized SQL and Java Streams.
+          - id: date_range
+            in: [sde]
+            rank: { sde: 2 }
+            text: >-
+              Extended the dashboard APIs from single-day to custom date-range queries, refactoring and tuning the
+              underlying SQL.
+          - id: feature_toggle
+            rank: { fde: 2, ai: 2, sde: 3 }
+            fde: >-
+              Extended APIs from single-day to custom date ranges and shipped the new UI behind a database-driven
+              feature toggle (SQL migration) for a controlled, per-client rollout from the legacy JSP views.
+            ai: >-
+              Added custom date-range APIs and shipped the new UI behind a SQL feature toggle for a controlled rollout.
+            sde: >-
+              Shipped the new UI behind a database-driven feature toggle (SQL migration) so clients could be switched
+              between legacy JSP and Angular views for a controlled rollout.
+  - company: IFM Engineering Pvt. Ltd.
+    location: Pune, India
+    roles:
+      - title: Security Software Intern
+        dates: Jul 2024 – Dec 2024
+        bullets:
+          - id: security
+            text: >-
+              Detected and mitigated XSS, SQL-injection and misconfiguration risks in internal audits; automated scanning.
+
+projects:
+  - id: proofline
+    name: Proofline
+    link: { label: github.com/NamanChordia07/proofline, url: "https://github.com/NamanChordia07/proofline" }
+    tech: Python, MCP, pytest, Hypothesis
+    dates: Sep 2026
+    rank: { fde: 1, ai: 1, sde: 2 }
+    bullets:
+      - id: pl_what
+        fde: >-
+          Built a verifier that checks every number in LLM-written reports against source data, diagnoses the error
+          (wrong basis, entity, direction, points vs. percent) and repairs it; CI-gating CLI, Python library and MCP server.
+        ai: >-
+          Built a verifier that catches numeric hallucinations in LLM-written reports: computes facts from data, ties each
+          claim to a metric, entity and comparison basis, diagnoses 8 error types and repairs them with minimal edits.
+        sde: >-
+          Built a zero-dependency Python library and CLI that parses numbers with display-precision semantics, attributes
+          each claim to a metric, entity and comparison basis, and verifies it against computed facts.
+      - id: pl_eval
+        text: >-
+          Built the benchmark with independent ground truth (3 domains, 9 injected error types, held-out phrasing):
+          98.9–100% recall at 1.1–4.5% false alarms on unseen phrasing, vs. 16–20% recall for a naive value lookup.
+        ai: >-
+          Designed the evaluation with independent ground truth (3 domains, 9 injected error types, held-out phrasing):
+          98.9–100% recall at 1.1–4.5% false alarms on unseen phrasing vs. 16–20% for a naive value lookup; ablations
+          show a fixed ±1% tolerance yields 24–29% false alarms.
+      - id: pl_ship
+        in: [ai]
+        text: >-
+          Shipped as a Python library, CI-gating CLI and an MCP server agents can call, with a guarded Gemini/Claude loop
+          (draft, verify, targeted feedback, deterministic repair); 58 tests, 93% coverage, mypy --strict.
+  - id: cluecode
+    name: ClueCode
+    link: { label: cluecode.in, url: "https://cluecode.in" }
+    tech: Electron, TypeScript, Next.js, PostgreSQL, Razorpay
+    dates: Sep 2026
+    rank: { fde: 2, ai: 2, sde: 1 }
+    bullets:
+      - id: cc_product
+        fde: >-
+          Designed, built and deployed a full-stack desktop AI assistant end to end (cluecode.in): Electron client streaming
+          multimodal Gemini answers, Next.js/Postgres backend on Vercel and Neon, auth and Razorpay subscriptions.
+        ai: >-
+          Shipped a Windows desktop assistant (cluecode.in) that sends screen captures to Gemini with the user's own key
+          and streams answers into an overlay: model discovery and fallback, stall detection, versioned prompts with a
+          prompt-injection guard, keys encrypted with Windows DPAPI and never sent to the server.
+        sde: >-
+          Designed and shipped a subscription desktop app (cluecode.in): Electron + TypeScript client, Next.js API on
+          Vercel, PostgreSQL (Neon, Drizzle), Better Auth, Razorpay; npm-workspaces monorepo with shared zod contracts.
+      - id: cc_backend
+        fde: >-
+          Enforced one active device per account with server-clock session leases and heartbeats backed by a partial
+          unique index; made payment webhooks signature-verified and idempotent; 270+ automated tests.
+        ai: >-
+          Built the Next.js/Postgres backend (auth, Razorpay subscriptions, device-session leases, admin console) with
+          270+ automated tests, including Electron security and WCAG 2.1 AA end-to-end suites.
+        sde: >-
+          Enforced one active device per account with server-clock session leases, heartbeats and a partial unique
+          index; made Razorpay webhooks signature-verified and idempotent; built an audited, role-based admin console.
+      - id: cc_quality
+        in: [sde]
+        text: >-
+          Hardened Electron (sandboxed renderers, CSP, narrow IPC, DPAPI-encrypted user keys) and covered the system
+          with 270+ automated tests: unit, Postgres integration, Electron security and WCAG 2.1 AA end-to-end suites.
+
+skills:
+  fde:
+    - [Languages, "Python, Java, TypeScript, JavaScript, SQL"]
+    - [Integration & automation, "Playwright, Power Automate, REST APIs, webhooks, Salesforce, PDF/Word/Excel generation"]
+    - [Applied AI, "LLM integration (Gemini, Claude, Microsoft AI Builder), MCP servers, evaluation and guardrails"]
+    - [Frameworks & data, "Spring Boot, Angular, Next.js, React, Electron, pandas, Streamlit, Power BI"]
+    - [Infrastructure, "Docker, PostgreSQL, MySQL, Git, GitHub Actions, Vercel, Linux"]
+  ai:
+    - [AI / LLM, "Gemini and Claude APIs, Microsoft AI Builder, MCP, LLM evaluation and benchmarking, guardrails, multimodal input, streaming"]
+    - [Languages, "Python, TypeScript, Java, SQL"]
+    - [Data & automation, "pandas, Streamlit, Altair, Playwright, Power Automate, Power BI"]
+    - [Engineering, "Next.js, Electron, Spring Boot, PostgreSQL, Docker, pytest, Hypothesis, GitHub Actions"]
+  sde:
+    - [Languages, "Java, Python, TypeScript, JavaScript, SQL"]
+    - [Backend, "Spring Boot, REST APIs, Node.js (Next.js API routes), PostgreSQL, MySQL, Drizzle ORM"]
+    - [Frontend & desktop, "Angular, React, Next.js, Electron"]
+    - [Testing & tooling, "Playwright, Vitest, pytest, Hypothesis, Docker, Git, GitHub Actions CI, Vercel, Linux/Shell"]
+    - [AI & automation, "Gemini and Claude APIs, MCP, Power Automate, Streamlit"]
+
+education:
+  - school: Vishwakarma Institute of Information Technology, Pune
+    degree: B.Tech, Computer Engineering · CGPA 8.9/10
+    dates: May 2025
+
+leadership:
+  - text: >-
+      Technical Head, Cyber Cell, VIIT (5+ security workshops and CTFs, 150+ students) · Joint runner-up, Data Viz-a-thon.
