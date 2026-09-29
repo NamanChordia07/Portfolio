@@ -15,3 +15,18 @@ def test_samples_have_exactly_the_intended_errors(sample):
     assert found == sample.expected_errors
     fixed, _ = repair_text(report, sheet)
     assert verify_text(fixed, sheet).passed
+
+
+def test_export_demo_writes_engine_output(tmp_path):
+    import json
+
+    from proofline.export_demo import main
+
+    out = tmp_path / "demo.json"
+    assert main([str(out)]) == 0
+    data = json.loads(out.read_text(encoding="utf-8"))
+    assert [s["id"] for s in data["samples"]] == [s.id for s in SAMPLES]
+    for s in data["samples"]:
+        assert all(s["text"][c["start"] : c["end"]] == c["text"] for c in s["claims"])
+        assert s["repaired"]["counts"]["contradicted"] == 0
+    assert {r["family"] for r in data["benchmark"]["firstRuns"]} == {"heldout", "heldout2", "heldout3"}

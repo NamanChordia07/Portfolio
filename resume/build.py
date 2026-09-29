@@ -305,6 +305,18 @@ def render_docx(r: dict[str, Any], path: Path) -> None:
 # --- main -------------------------------------------------------------------------------------
 
 
+def previews(pdfs: list[Path]) -> None:
+    """PNG thumbnails of the public PDFs for the website's resume page (794 px wide, A4 at 96 dpi)."""
+    import pypdfium2 as pdfium
+
+    out = PUBLIC / "previews"
+    out.mkdir(parents=True, exist_ok=True)
+    for pdf in pdfs:
+        page = pdfium.PdfDocument(str(pdf))[0]
+        image = page.render(scale=96 / 72).to_pil().convert("L")
+        image.save(out / f"{pdf.stem}.png", optimize=True)
+
+
 def page_count(pdf: Path) -> int:
     from pypdf import PdfReader
 
@@ -337,6 +349,7 @@ def main() -> int:
     for html_path, _ in jobs:
         if html_path.name.startswith("."):
             html_path.unlink()
+    previews([pdf for _, pdf in jobs if pdf.parent == PUBLIC])
     failed = False
     for _, pdf in jobs:
         n = page_count(pdf)
