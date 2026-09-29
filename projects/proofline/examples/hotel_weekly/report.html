@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proofline report</title>
+<style>
+:root{--fg:#16181d;--bg:#fbfbfa;--muted:#667;--ok:#d9f2e3;--bad:#fbd9d6;--unk:#f3ecd0;--line:#e4e4e0}
+@media (prefers-color-scheme:dark){:root{--fg:#e8e8e6;--bg:#121315;--muted:#99a;--ok:#1d4030;--bad:#5a2320;--unk:#4a4020;--line:#2a2b2e}}
+body{font:16px/1.6 ui-sans-serif,system-ui,sans-serif;color:var(--fg);background:var(--bg);max-width:860px;margin:40px auto;padding:0 16px}
+mark{border-radius:4px;padding:0 3px;color:inherit;cursor:help} mark.ok{background:var(--ok)} mark.bad{background:var(--bad)} mark.unk{background:var(--unk)}
+.doc{border:1px solid var(--line);border-radius:8px;padding:20px 24px} table{border-collapse:collapse;width:100%;font-size:13px;margin-top:24px}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top} .muted{color:var(--muted)}
+</style></head><body>
+<h1>Proofline report</h1>
+<p class="muted">hotel_weekly &middot; period 2026-W32 &middot; 15 claims:
+8 supported, 5 contradicted, 2 unverifiable</p>
+<div class="doc">## Portfolio<br>
+Occupancy rose <mark class="bad" title="5.2% matches the change in percentage points (occupancy:portfolio:delta_abs:last_year); as written it should be 8.44%" data-claim="0">5.2%</mark> to <mark class="ok" title="occupancy:portfolio:level = 66.81 (sum(rooms_sold) / sum(rooms_available) x 100 for all entities, 2026-W32)" data-claim="1">66.8%</mark> vs last year, while ADR grew <mark class="ok" title="adr:portfolio:delta_pct:last_year = 3.806 ((level - last year) / |last year| x 100 = (162.7919 - 156.8231) / 156.8231 x 100)" data-claim="2">3.8%</mark> year over year.<br>
+Room revenue reached <mark class="ok" title="room_revenue:portfolio:level = 4.644e+05 (sum(room_revenue) for all entities, 2026-W32)" data-claim="3">$464.4K</mark>, <mark class="ok" title="room_revenue:portfolio:delta_pct:budget = -3.241 ((level - budget) / |budget| x 100 = (464445.4 - 480002.59) / 480002.59 x 100)" data-claim="4">3.2%</mark> behind budget, and RevPAR <mark class="bad" title="says up, but revpar:portfolio:delta_abs:prior is -4.05" data-claim="5">improved</mark> vs last week.<br>
+Rooms sold were <mark class="bad" title="1.1% matches rooms_sold:portfolio:delta_pct:forecast, not the stated basis (rooms_sold:portfolio:delta_pct:last_year = 8.44%)" data-claim="6">1.1%</mark> ahead of last year.<br>
+<br>
+## Harbor View<br>
+Harbor View&#x27;s RevPAR climbed <mark class="ok" title="revpar:harbor-view:delta_pct:last_year = 13.6 ((level - last year) / |last year| x 100 = (99.0856 - 87.2218) / 87.2218 x 100)" data-claim="7">13.6%</mark> vs last year to <mark class="ok" title="revpar:harbor-view:level = 99.09 (sum(room_revenue) / sum(rooms_available) for Harbor View, 2026-W32)" data-claim="8">$99.09</mark>. Its ADR of <mark class="bad" title="$171.08 is the figure for Riverside Inn, not Harbor View" data-claim="9">$171.08</mark> was <mark class="ok" title="adr:harbor-view:delta_pct:forecast = 6.52 ((level - forecast) / |forecast| x 100 = (150.0412 - 140.8572) / 140.8572 x 100)" data-claim="10">6.5%</mark> above forecast.<br>
+Occupancy was <mark class="bad" title="66.3% does not match occupancy:harbor-view:level = 66.04%" data-claim="11">66.3%</mark>, down <mark class="ok" title="occupancy:harbor-view:delta_abs:prior = -4.351 (level - last week = 66.039 - 70.3896)" data-claim="12">4.4 pts</mark> week over week. Guest satisfaction rose to <mark class="unk" title="no metric could be attributed to this number" data-claim="13">4.6</mark> out of <mark class="unk" title="no metric could be attributed to this number" data-claim="14">5</mark>.<br>
+</div>
+<table><thead><tr><th>#</th><th>claim</th><th>status</th><th>reason</th><th>fact</th><th>detail</th></tr></thead>
+<tbody><tr class='bad'><td>0</td><td>5.2%</td><td>contradicted</td><td>unit_confusion</td><td>occupancy:portfolio:delta_pct:last_year</td><td>5.2% matches the change in percentage points (occupancy:portfolio:delta_abs:last_year); as written it should be 8.44%</td></tr>
+<tr class='ok'><td>1</td><td>66.8%</td><td>supported</td><td>ok</td><td>occupancy:portfolio:level</td><td></td></tr>
+<tr class='ok'><td>2</td><td>3.8%</td><td>supported</td><td>ok</td><td>adr:portfolio:delta_pct:last_year</td><td></td></tr>
+<tr class='ok'><td>3</td><td>$464.4K</td><td>supported</td><td>ok</td><td>room_revenue:portfolio:level</td><td></td></tr>
+<tr class='ok'><td>4</td><td>3.2%</td><td>supported</td><td>ok</td><td>room_revenue:portfolio:delta_pct:budget</td><td></td></tr>
+<tr class='bad'><td>5</td><td>improved</td><td>contradicted</td><td>wrong_direction</td><td>revpar:portfolio:delta_abs:prior</td><td>says up, but revpar:portfolio:delta_abs:prior is -4.05</td></tr>
+<tr class='bad'><td>6</td><td>1.1%</td><td>contradicted</td><td>wrong_basis</td><td>rooms_sold:portfolio:delta_pct:last_year</td><td>1.1% matches rooms_sold:portfolio:delta_pct:forecast, not the stated basis (rooms_sold:portfolio:delta_pct:last_year = 8.44%)</td></tr>
+<tr class='ok'><td>7</td><td>13.6%</td><td>supported</td><td>ok</td><td>revpar:harbor-view:delta_pct:last_year</td><td></td></tr>
+<tr class='ok'><td>8</td><td>$99.09</td><td>supported</td><td>ok</td><td>revpar:harbor-view:level</td><td></td></tr>
+<tr class='bad'><td>9</td><td>$171.08</td><td>contradicted</td><td>wrong_entity</td><td>adr:harbor-view:level</td><td>$171.08 is the figure for Riverside Inn, not Harbor View</td></tr>
+<tr class='ok'><td>10</td><td>6.5%</td><td>supported</td><td>ok</td><td>adr:harbor-view:delta_pct:forecast</td><td></td></tr>
+<tr class='bad'><td>11</td><td>66.3%</td><td>contradicted</td><td>wrong_value</td><td>occupancy:harbor-view:level</td><td>66.3% does not match occupancy:harbor-view:level = 66.04%</td></tr>
+<tr class='ok'><td>12</td><td>4.4 pts</td><td>supported</td><td>ok</td><td>occupancy:harbor-view:delta_abs:prior</td><td></td></tr>
+<tr class='unk'><td>13</td><td>4.6</td><td>unverifiable</td><td>no_metric</td><td></td><td>no metric could be attributed to this number</td></tr>
+<tr class='unk'><td>14</td><td>5</td><td>unverifiable</td><td>no_metric</td><td></td><td>no metric could be attributed to this number</td></tr></tbody></table>
+</body></html>
