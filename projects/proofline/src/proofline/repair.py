@@ -91,6 +91,8 @@ _ANTONYMS = {
     "lowered": "raised",
     "boosted": "trimmed",
     "trimmed": "boosted",
+    "fewer": "more",
+    "more": "fewer",
     "climbing": "slipping",
     "slipping": "climbing",
 }

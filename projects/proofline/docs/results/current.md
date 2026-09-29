@@ -22,8 +22,8 @@ Clean claims: 99.9% verified as supported, 0.0% left unverifiable, 0.0% not extr
 | rounding_drift | 51 | 100.0% | 90% | 49.0% |
 | wrong_direction | 129 | 100.0% | 98% | 0.0% |
 | unit_confusion | 9 | 100.0% | 100% | 0.0% |
-| wrong_basis | 109 | 100.0% | 94% | 0.0% |
-| wrong_entity | 228 | 100.0% | 93% | 0.0% |
+| wrong_basis | 109 | 100.0% | 93% | 0.0% |
+| wrong_entity | 228 | 100.0% | 90% | 0.0% |
 | wrong_metric | 66 | 100.0% | 98% | 0.0% |
 | scale_error | 15 | 100.0% | 100% | 100.0% |
 | fabricated | 158 | 100.0% | - | 35.4% |
@@ -51,7 +51,7 @@ Clean claims: 100.0% verified as supported, 0.0% left unverifiable, 0.0% not ext
 | wrong_direction | 126 | 100.0% | 100% | 0.0% |
 | unit_confusion | 6 | 100.0% | 100% | 0.0% |
 | wrong_basis | 116 | 100.0% | 97% | 0.0% |
-| wrong_entity | 173 | 100.0% | 97% | 0.0% |
+| wrong_entity | 173 | 100.0% | 94% | 0.0% |
 | wrong_metric | 81 | 100.0% | 96% | 0.0% |
 | scale_error | 11 | 100.0% | 100% | 100.0% |
 | fabricated | 162 | 100.0% | - | 27.2% |
@@ -79,7 +79,7 @@ Clean claims: 100.0% verified as supported, 0.0% left unverifiable, 0.0% not ext
 | wrong_direction | 102 | 100.0% | 100% | 0.0% |
 | unit_confusion | 16 | 100.0% | 100% | 0.0% |
 | wrong_basis | 143 | 100.0% | 97% | 0.0% |
-| wrong_entity | 194 | 100.0% | 96% | 0.0% |
+| wrong_entity | 194 | 100.0% | 95% | 0.0% |
 | wrong_metric | 91 | 100.0% | 98% | 0.0% |
 | scale_error | 14 | 100.0% | 100% | 100.0% |
 | fabricated | 179 | 100.0% | - | 25.7% |
@@ -106,8 +106,8 @@ Clean claims: 98.9% verified as supported, 0.0% left unverifiable, 0.0% not extr
 | rounding_drift | 50 | 100.0% | 90% | 56.0% |
 | wrong_direction | 86 | 100.0% | 99% | 0.0% |
 | unit_confusion | 19 | 100.0% | 100% | 0.0% |
-| wrong_basis | 98 | 99.0% | 91% | 0.0% |
-| wrong_entity | 163 | 100.0% | 95% | 0.0% |
+| wrong_basis | 98 | 99.0% | 90% | 0.0% |
+| wrong_entity | 163 | 100.0% | 94% | 0.0% |
 | wrong_metric | 91 | 100.0% | 92% | 0.0% |
 | scale_error | 16 | 100.0% | 100% | 100.0% |
 | fabricated | 182 | 100.0% | - | 25.8% |
