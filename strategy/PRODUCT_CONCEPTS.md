@@ -1,4 +1,55 @@
-# New AI product: research and concepts (for approval)
+# New AI product: concepts (round 2, for approval)
+
+Status: **proposal only. Nothing is built until you reply "PROCEED" with a choice.**
+Round 1 (below, kept for the record) was rejected: it read as testing/verification tooling.
+Round 2 is products that make decisions and take actions, built on System One models, LLMs
+and RAG, deployable and chargeable.
+
+## 1. Instinct (working name): your own Jev, trained on your data (recommended)
+
+- **What it does.** A customer uploads a few hundred labelled examples (CSV, or a helpdesk /
+  inbox export) and gets a private decision endpoint in minutes: typed questions (yes/no,
+  choice, 1-10 score) answered in tens of milliseconds with calibrated probabilities, served
+  through a Jev-compatible API. Low-confidence answers escalate automatically to an LLM or a
+  person; every correction becomes new training data.
+- **Why now.** Jev launched 15 Sep 2026 and cannot be fine-tuned: one set of weights serves
+  every account, behind a waitlist. Open System One models can be: an open fine-tune with 395
+  examples beat Jev on a healthcare router (0.979 vs 0.941 intent accuracy); Laya fine-tuned
+  scores 0.766 vs 0.362 for its base checkpoint. Nobody yet sells "bring your labels, get a
+  hosted, calibrated decision model".
+- **How the tech fits.** Day one: zero-shot via Jev or Laya, so the product works before any
+  labels exist. With labels: fine-tune an open encoder (ModernBERT / mmBERT for Hindi and
+  Hinglish) on serverless GPU, fit temperatures, pick thresholds. LLM (Claude or Gemini):
+  bootstraps seed labels from a description of each option, and is the escalation tier.
+  RAG: retrieves the nearest labelled examples to explain each decision and to give the
+  escalation LLM relevant examples. MCP: a `decide` tool so agents call your models.
+- **Customers.** Startups and SaaS teams doing ticket routing, lead scoring, moderation,
+  KYC/ops triage, agent branching; Indian teams needing Hinglish and Indic languages.
+- **Stack.** Next.js dashboard on Vercel; FastAPI inference service (CPU containers for the
+  encoder); training jobs on serverless GPU; Postgres + object storage; API keys, metering,
+  rate limits; Stripe / Razorpay usage billing; Python and TypeScript SDKs.
+- **Pricing (to validate).** Free: 1 model, 10k decisions/month. Pro: ~$29/month, 5 models,
+  1M decisions. Usage-based above that. Training runs are minutes of GPU; inference is CPU.
+- **Risks.** TypeSafe may add fine-tuning; demand for the category is weeks old; quality
+  depends on customer labels. Needs `huggingface.co` allowed in this environment to build.
+
+## 2. Voice receptionist for Indian clinics (Hindi / English)
+
+Answers calls, books and reschedules appointments, answers FAQs from the clinic's own
+documents (RAG), hands over to staff. A System One model makes per-turn routing decisions
+in tens of milliseconds, inside a voice latency budget where an LLM call is too slow; the
+LLM writes replies. Paid monthly per clinic. Hot market (Bolna, Vapi, Retell are the
+platforms), more operations work: telephony numbers, KYC, per-minute costs.
+
+## 3. WhatsApp / Instagram support autopilot for D2C brands
+
+Order-status, returns and product questions answered from the store's catalogue and orders
+(RAG plus Shopify tools), System One for intent, urgency and abuse routing, LLM replies in
+Hinglish. Clearest demand; most crowded (BiteSpeed, Interakt, Wati).
+
+---
+
+# Round 1 (rejected): research and concepts
 
 Status: **proposal only. Nothing below is built until you reply "PROCEED" and pick a concept.**
 Research date: 29 Sep 2026. Vendor numbers are vendor claims unless marked as measured.
