@@ -26,7 +26,8 @@ Cybersecurity is kept as one line (and it quietly strengthens ClueCode's securit
 - Resume headline (AI): *Applied AI Engineer · LLM Systems, Evaluation & Automation*
 - Resume headline (SDE): *Software Engineer · Backend, Full-Stack & Automation*
 - Website: *"I build automation and AI systems for messy, real-world workflows, and the checks that make them safe to ship."*
-- Suggested LinkedIn headline: *Software Engineer, AI & Automation at IDeaS (a SAS company) · Building Proofline · Shipped ClueCode*
+- Suggested LinkedIn headline: *AI & Automation Developer at IDeaS (a SAS company) · LLM pipelines and the checks that make them safe (Proofline) · Shipped ClueCode*
+- LinkedIn experience: one IDeaS entry with three positions (Software Developer Intern, Jan–Jun 2025; Business Intelligence & Automation Intern, Jul–Oct 2025; AI & Automation Developer, Nov 2025–present) so the promotion path is visible. Reuse the resume bullets; keep client names, internal URLs and system internals out.
 
 ## 3. Experience discovered
 
@@ -36,7 +37,8 @@ Hospital-Inventory group repos. Findings:
 
 | Area | What the evidence supports |
 |---|---|
-| IDeaS, BI & Automation (Jul 2025 – present) | Forecast-review report pipeline (Python; PDF/Word/Excel; charts; AI Builder commentary; Docker; SIT/UAT; standard vs limited-history builds). G3 configuration checks with Playwright across Salesforce/UI/DB in Docker. Streamlit pricing analytics (BAR trends, property/chain extraction, decision validation; modular services). Power Automate care-mailbox automation (~3 h saved). |
+| IDeaS, AI & Automation Developer (full-time, Nov 2025 – present) | Forecast-review report pipeline (Python; PDF/Word/Excel; charts; AI Builder commentary; Docker; SIT/UAT/hypercare; standard vs limited-history builds). G3 configuration checks with Playwright across Salesforce/UI/DB in Docker. Streamlit pricing analytics (BAR trends, property/chain extraction, decision validation; modular services). |
+| IDeaS, BI & Automation Intern (Jul – Oct 2025) | Power Automate care-mailbox automation (~3 h saved). |
 | IDeaS, Software Developer Intern (Jan – Jun 2025) | At-a-Glance JSP/Struts → Angular + Spring Boot; REST APIs; SQL/Streams optimisation; date-range APIs; SQL-migration feature toggle. |
 | IFM Engineering (Jul – Dec 2024) | Security audits (XSS, SQLi, misconfiguration), scan automation. |
 | ClueCode (Sep 2026, live) | Verified from the repo: Electron 44 + Next.js 16 + Neon/Drizzle + Better Auth + Razorpay; DB-enforced session leases; signed idempotent webhooks; DPAPI BYOK; strict Electron security; threat model; 279 recorded passing test runs (~200 declarations). |
@@ -77,7 +79,7 @@ Spring Boot work), and the relevant-coursework line.
 - minimal repair; guarded generation loop with Gemini and Claude providers (official SDKs);
 - CLI (exit code gating), MCP server (4 tools), HTML provenance report;
 - benchmark: 3 domains, 9 error types, independent ground truth, dev + 3 held-out families, 3 ablations, naive baseline;
-- 62 tests, 93% coverage, `mypy --strict`, `ruff`, CI.
+- 71 tests, 95% coverage, `mypy --strict`, `ruff`, CI; two hand-labelled challenge sets (held-out first run: 62/65, recall 100%, precision 87.9%).
 
 Measured, first run per held-out family: **98.9–100% of injected errors caught at 1.1–4.5% false
 alarms, vs 16–20% for a naive lookup**; the naive lookup catches **0%** of direction, basis, entity,
@@ -129,7 +131,7 @@ screen, but experience length and DSA will decide.
 real integration work at IDeaS.
 
 **What looks weak or will be challenged:**
-1. "Intern, Jul 2025 – Present" (14+ months). Fix the title if it changed.
+1. ~~Intern title~~ Resolved: full-time AI & Automation Developer since Nov 2025, now on every resume and the site.
 2. Few work metrics. Add volumes and time saved (list in `VERIFY.md`).
 3. Both projects dated September 2026. Expect "did AI write this?"; prepare as in `INTERVIEW_PREP.md`.
 4. ClueCode's category (screen-reading AI overlay). Change the site copy before applying (see `AUDIT.md`).
@@ -166,7 +168,7 @@ project name is free; otherwise update `NEXT_PUBLIC_SITE_URL` and the resume lin
 
 ## 15. Interview risks
 
-See `strategy/INTERVIEW_PREP.md`. Top five: the intern title; ClueCode's category; AI-assisted
+See `strategy/INTERVIEW_PREP.md`. Top four: ClueCode's category; AI-assisted
 authorship of recent projects; a synthetic benchmark; confidentiality when describing IDeaS work.
 
 ## 16. Skills to strengthen next

@@ -57,6 +57,17 @@ extractor frozen, 7.5k-8.4k claims per family):
 - Deterministic repair fixes 98-100% of erroneous claims while altering 0.05-1.2% of
   correct ones.
 
+**Hand-labelled challenge sets** (one construction per case, 13 categories from points vs
+percent and lakh/crore to ambiguity and identifiers; first run of each, before any fix):
+
+| set | cases passed | precision | recall | F1 | false positives | false negatives | p50 latency |
+|---|---|---|---|---|---|---|---|
+| original, 68 cases | 63/68 | 100.0% | 94.1% | 0.970 | 0 | 2 | 0.38 ms |
+| held-out, 65 cases | 62/65 | 87.9% | 100.0% | 0.935 | 4 | 0 | 0.51 ms |
+
+Both pass fully after the fixes each run exposed. Throughput is about 5,000-6,200 claims/s
+single-threaded (2-2.5 ms per report).
+
 What is not measured yet: error rates of real models. `proofline eval-llm --provider gemini`
 runs the guarded loop against a live model and reports first-draft vs final error rates;
 no numbers are claimed here until that has been run.
@@ -101,8 +112,10 @@ proofline facts  --data examples/hotel_weekly/data.csv --spec examples/hotel_wee
 proofline verify --facts facts.json examples/hotel_weekly/report.md --html report.html   # exit 1 if contradicted
 proofline repair --facts facts.json examples/hotel_weekly/report.md -o fixed.md
 proofline bench  --n 200                                                                   # reproduce the benchmark
+proofline challenge --set heldout                                                          # hand-labelled cases
+python -m proofline.export_demo --html docs/demo                                           # static demo pages
 
-pip install -e ".[gemini]" && export GEMINI_API_KEY=...
+pip install -e ".[gemini]"   # then set GEMINI_API_KEY in your environment (see .env.example)
 proofline generate --facts facts.json --provider gemini --task "Weekly summary for the GM"
 proofline eval-llm --provider gemini --n 5 --out llm_eval.json
 ```
@@ -125,8 +138,11 @@ client. Tools: `compute_facts`, `facts_brief`, `verify_narrative`, `repair_narra
 
 - Pure-Python core, zero runtime dependencies; model SDKs (`google-genai`, `anthropic`) and
   `mcp` are optional extras.
-- 58 tests (unit, property-based with Hypothesis, CLI, in-process MCP client, fake-SDK
-  provider contracts, benchmark smoke), 93% line coverage, `mypy --strict`, `ruff`.
+- 71 tests (unit, property-based with Hypothesis, CLI, in-process MCP client, fake-SDK
+  provider contracts, benchmark smoke, both challenge sets as regression tests), 95% line
+  coverage, `mypy --strict`, `ruff`, CI on Python 3.11-3.13.
+- API keys are read from the environment only (`GEMINI_API_KEY`, `ANTHROPIC_API_KEY`); the
+  core never makes a network call.
 - The benchmark generator is seeded and deterministic across processes; ground-truth
   labelling is independent of the verifier's extractor.
 
@@ -139,6 +155,13 @@ client. Tools: `compute_facts`, `facts_brief`, `verify_narrative`, `repair_narra
   derived arithmetic ("twice last year's level") are not checked yet.
 - The benchmark text is template-generated. It measures the checker against known error
   types; it does not measure how often real models make each error.
+
+## Project
+
+- [docs/DESIGN.md](docs/DESIGN.md): design and trade-offs
+- [docs/BENCHMARK.md](docs/BENCHMARK.md): method, protocol, all results including first runs
+- [docs/demo/](docs/demo/index.html): static demo, generated from real verifier output
+- [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 

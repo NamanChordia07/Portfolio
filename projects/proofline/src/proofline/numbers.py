@@ -149,7 +149,10 @@ _HEDGES: list[tuple[str, Hedge]] = [
     (r"just\s+under|just\s+shy\s+of|a\s+shade\s+under|nearly|almost|close\s+to", Hedge.NEARLY),
     (r"just\s+over|just\s+above|slightly\s+(?:over|above|more\s+than)", Hedge.JUST_OVER),
     (r"about|around|approximately|approx\.?|roughly|some|circa|~|≈", Hedge.APPROX),
-    (r"more\s+than|over|above|at\s+least|north\s+of|upwards\s+of|in\s+excess\s+of|exceeding", Hedge.AT_LEAST),
+    (
+        r"more\s+than|over|above|at\s+least|north\s+of|upwards\s+of|in\s+excess\s+of|exceeding|exceeded|topped|topping|surpassed",
+        Hedge.AT_LEAST,
+    ),
     (r"less\s+than|under|below|at\s+most|up\s+to|no\s+more\s+than|south\s+of", Hedge.AT_MOST),
 ]
 _HEDGE_RE = [(re.compile(rf"(?:^|[\s(])(?:{pat})\s*$", re.IGNORECASE), h) for pat, h in _HEDGES]

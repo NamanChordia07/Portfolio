@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 
-const pages = ["/", "/work/proofline", "/work/cluecode", "/work/enterprise-automation", "/resume"];
+const pages = ["/", "/work/proofline", "/work/voice-sales-agent", "/work/cluecode", "/work/enterprise-automation", "/resume"];
 
 async function noHorizontalOverflow(page: Page) {
   const offenders = await page.evaluate(() => {
@@ -57,7 +57,7 @@ test("resume page links to every PDF", async ({ page }) => {
 
 test("case studies are reachable from the home page", async ({ page }) => {
   await page.goto("/");
-  for (const title of ["Proofline", "ClueCode", "Enterprise automation at IDeaS"]) {
+  for (const title of ["Proofline", "AI Voice Sales Agent", "ClueCode", "Enterprise automation at IDeaS"]) {
     await page.goto("/");
     // The hero also links Proofline and ClueCode by name; either link goes to the same page.
     await page.getByRole("link", { name: title, exact: true }).first().click();
@@ -114,7 +114,8 @@ test("SEO: metadata, JSON-LD, sitemap, robots and OG images", async ({ page, req
   const ld = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? "{}");
   expect(ld["@type"]).toBe("Person");
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  for (const p of ["/work/proofline", "/work/cluecode", "/work/enterprise-automation", "/resume"]) expect(sitemap).toContain(p);
+  for (const p of ["/work/proofline", "/work/voice-sales-agent", "/work/cluecode", "/work/enterprise-automation", "/resume"])
+    expect(sitemap).toContain(p);
   expect(await (await request.get("/robots.txt")).text()).toContain("Sitemap:");
   for (const p of ["/opengraph-image", "/work/proofline/opengraph-image"]) {
     const img = await request.get(p);

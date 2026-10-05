@@ -17,7 +17,7 @@ export const site = {
   description:
     "Software engineer building automation and AI systems for real-world workflows, and the checks that make them safe to ship. Proofline, ClueCode, and enterprise automation at IDeaS (a SAS company).",
   openTo: "Forward Deployed, Applied AI and Software Engineering roles, in India, remote or international.",
-  currently: "Business Intelligence & Automation at IDeaS Revenue Solutions (a SAS company)",
+  currently: "AI & Automation Developer at IDeaS Revenue Solutions (a SAS company)",
 } as const;
 
 export const claims = {
@@ -41,14 +41,29 @@ export const claims = {
     value: "32k",
     source: "About 8k labelled number and direction claims per template family, four families, three synthetic domains.",
   },
-  plTests: { value: "58 tests", source: "pytest suite, 93% line coverage, mypy --strict (September 2026)." },
+  plTests: {
+    value: "71 tests",
+    source: "pytest suite, 95% line coverage, mypy --strict; both challenge sets run as regression tests (September 2026).",
+  },
   throughput: {
-    value: "~7,700 claims/s",
-    source: "Single-threaded verification on a 2.1 GHz cloud vCPU, measured on the held-out corpus.",
+    value: "~5,000–6,200 claims/s",
+    source: "Single-threaded verification on a 2.1 GHz Xeon cloud vCPU across the four template families, about 2–2.5 ms per report (run of 29 Sep 2026).",
+  },
+  challengeHeldout: {
+    value: "62 of 65",
+    source: "Hand-written held-out challenge cases passed on the first run, before any fix: 100% recall, 87.9% precision (4 false positives, 0 missed errors). All 65 pass after the fixes.",
   },
   ablation: {
     value: "24–29%",
     source: "False-alarm rate when display-precision intervals are replaced by a fixed ±1% tolerance (held-out first runs).",
+  },
+  vaLatency: {
+    value: "~2.9 s",
+    source: "Median from end of speech to the agent's first audio, 13 turns in the browser demo (Chrome, push-to-talk), Oct 2026. Per turn: STT 0.7–1.3 s, LLM 0.8–1.6 s, TTS first audio 0.8–1.0 s.",
+  },
+  vaTests: {
+    value: "121",
+    source: "Automated tests passing at the commit that integrated FreJun (Oct 2026): telephony provider and routes, call lifecycle, engine regressions, prompt schemas.",
   },
   ccTests: {
     value: "270+",
@@ -72,12 +87,18 @@ export const experience: Job[] = [
     url: "https://ideas.com",
     roles: [
       {
-        title: "Business Intelligence & Automation Intern",
-        dates: "Jul 2025 – Present",
+        title: "AI & Automation Developer",
+        dates: "Nov 2025 – Present",
         points: [
-          "Built a Python pipeline that generates client forecast-review reports (forecast vs. projections) as PDF, Word and Excel with LLM-written commentary; modular services, Dockerised, through SIT and UAT.",
+          "Built a Python pipeline that generates client forecast-review reports (forecast vs. projections) as PDF, Word and Excel with LLM-written commentary; modular services, Dockerised, through SIT, UAT and hypercare.",
           "Automated end-to-end checks of client setup on the G3 revenue-management platform with Playwright, validating account numbers and integration types across Salesforce, the product UI and its database.",
           "Built a Streamlit analytics tool (pandas, Altair) for best-available-rate trends and pricing-decision validation, structured as configuration, validation, calculation and chart services.",
+        ],
+      },
+      {
+        title: "Business Intelligence & Automation Intern",
+        dates: "Jul 2025 – Oct 2025",
+        points: [
           "Automated a shared customer-care mailbox with scheduled Power Automate flows that log client and system emails to Excel and reconcile replies from Sent Items.",
         ],
       },
@@ -105,7 +126,7 @@ export const experience: Job[] = [
 ];
 
 export type WorkItem = {
-  slug: "proofline" | "cluecode" | "enterprise-automation";
+  slug: "proofline" | "voice-sales-agent" | "cluecode" | "enterprise-automation";
   title: string;
   kicker: string;
   summary: string;
@@ -126,6 +147,17 @@ export const work: WorkItem[] = [
     stack: ["Python", "MCP", "Gemini", "Claude", "pytest", "Hypothesis"],
     year: "2026",
     links: [{ label: "Source", href: "https://github.com/NamanChordia07/proofline" }],
+  },
+  {
+    slug: "voice-sales-agent",
+    title: "AI Voice Sales Agent",
+    kicker: "Client project · Voice AI · 2026",
+    summary:
+      "An outbound AI agent that phones leads, holds a scripted but adaptive qualification conversation, and hands qualified leads to a sales team. Streaming speech in and out, barge-in, and an LLM whose every action is validated before it happens.",
+    facts: [claims.vaLatency, claims.vaTests, "FreJun telephony, HMAC-signed webhooks"],
+    stack: ["Python", "FastAPI", "OpenAI", "PostgreSQL", "WebSockets", "FreJun"],
+    year: "2026",
+    links: [{ label: "Source", href: "https://github.com/NamanChordia07/ai-voice-sales-agent" }],
   },
   {
     slug: "cluecode",
@@ -155,7 +187,7 @@ export const areas = [
   {
     title: "Applied AI you can trust",
     body: "LLM features with the evaluation, guardrails and fallbacks that let them ship: grounded generation, verification, model fallback, prompt-injection defence.",
-    tools: ["Gemini", "Claude", "Microsoft AI Builder", "MCP", "evals", "Python"],
+    tools: ["OpenAI", "Gemini", "Claude", "voice agents", "MCP", "evals", "Python"],
   },
   {
     title: "Enterprise automation & integration",

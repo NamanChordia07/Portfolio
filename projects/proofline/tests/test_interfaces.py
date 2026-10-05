@@ -93,5 +93,40 @@ def test_benchmark_smoke():
     naive = evaluate(corpus, None, naive=True)
     assert main_cfg["error_recall"] > 0.95 and main_cfg["false_alarm_rate"] < 0.02
     assert naive["error_recall"] < 0.5
+    gate = main_cfg["gate"]
+    assert gate["tp"] + gate["fn"] == main_cfg["error_slots"] and 0.9 < gate["precision"] <= 1.0
+    assert main_cfg["latency"]["report_p50_ms"] > 0 and naive["latency"] is None
     md = to_markdown(run(5, families=("dev",)))
-    assert "| proofline |" in md and "naive_lookup" in md
+    assert "| proofline |" in md and "naive_lookup" in md and "Gate view" in md
+
+
+@pytest.mark.parametrize("name", ["original", "heldout"])
+def test_challenge_sets_pass(name):
+    from proofline.bench.challenge import CHALLENGE_SETS, run_challenge
+
+    res = run_challenge(CHALLENGE_SETS[name])
+    assert res["failures"] == [] and res["flag"]["f1"] == 1.0
+
+
+def test_cli_challenge(tmp_path, capsys):
+    out = tmp_path / "c.json"
+    assert main(["challenge", "--set", "heldout", "--json", str(out)]) == 0
+    assert "65/65 cases pass" in capsys.readouterr().out
+    assert json.loads(out.read_text())["cases"] == 65
+    failing = tmp_path / "failing.yaml"
+    failing.write_text(
+        '- {id: x, category: basics, dataset: hotel_weekly, text: "Occupancy was 70%.", '
+        "expect: [{token: '70%', status: supported}]}\n"
+    )
+    assert main(["challenge", "--set", str(failing)]) == 1
+
+
+def test_static_demo_export(tmp_path):
+    from proofline.export_demo import main as export_main
+
+    assert export_main([str(tmp_path / "demo.json"), "--html", str(tmp_path / "demo")]) == 0
+    data = json.loads((tmp_path / "demo.json").read_text())
+    assert {s["id"] for s in data["samples"]} == {"hotel", "retail", "saas"}
+    assert "challenge_heldout_first_run" in data["benchmark"]["challenge"]
+    index = (tmp_path / "demo" / "index.html").read_text()
+    assert "hotel-repaired.html" in index and (tmp_path / "demo" / "saas.html").exists()

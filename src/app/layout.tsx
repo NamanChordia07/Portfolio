@@ -60,7 +60,7 @@ const personJsonLd = {
   "@type": "Person",
   name: site.name,
   url: site.url,
-  jobTitle: "Software Engineer",
+  jobTitle: "AI & Automation Developer",
   email: `mailto:${site.email}`,
   address: { "@type": "PostalAddress", addressLocality: "Pune", addressCountry: "IN" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Vishwakarma Institute of Information Technology" },

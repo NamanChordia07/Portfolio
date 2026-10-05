@@ -1,0 +1,134 @@
+{
+  "cases": 65,
+  "cases_passed": 62,
+  "tokens": 79,
+  "status_accuracy": 0.9494,
+  "reason_accuracy": 1.0,
+  "missed": 0,
+  "spurious": 1,
+  "flag": {
+    "tp": 29,
+    "fp": 4,
+    "fn": 0,
+    "tn": 46,
+    "precision": 0.8788,
+    "recall": 1.0,
+    "f1": 0.9355,
+    "accuracy": 0.9494
+  },
+  "confusion": {
+    "contradicted->contradicted": 23,
+    "supported->contradicted": 1,
+    "supported->supported": 46,
+    "supported->unverifiable": 3,
+    "unverifiable->unverifiable": 6
+  },
+  "latency_ms": {
+    "p50": 0.514,
+    "p95": 1.305,
+    "max": 8.601
+  },
+  "categories": {
+    "absolute_numbers": {
+      "cases": 5,
+      "passed": 4
+    },
+    "ambiguous": {
+      "cases": 4,
+      "passed": 4
+    },
+    "basics": {
+      "cases": 5,
+      "passed": 5
+    },
+    "context": {
+      "cases": 6,
+      "passed": 6
+    },
+    "currency_and_scale": {
+      "cases": 8,
+      "passed": 8
+    },
+    "hedges_and_rounding": {
+      "cases": 6,
+      "passed": 5
+    },
+    "identifiers": {
+      "cases": 4,
+      "passed": 3
+    },
+    "lower_is_better": {
+      "cases": 4,
+      "passed": 4
+    },
+    "missing_evidence": {
+      "cases": 4,
+      "passed": 4
+    },
+    "points_vs_percent": {
+      "cases": 7,
+      "passed": 7
+    },
+    "wrong_direction": {
+      "cases": 4,
+      "passed": 4
+    },
+    "wrong_entity": {
+      "cases": 3,
+      "passed": 3
+    },
+    "wrong_period_or_basis": {
+      "cases": 5,
+      "passed": 5
+    }
+  },
+  "failures": [
+    {
+      "id": "ha-01",
+      "text": "Harbor View sold 1,017 rooms, 67 fewer than the prior week.",
+      "tokens": [
+        {
+          "token": "1,017",
+          "expected": "supported",
+          "got": "unverifiable/no_metric",
+          "message": "no metric could be attributed to this number"
+        },
+        {
+          "token": "67",
+          "expected": "supported",
+          "got": "unverifiable/no_metric",
+          "message": "no metric could be attributed to this number"
+        }
+      ],
+      "spurious": []
+    },
+    {
+      "id": "hh-02",
+      "text": "Portfolio room revenue topped $460K.",
+      "tokens": [
+        {
+          "token": "$460K",
+          "expected": "supported",
+          "got": "contradicted/wrong_value",
+          "message": "$460K does not match room_revenue:portfolio:delta_abs:last_year = 51,843.73 (no comparison basis stated; checked all)"
+        }
+      ],
+      "spurious": []
+    },
+    {
+      "id": "hi-01",
+      "text": "Harbor View (Tower 2) sold 1,017 rooms.",
+      "tokens": [
+        {
+          "token": "1,017",
+          "expected": "supported",
+          "got": "unverifiable/no_metric",
+          "message": "no metric could be attributed to this number"
+        }
+      ],
+      "spurious": [
+        "2"
+      ]
+    }
+  ]
+}

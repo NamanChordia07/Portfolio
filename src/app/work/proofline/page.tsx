@@ -165,7 +165,7 @@ export default function ProoflinePage() {
             held-out family in a different voice and ran it once before looking at failures. Those first runs are the honest numbers.
           </p>
         </Prose>
-        <div className="mt-8 overflow-x-auto rounded-xl border border-line">
+        <div className="mt-8 overflow-x-auto rounded-xl border border-line" tabIndex={0} role="region" aria-label="Benchmark results, first run per held-out family">
           <table className="w-full min-w-[620px] text-left text-sm">
             <caption className="sr-only">First run on each held-out family</caption>
             <thead className="bg-sunk font-mono text-[11px] uppercase tracking-wider text-subtle">
@@ -204,7 +204,7 @@ export default function ProoflinePage() {
         </p>
 
         <h3 className="mt-12 font-medium text-fg">By error type (heldout3, current engine)</h3>
-        <div className="mt-4 overflow-x-auto rounded-xl border border-line">
+        <div className="mt-4 overflow-x-auto rounded-xl border border-line" tabIndex={0} role="region" aria-label="Detection by error type">
           <table className="w-full min-w-[520px] text-left text-sm">
             <thead className="bg-sunk font-mono text-[11px] uppercase tracking-wider text-subtle">
               <tr>
@@ -236,6 +236,14 @@ export default function ProoflinePage() {
               month)&rdquo;), each traced and fixed. One held-out run also exposed a bug in the benchmark itself: a template hard-coded the
               verb &ldquo;lifted&rdquo;, so falling metrics were labelled clean while the verifier, correctly, flagged them. I fixed the
               labels, not the verifier, and kept both result files.
+            </p>
+            <p>
+              <strong>A second, harder test.</strong> Templates give many sentences from a few constructions, so I also wrote challenge
+              sets by hand: one construction per case, labelled from the data, across thirteen categories from points-versus-percent and
+              lakh/crore to ambiguous comparisons and identifiers. A held-out set written after the first was fixed passed{" "}
+              <Claim claim={claims.challengeHeldout} /> cases on its first run. It missed no errors; the failures were false positives
+              (&ldquo;sold 1,017 rooms&rdquo;, &ldquo;topped $460K&rdquo;, &ldquo;Tower 2&rdquo;), each fixed with a general rule and
+              re-checked against the template families.
             </p>
             <p>
               <strong>What they don&apos;t say.</strong> The text is template-generated and the templates share an author with the
@@ -280,7 +288,7 @@ export default function ProoflinePage() {
         </Prose>
       </CaseSection>
 
-      <NextCase href="/work/cluecode" title="ClueCode" note="A desktop AI assistant with subscriptions, shipped end to end." />
+      <NextCase href="/work/voice-sales-agent" title="AI Voice Sales Agent" note="Qualifying leads over the phone in real time." />
     </article>
   );
 }

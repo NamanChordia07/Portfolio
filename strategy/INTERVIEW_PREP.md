@@ -2,9 +2,21 @@
 
 ## Questions you will get, and how to answer them honestly
 
-**"Why are you still an intern after 14 months?"** (only if the title is still Intern)
-Answer with the facts: when the role started, what changed in scope, what the conversion
-status is. Do not dodge. If you were converted, fix the resume instead.
+**"Walk me through the AI voice sales agent. What did you build?"**
+Be precise about the split: a team of two, for a client. Karthik built the core engine (state machine,
+validator, providers, Postgres queue). You owned the FreJun (Teler) integration, call lifecycle,
+live-test bug fixes, latency work and the browser demo. Know the numbers: ~2.9 s median from end
+of speech to agent audio (STT 0.7–1.3 s, LLM 0.8–1.6 s, TTS 0.8–1.0 s); LLM time to a speakable reply
+1.96 s -> 0.84 s after re-benchmarking models; 121 tests. Be ready to explain why sub-second needs a
+different architecture (three sequential network calls; speech-to-speech would bypass the validator)
+and that the first real FreJun call was waiting on carrier KYC. Never name the client.
+
+**"Walk me through your time at IDeaS."**
+Three steps, one company: Software Developer Intern (Jan–Jun 2025, dashboard modernisation in
+Angular and Spring Boot), Business Intelligence & Automation Intern (Jul–Oct 2025, mailbox and
+reporting automation), then full-time AI & Automation Developer from November 2025 (forecast-review
+pipeline with LLM commentary, Playwright configuration checks, pricing analytics). Say what the
+conversion changed: you went from assigned tasks to owning pipelines through SIT, UAT and hypercare.
 
 **"ClueCode reads screens during interviews. Is it a cheating tool?"**
 - It is an ordinary visible window. It does not hide from screen sharing, recording or

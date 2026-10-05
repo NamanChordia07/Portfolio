@@ -6,6 +6,7 @@ proofline repair   --facts facts.json report.md [-o fixed.md]
 proofline generate --facts facts.json --provider gemini --task "Weekly summary..." [--trace t.json]
 proofline eval-llm --provider gemini --n 5                 (first-draft vs guarded error rates)
 proofline bench    [--n 200] [--out docs/BENCHMARK_CURRENT.md]
+proofline challenge [--set heldout|original|path.yaml] [--json out.json]   (exit 1 on any failed case)
 proofline demo                                             (offline walkthrough)
 """
 
@@ -121,6 +122,17 @@ def cmd_bench(a: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_challenge(a: argparse.Namespace) -> int:
+    from .bench.challenge import CHALLENGE_SETS, run_challenge, to_markdown
+
+    path = CHALLENGE_SETS.get(a.set, Path(a.set))
+    res = run_challenge(path)
+    if a.json:
+        Path(a.json).write_text(json.dumps(res, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(to_markdown(res))
+    return 0 if res["cases_passed"] == res["cases"] else 1
+
+
 DEMO_TEXT = HOTEL.text
 
 
@@ -190,6 +202,11 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("--out")
     s.add_argument("--json")
     s.set_defaults(fn=cmd_bench)
+
+    s = sub.add_parser("challenge", help="score the verifier on a hand-labelled challenge set")
+    s.add_argument("--set", default="heldout", help="heldout, original, or a path to a challenge YAML file")
+    s.add_argument("--json")
+    s.set_defaults(fn=cmd_challenge)
 
     s = sub.add_parser("demo", help="offline walkthrough on synthetic hotel data")
     s.set_defaults(fn=cmd_demo)

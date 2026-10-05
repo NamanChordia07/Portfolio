@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Retail regions, monthly (INR) (after repair)</title>
+<style>
+:root{--fg:#16181d;--bg:#fbfbfa;--muted:#667;--ok:#d9f2e3;--bad:#fbd9d6;--unk:#f3ecd0;--line:#e4e4e0}
+@media (prefers-color-scheme:dark){:root{--fg:#e8e8e6;--bg:#121315;--muted:#99a;--ok:#1d4030;--bad:#5a2320;--unk:#4a4020;--line:#2a2b2e}}
+body{font:16px/1.6 ui-sans-serif,system-ui,sans-serif;color:var(--fg);background:var(--bg);max-width:860px;margin:40px auto;padding:0 16px}
+mark{border-radius:4px;padding:0 3px;color:inherit;cursor:help} mark.ok{background:var(--ok)} mark.bad{background:var(--bad)} mark.unk{background:var(--unk)}
+.doc{border:1px solid var(--line);border-radius:8px;padding:20px 24px} table{border-collapse:collapse;width:100%;font-size:13px;margin-top:24px}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top} .muted{color:var(--muted)}
+</style></head><body>
+<h1>Retail regions, monthly (INR) (after repair)</h1>
+<p class="muted">retail_monthly &middot; period 2026-08 &middot; 11 claims:
+11 supported, 0 contradicted, 0 unverifiable</p>
+<div class="doc">## Company<br>
+Revenue reached <mark class="ok" title="revenue:company:level = 9.595e+07 (sum(revenue) for all entities, 2026-08)" data-claim="0">₹9.59 crore</mark> in August, up <mark class="ok" title="revenue:company:delta_pct:last_year = 8.818 ((level - last year) / |last year| x 100 = (95945589.00 - 88171000.00) / 88171000.00 x 100)" data-claim="1">8.8%</mark> year over year but <mark class="ok" title="revenue:company:delta_pct:budget = -1.08 ((level - budget) / |budget| x 100 = (95945589.00 - 96993049.00) / 96993049.00 x 100)" data-claim="2">1.1%</mark> behind budget. Orders fell <mark class="ok" title="orders:company:delta_pct:prior = -7.301 ((level - last month) / |last month| x 100 = (51906 - 55994) / 55994 x 100)" data-claim="3">7.3%</mark> vs last month, and the return rate <mark class="ok" title="return_rate:company:delta_abs:prior = -0.6218 (level - last month = 6.4289 - 7.0508)" data-claim="4">improved</mark> to <mark class="ok" title="return_rate:company:level = 6.429 (sum(returns) / sum(orders) x 100 for all entities, 2026-08)" data-claim="5">6.4%</mark>, down <mark class="ok" title="return_rate:company:delta_abs:prior = -0.6218 (level - last month = 6.4289 - 7.0508)" data-claim="6">0.6 pts</mark> month over month. Conversion rate slipped <mark class="ok" title="conversion_rate:company:delta_abs:prior = -0.1699 (level - last month = 2.7664 - 2.9363)" data-claim="7">0.2 pts</mark> vs last month.<br>
+<br>
+## Regions<br>
+East beat budget on revenue by <mark class="ok" title="revenue:east:delta_pct:budget = 12.09 ((level - budget) / |budget| x 100 = (14994109.00 - 13377277.00) / 13377277.00 x 100)" data-claim="8">12.1%</mark>, with sales of <mark class="ok" title="revenue:east:level = 1.499e+07 (sum(revenue) for East, 2026-08)" data-claim="9">₹149.94 lakh</mark>. North&#x27;s AOV slipped <mark class="ok" title="aov:north:delta_pct:prior = -2.296 ((level - last month) / |last month| x 100 = (2101.6554 - 2151.0533) / 2151.0533 x 100)" data-claim="10">2.3%</mark> vs last month.<br>
+</div>
+<table><thead><tr><th>#</th><th>claim</th><th>status</th><th>reason</th><th>fact</th><th>detail</th></tr></thead>
+<tbody><tr class='ok'><td>0</td><td>₹9.59 crore</td><td>supported</td><td>ok</td><td>revenue:company:level</td><td></td></tr>
+<tr class='ok'><td>1</td><td>8.8%</td><td>supported</td><td>ok</td><td>revenue:company:delta_pct:last_year</td><td></td></tr>
+<tr class='ok'><td>2</td><td>1.1%</td><td>supported</td><td>ok</td><td>revenue:company:delta_pct:budget</td><td></td></tr>
+<tr class='ok'><td>3</td><td>7.3%</td><td>supported</td><td>ok</td><td>orders:company:delta_pct:prior</td><td></td></tr>
+<tr class='ok'><td>4</td><td>improved</td><td>supported</td><td>ok</td><td>return_rate:company:delta_abs:prior</td><td></td></tr>
+<tr class='ok'><td>5</td><td>6.4%</td><td>supported</td><td>ok</td><td>return_rate:company:level</td><td></td></tr>
+<tr class='ok'><td>6</td><td>0.6 pts</td><td>supported</td><td>ok</td><td>return_rate:company:delta_abs:prior</td><td></td></tr>
+<tr class='ok'><td>7</td><td>0.2 pts</td><td>supported</td><td>ok</td><td>conversion_rate:company:delta_abs:prior</td><td></td></tr>
+<tr class='ok'><td>8</td><td>12.1%</td><td>supported</td><td>ok</td><td>revenue:east:delta_pct:budget</td><td></td></tr>
+<tr class='ok'><td>9</td><td>₹149.94 lakh</td><td>supported</td><td>ok</td><td>revenue:east:level</td><td></td></tr>
+<tr class='ok'><td>10</td><td>2.3%</td><td>supported</td><td>ok</td><td>aov:north:delta_pct:prior</td><td></td></tr></tbody></table>
+</body></html>

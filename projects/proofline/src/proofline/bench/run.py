@@ -14,6 +14,8 @@ template families, for the full system, three ablations and a naive baseline:
 from __future__ import annotations
 
 import json
+import statistics
+import time
 from collections import Counter, defaultdict
 from collections.abc import Callable
 from dataclasses import dataclass, field
@@ -149,12 +151,15 @@ def evaluate(reports: list[tuple[GeneratedReport, FactSheet]], cfg: Config | Non
     spurious_total = 0
     contradicted_flags = contradicted_on_errors = 0
     clean_reports = clean_passed = corrupt_reports = corrupt_detected = 0
+    latencies: list[float] = []
     for report, sheet in reports:
         if naive:
             outcomes, spurious = _naive_outcomes(report, sheet)
         else:
             assert cfg is not None
+            started = time.perf_counter()
             rep = verify_text(report.text, sheet, cfg.verify, cfg.extract)
+            latencies.append((time.perf_counter() - started) * 1000)
             outcomes, spurious = _slot_outcomes(report, rep.verdicts)
         spurious_total += spurious
         for o in outcomes:
@@ -188,6 +193,23 @@ def evaluate(reports: list[tuple[GeneratedReport, FactSheet]], cfg: Config | Non
         }
         for k, c in sorted(errors.items(), key=lambda kv: ERROR_TYPES.index(kv[0]) if kv[0] in ERROR_TYPES else 99)
     }
+    # Gate view: a claim is flagged if it is contradicted or left unverifiable; an unmatched
+    # contradiction (spurious) is a false positive too.
+    tp = detected
+    fn = n_err - detected
+    fp = clean["contradicted"] + clean["unverifiable"] + spurious_total
+    tn = n_clean - clean["contradicted"] - clean["unverifiable"]
+    precision = tp / (tp + fp) if tp + fp else 1.0
+    recall = tp / (tp + fn) if tp + fn else 1.0
+    latency = (
+        {
+            "report_p50_ms": round(statistics.median(latencies), 3),
+            "report_p95_ms": round(sorted(latencies)[int(0.95 * (len(latencies) - 1))], 3),
+            "claims_per_second": round((n_clean + n_err) / (sum(latencies) / 1000), 0) if sum(latencies) else None,
+        }
+        if latencies
+        else None
+    )
     return {
         "slots": n_clean + n_err,
         "error_slots": n_err,
@@ -202,6 +224,17 @@ def evaluate(reports: list[tuple[GeneratedReport, FactSheet]], cfg: Config | Non
         "corrupt_report_detection_rate": round(corrupt_detected / max(1, corrupt_reports), 4),
         "reports": {"clean": clean_reports, "corrupted": corrupt_reports},
         "per_type": per_type,
+        "gate": {
+            "tp": tp,
+            "fp": fp,
+            "fn": fn,
+            "tn": tn,
+            "precision": round(precision, 4),
+            "recall": round(recall, 4),
+            "f1": round(2 * precision * recall / (precision + recall), 4) if precision + recall else 0.0,
+            "accuracy": round((tp + tn) / max(1, tp + tn + fp + fn), 4),
+        },
+        "latency": latency,
     }
 
 
@@ -272,7 +305,15 @@ def to_markdown(results: dict[str, Any]) -> str:
                 f"| {name} | {r['error_recall']:.1%} | {r['false_alarm_rate']:.2%} | {r['flag_precision']:.1%} | "
                 f"{r['clean_report_pass_rate']:.1%} | {r['corrupt_report_detection_rate']:.1%} |"
             )
+        g = main["gate"]
+        lat = main["latency"]
         lines += [
+            "",
+            "Gate view (flag = contradicted or unverifiable): "
+            f"precision {g['precision']:.1%}, recall {g['recall']:.1%}, F1 {g['f1']:.3f}, accuracy {g['accuracy']:.2%} "
+            f"(TP {g['tp']}, FP {g['fp']}, FN {g['fn']}, TN {g['tn']}). "
+            f"Latency per report: p50 {lat['report_p50_ms']:.2f} ms, p95 {lat['report_p95_ms']:.2f} ms; "
+            f"~{lat['claims_per_second']:,.0f} claims/s single-threaded.",
             "",
             f"Clean claims: {main['clean_supported_rate']:.1%} verified as supported, "
             f"{main['clean_unverifiable_rate']:.1%} left unverifiable, {main['clean_missed_rate']:.1%} not extracted.",

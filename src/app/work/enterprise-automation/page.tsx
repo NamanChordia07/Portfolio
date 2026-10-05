@@ -22,7 +22,11 @@ export default function EnterpriseAutomationPage() {
         title="Enterprise automation at IDeaS"
         lede="IDeaS builds revenue-management software for hotels. Around the product sit teams doing a lot of careful, manual, cross-system work. My job has been to turn that work into scheduled, tested automation, and to put LLMs where they genuinely help."
         meta={[
-          { label: "Roles", value: "Business Intelligence & Automation (Jul 2025 – present); Software Developer Intern (Jan – Jun 2025)" },
+          {
+            label: "Roles",
+            value:
+              "AI & Automation Developer (Nov 2025 – present); Business Intelligence & Automation Intern (Jul – Oct 2025); Software Developer Intern (Jan – Jun 2025)",
+          },
           { label: "Stack", value: "Python, pandas, Playwright, Power Automate, Streamlit, Altair, Java, Spring Boot, Angular, SQL, Docker" },
           { label: "Systems", value: "G3 revenue-management platform, Salesforce, Excel/Word/PDF, Microsoft AI Builder" },
           { label: "Note", value: "Described at the level of what was built. No internal code, data, names or screenshots." },
@@ -45,8 +49,8 @@ export default function EnterpriseAutomationPage() {
             <p>
               A Python pipeline that assembles client forecast reviews. It is split into modular services (data, calculations, charts,
               document merge) so a new report section is an addition, not a rewrite, and it handles both full-history properties and those
-              with limited history, where the model runs on a synthetic baseline. It is containerised with Docker and went through SIT and
-              UAT.
+              with limited history, where the model runs on a synthetic baseline. It is containerised with Docker and went through SIT, UAT
+              and hypercare.
             </p>
             <p>
               The LLM writes narrative around numbers the pipeline has already computed. The failure mode worth worrying about is a wrong
