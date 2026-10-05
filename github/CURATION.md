@@ -8,7 +8,7 @@ README, the pinned repositories and the contribution graph. This is the plan for
 | repository | visibility | contents | how |
 |---|---|---|---|
 | `NamanChordia07/proofline` | **public** | Proofline with its full history | Create it empty (no README, licence or .gitignore), then from the Portfolio repo: `git subtree split --prefix projects/proofline -b proofline-split && git push https://github.com/NamanChordia07/proofline.git proofline-split:main`. Or attach it to a session and ask Claude to push. Verified: a clean clone of the split passes lint, types, 71 tests and both challenge sets. |
-| `NamanChordia07/NamanChordia07` | **public** | `PROFILE_README.md` from this folder, saved as `README.md` | Create it with "Add a README file" ticked, paste the content. GitHub shows it on your profile automatically. |
+| `NamanChordia07/NamanChordia07` | **public** | Everything in `github/profile/` (README.md and `.github/workflows/snake.yml`) | Create it empty, then ask Claude to push, or copy both files in. The snake image appears after the workflow's first run (Actions tab → Generate contribution snake → Run workflow). |
 | `NamanChordia07/portfolio-site` (optional) | public | The website only | See section 4. |
 
 The site and all three resumes already link to `github.com/NamanChordia07/proofline`; that
@@ -23,8 +23,14 @@ After creating `proofline`, set its About box:
 
 Pin at most what you can defend line by line. Right now that is:
 
-1. `proofline` (public)
-2. `portfolio-site`, if you create it (section 4)
+1. `ai-voice-sales-agent` (public; published from your `naman-development` branch)
+2. `proofline` (public, once created)
+3. `portfolio-site`, if you create it (section 4)
+
+`ai-voice-sales-agent` About box: *Outbound AI voice agent that qualifies sales leads over the phone:
+streaming STT/LLM/TTS, barge-in, validated LLM actions, FreJun telephony.* Topics: `voice-ai`, `ai-agent`,
+`llm`, `fastapi`, `openai`, `telephony`, `websockets`, `python`. Its history keeps Karthik's commits under
+his name, which is the honest record of a two-person project.
 
 Do **not** pin the college group repositories (`ankushkaudi/Windals`,
 `Tanmayb25/Hospital-Inventory`, the `windalsweb*` sites, `American-Sign-Language-Detection`).
