@@ -26,14 +26,14 @@ variants:
     headline: Software Engineer · Enterprise Automation, Integration & Applied AI
     summary: >-
       AI & Automation Developer at IDeaS (a SAS company) who turns enterprise workflows into deployed automation:
-      LLM-assisted report pipelines, Playwright checks across Salesforce and product systems; shipped a production SaaS solo.
+      LLM report pipelines and Playwright checks; co-built an AI voice sales agent; shipped a production SaaS solo.
     sections: [summary, experience, projects, skills, education, leadership]
   ai:
     file: Naman_Chordia_AI_Engineer_Resume
     headline: Applied AI Engineer · LLM Systems, Evaluation & Automation
     summary: >-
-      Applied AI engineer who makes LLM output trustworthy enough to ship: Proofline (report verification benchmarked
-      on 32k labelled claims), LLM commentary in IDeaS (a SAS company) report automation, a production multimodal Gemini app.
+      Applied AI engineer who ships LLM systems to production: a real-time AI voice sales agent (STT, LLM, TTS),
+      Proofline (verification benchmarked on 32k labelled claims), and LLM report automation at IDeaS (a SAS company).
     sections: [summary, projects, experience, skills, education, leadership]
   sde:
     file: Naman_Chordia_SDE_Resume
@@ -74,6 +74,7 @@ experience:
               Wrote Playwright end-to-end automation that checks client configuration (account numbers, integration
               types) across Salesforce, the G3 revenue-management UI and its database, in Docker.
           - id: pricing_app
+            in: [ai, sde]
             rank: { fde: 4, ai: 2, sde: 3 }
             fde: >-
               Built a Streamlit tool (pandas, Altair) that automates best-available-rate trends, property/chain extraction
@@ -101,12 +102,13 @@ experience:
               Migrated the legacy JSP/Struts "At-a-Glance" dashboard of an enterprise revenue-management product to
               Angular and Spring Boot, building Angular components and REST APIs over optimized SQL and Java Streams.
           - id: date_range
-            in: [sde]
+            in: []
             rank: { sde: 2 }
             text: >-
               Extended the dashboard APIs from single-day to custom date-range queries, refactoring and tuning the
               underlying SQL.
           - id: feature_toggle
+            in: [sde]
             rank: { fde: 2, ai: 2, sde: 3 }
             fde: >-
               Extended APIs from single-day to custom date ranges and shipped the new UI behind a database-driven
@@ -127,6 +129,33 @@ experience:
               Detected and mitigated XSS, SQL-injection and misconfiguration risks in internal audits; automated scanning.
 
 projects:
+  - id: voice_agent
+    name: AI Voice Sales Agent
+    link: { label: github.com/NamanChordia07/ai-voice-sales-agent, url: "https://github.com/NamanChordia07/ai-voice-sales-agent" }
+    tech: Python, FastAPI, OpenAI
+    dates: Sep – Oct 2026
+    rank: { fde: 1, ai: 2, sde: 2 }
+    bullets:
+      - id: va_what
+        fde: >-
+          Co-built (team of two) an outbound AI voice agent for a client that phones leads, runs an adaptive
+          qualification script and hands qualified leads to sales; DNC enforced first, every LLM action validated.
+        ai: >-
+          Co-built a real-time AI voice agent that qualifies sales leads over the phone: streaming speech-to-text, an LLM
+          with schema-validated output (the model proposes, the app decides), text-to-speech and barge-in.
+        sde: >-
+          Co-built an outbound AI calling system: FastAPI, a PostgreSQL work queue (SKIP LOCKED) with idempotent call
+          attempts, WebSocket media bridging and adapters for Twilio, Exotel and FreJun telephony.
+      - id: va_telephony
+        in: [fde, sde]
+        text: >-
+          Integrated FreJun (Teler) telephony from its docs and SDK: outbound dialling, call-flow endpoint, media
+          WebSocket and HMAC-signed status webhooks; debugged call-lifecycle and agent failures found in live testing.
+      - id: va_latency
+        in: [fde, ai]
+        text: >-
+          Cut voice latency to a measured ~2.9 s median (end of speech to agent audio) by benchmarking models,
+          reordering prompts for caching, one deadline per turn and streamed playback; 121 automated tests.
   - id: proofline
     name: Proofline
     link: { label: github.com/NamanChordia07/proofline, url: "https://github.com/NamanChordia07/proofline" }
@@ -145,15 +174,15 @@ projects:
           Built a zero-dependency Python library and CLI that parses numbers with display-precision semantics, attributes
           each claim to a metric, entity and comparison basis, and verifies it against computed facts.
       - id: pl_eval
+        in: [ai]
         text: >-
           Built the benchmark with independent ground truth (3 domains, 9 injected error types, held-out phrasing):
           98.9–100% recall at 1.1–4.5% false alarms on unseen phrasing, vs. 16–20% recall for a naive value lookup.
         ai: >-
-          Designed the evaluation with independent ground truth (3 domains, 9 injected error types, held-out phrasing):
-          98.9–100% recall at 1.1–4.5% false alarms on unseen phrasing vs. 16–20% for a naive value lookup; ablations
-          show a fixed ±1% tolerance yields 24–29% false alarms.
+          Designed the evaluation with independent ground truth (3 domains, 9 error types, held-out phrasing): 98.9–100%
+          recall at 1.1–4.5% false alarms on unseen phrasing vs. 16–20% for a naive value lookup.
       - id: pl_ship
-        in: [ai]
+        in: []
         text: >-
           Shipped as a Python library, CI-gating CLI and an MCP server agents can call, with a guarded Gemini/Claude loop
           (draft, verify, targeted feedback, deterministic repair); 71 tests, 95% coverage, mypy --strict.
@@ -169,13 +198,13 @@ projects:
           Designed, built and deployed a full-stack desktop AI assistant end to end (cluecode.in): Electron client streaming
           multimodal Gemini answers, Next.js/Postgres backend on Vercel and Neon, auth and Razorpay subscriptions.
         ai: >-
-          Shipped a Windows desktop assistant (cluecode.in) that sends screen captures to Gemini with the user's own key
-          and streams answers into an overlay: model discovery and fallback, stall detection, versioned prompts with a
-          prompt-injection guard, keys encrypted with Windows DPAPI and never sent to the server.
+          Shipped a desktop assistant (cluecode.in) streaming multimodal Gemini answers: model fallback, stall detection,
+          versioned prompts with an injection guard, user keys DPAPI-encrypted; Next.js/Postgres backend, 270+ tests.
         sde: >-
           Designed and shipped a subscription desktop app (cluecode.in): Electron + TypeScript client, Next.js API on
           Vercel, PostgreSQL (Neon, Drizzle), Better Auth, Razorpay; npm-workspaces monorepo with shared zod contracts.
       - id: cc_backend
+        in: [sde]
         fde: >-
           Enforced one active device per account with server-clock session leases and heartbeats backed by a partial
           unique index; made payment webhooks signature-verified and idempotent; 270+ automated tests.
@@ -186,7 +215,7 @@ projects:
           Enforced one active device per account with server-clock session leases, heartbeats and a partial unique
           index; made Razorpay webhooks signature-verified and idempotent; built an audited, role-based admin console.
       - id: cc_quality
-        in: [sde]
+        in: []
         text: >-
           Hardened Electron (sandboxed renderers, CSP, narrow IPC, DPAPI-encrypted user keys) and covered the system
           with 270+ automated tests: unit, Postgres integration, Electron security and WCAG 2.1 AA end-to-end suites.
@@ -194,21 +223,21 @@ projects:
 skills:
   fde:
     - [Languages, "Python, Java, TypeScript, JavaScript, SQL"]
-    - [Integration & automation, "Playwright, Power Automate, REST APIs, webhooks, Salesforce, PDF/Word/Excel generation"]
-    - [Applied AI, "LLM integration (Gemini, Claude, Microsoft AI Builder), MCP servers, evaluation and guardrails"]
+    - [Integration & automation, "FastAPI, REST, WebSockets, webhooks, telephony (FreJun, Twilio), Playwright, Power Automate"]
+    - [Applied AI, "LLMs (OpenAI, Gemini, Claude, AI Builder), voice agents (STT/TTS), MCP, evaluation, guardrails"]
     - [Frameworks & data, "Spring Boot, Angular, Next.js, React, Electron, pandas, Streamlit, Power BI"]
     - [Infrastructure, "Docker, PostgreSQL, MySQL, Git, GitHub Actions, Vercel, Linux"]
   ai:
-    - [AI / LLM, "Gemini and Claude APIs, Microsoft AI Builder, MCP, LLM evaluation and benchmarking, guardrails, multimodal input, streaming"]
+    - [AI / LLM, "OpenAI, Gemini and Claude APIs, real-time voice agents (STT/TTS, barge-in), MCP, LLM evaluation, guardrails"]
     - [Languages, "Python, TypeScript, Java, SQL"]
     - [Data & automation, "pandas, Streamlit, Altair, Playwright, Power Automate, Power BI"]
-    - [Engineering, "Next.js, Electron, Spring Boot, PostgreSQL, Docker, pytest, Hypothesis, GitHub Actions"]
+    - [Engineering, "FastAPI, WebSockets, Next.js, Electron, Spring Boot, PostgreSQL, Docker, pytest, GitHub Actions"]
   sde:
     - [Languages, "Java, Python, TypeScript, JavaScript, SQL"]
-    - [Backend, "Spring Boot, REST APIs, Node.js (Next.js API routes), PostgreSQL, MySQL, Drizzle ORM"]
+    - [Backend, "Spring Boot, FastAPI, REST and WebSocket APIs, Node.js (Next.js API routes), PostgreSQL, MySQL, Drizzle ORM"]
     - [Frontend & desktop, "Angular, React, Next.js, Electron"]
     - [Testing & tooling, "Playwright, Vitest, pytest, Hypothesis, Docker, Git, GitHub Actions CI, Vercel, Linux/Shell"]
-    - [AI & automation, "Gemini and Claude APIs, MCP, Power Automate, Streamlit"]
+    - [AI & automation, "OpenAI, Gemini and Claude APIs, voice agents (STT/TTS), MCP, Power Automate, Streamlit"]
 
 education:
   - school: Vishwakarma Institute of Information Technology, Pune

@@ -2,6 +2,15 @@
 
 ## Questions you will get, and how to answer them honestly
 
+**"Walk me through the AI voice sales agent. What did you build?"**
+Be precise about the split: a team of two, for a client. Karthik built the core engine (state machine,
+validator, providers, Postgres queue). You owned the FreJun (Teler) integration, call lifecycle,
+live-test bug fixes, latency work and the browser demo. Know the numbers: ~2.9 s median from end
+of speech to agent audio (STT 0.7–1.3 s, LLM 0.8–1.6 s, TTS 0.8–1.0 s); LLM time to a speakable reply
+1.96 s -> 0.84 s after re-benchmarking models; 121 tests. Be ready to explain why sub-second needs a
+different architecture (three sequential network calls; speech-to-speech would bypass the validator)
+and that the first real FreJun call was waiting on carrier KYC. Never name the client.
+
 **"Walk me through your time at IDeaS."**
 Three steps, one company: Software Developer Intern (Jan–Jun 2025, dashboard modernisation in
 Angular and Spring Boot), Business Intelligence & Automation Intern (Jul–Oct 2025, mailbox and

@@ -288,7 +288,7 @@ export default function ProoflinePage() {
         </Prose>
       </CaseSection>
 
-      <NextCase href="/work/cluecode" title="ClueCode" note="A desktop AI assistant with subscriptions, shipped end to end." />
+      <NextCase href="/work/voice-sales-agent" title="AI Voice Sales Agent" note="Qualifying leads over the phone in real time." />
     </article>
   );
 }

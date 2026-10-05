@@ -57,6 +57,14 @@ export const claims = {
     value: "24–29%",
     source: "False-alarm rate when display-precision intervals are replaced by a fixed ±1% tolerance (held-out first runs).",
   },
+  vaLatency: {
+    value: "~2.9 s",
+    source: "Median from end of speech to the agent's first audio, 13 turns in the browser demo (Chrome, push-to-talk), Oct 2026. Per turn: STT 0.7–1.3 s, LLM 0.8–1.6 s, TTS first audio 0.8–1.0 s.",
+  },
+  vaTests: {
+    value: "121",
+    source: "Automated tests passing at the commit that integrated FreJun (Oct 2026): telephony provider and routes, call lifecycle, engine regressions, prompt schemas.",
+  },
   ccTests: {
     value: "270+",
     source: "ClueCode's recorded green run, Sep 2026: web 138, shared 13, desktop unit 67, Electron security and a11y 11, website E2E 43, installer and auto-update 7.",
@@ -118,7 +126,7 @@ export const experience: Job[] = [
 ];
 
 export type WorkItem = {
-  slug: "proofline" | "cluecode" | "enterprise-automation";
+  slug: "proofline" | "voice-sales-agent" | "cluecode" | "enterprise-automation";
   title: string;
   kicker: string;
   summary: string;
@@ -139,6 +147,17 @@ export const work: WorkItem[] = [
     stack: ["Python", "MCP", "Gemini", "Claude", "pytest", "Hypothesis"],
     year: "2026",
     links: [{ label: "Source", href: "https://github.com/NamanChordia07/proofline" }],
+  },
+  {
+    slug: "voice-sales-agent",
+    title: "AI Voice Sales Agent",
+    kicker: "Client project · Voice AI · 2026",
+    summary:
+      "An outbound AI agent that phones leads, holds a scripted but adaptive qualification conversation, and hands qualified leads to a sales team. Streaming speech in and out, barge-in, and an LLM whose every action is validated before it happens.",
+    facts: [claims.vaLatency, claims.vaTests, "FreJun telephony, HMAC-signed webhooks"],
+    stack: ["Python", "FastAPI", "OpenAI", "PostgreSQL", "WebSockets", "FreJun"],
+    year: "2026",
+    links: [{ label: "Source", href: "https://github.com/NamanChordia07/ai-voice-sales-agent" }],
   },
   {
     slug: "cluecode",
@@ -168,7 +187,7 @@ export const areas = [
   {
     title: "Applied AI you can trust",
     body: "LLM features with the evaluation, guardrails and fallbacks that let them ship: grounded generation, verification, model fallback, prompt-injection defence.",
-    tools: ["Gemini", "Claude", "Microsoft AI Builder", "MCP", "evals", "Python"],
+    tools: ["OpenAI", "Gemini", "Claude", "voice agents", "MCP", "evals", "Python"],
   },
   {
     title: "Enterprise automation & integration",

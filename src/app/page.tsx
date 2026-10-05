@@ -31,7 +31,11 @@ function Hero() {
             I build automation and AI systems for messy, real-world workflows, and the checks that make them safe to ship.
           </h1>
           <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-muted sm:text-lg">
-            At IDeaS (a SAS company) I automate revenue-management operations with Python, Playwright and LLMs. On my own, I shipped{" "}
+            At IDeaS (a SAS company) I automate revenue-management operations with Python, Playwright and LLMs. I co-built an{" "}
+            <Link href="/work/voice-sales-agent" className="link">
+              AI voice sales agent
+            </Link>{" "}
+            that qualifies leads over the phone, shipped{" "}
             <Link href="/work/cluecode" className="link">
               ClueCode
             </Link>

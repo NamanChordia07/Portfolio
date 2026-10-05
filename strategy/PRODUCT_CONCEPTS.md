@@ -1,3 +1,7 @@
+> **Superseded (5 Oct 2026):** no new product is being built. The project added instead is the AI voice sales
+> agent co-built with Karthik Nambiar, published from the `naman-development` branch at
+> github.com/NamanChordia07/ai-voice-sales-agent. This file is kept for the research only.
+
 # New AI product: concepts (round 2, for approval)
 
 Status: **proposal only. Nothing is built until you reply "PROCEED" with a choice.**
