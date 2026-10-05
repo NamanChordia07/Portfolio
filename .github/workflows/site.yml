@@ -2,9 +2,9 @@ name: site
 
 on:
   push:
-    paths-ignore: ["projects/**", "strategy/**", "resume/**/*.py"]
+    paths-ignore: ["strategy/**", "resume/**/*.py"]
   pull_request:
-    paths-ignore: ["projects/**", "strategy/**", "resume/**/*.py"]
+    paths-ignore: ["strategy/**", "resume/**/*.py"]
 
 jobs:
   check:

@@ -6,14 +6,24 @@ const pages = ["/", "/work/proofline", "/work/voice-sales-agent", "/work/cluecod
 async function noHorizontalOverflow(page: Page) {
   const offenders = await page.evaluate(() => {
     const out: string[] = [];
+    // Anything inside a container that clips horizontally (tables that scroll, decorative glows,
+    // the marquee) cannot widen the page, so only unclipped elements count.
+    const clipped = (el: Element) => {
+      for (let p = el.parentElement; p && p !== document.body; p = p.parentElement) {
+        const o = getComputedStyle(p).overflowX;
+        if (o === "hidden" || o === "clip" || o === "auto" || o === "scroll") return true;
+      }
+      return false;
+    };
     for (const el of Array.from(document.querySelectorAll("body *"))) {
-      if (el.closest(".overflow-x-auto")) continue; // tables scroll inside their own container
+      if (clipped(el)) continue;
       const r = el.getBoundingClientRect();
       if (r.width > 0 && r.right > window.innerWidth + 1) out.push(`${el.tagName} ${el.className}`.slice(0, 120));
     }
     return out;
   });
   expect(offenders, "elements wider than the viewport").toEqual([]);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), "page scrolls sideways").toBe(true);
 }
 
 for (const path of pages) {
@@ -29,10 +39,12 @@ for (const path of pages) {
     expect(errors).toEqual([]);
   });
 
-  for (const scheme of ["light", "dark"] as const) {
-    test(`${path} has no WCAG 2.1 AA violations (${scheme})`, async ({ page }) => {
-      await page.emulateMedia({ colorScheme: scheme, reducedMotion: "reduce" });
+  for (const theme of ["light", "dark"] as const) {
+    test(`${path} has no WCAG 2.1 AA violations (${theme})`, async ({ page }) => {
+      await page.addInitScript((t) => localStorage.setItem("theme", t), theme);
+      await page.emulateMedia({ reducedMotion: "reduce" });
       await page.goto(path);
+      await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
       const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
       const summary = results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);
       expect(summary).toEqual([]);
@@ -61,7 +73,42 @@ test("contact links point at the right profiles", async ({ page }) => {
   const hrefs = await page.locator("a[href]").evaluateAll((els) => els.map((e) => e.getAttribute("href") ?? ""));
   expect(hrefs).toContain("https://www.linkedin.com/in/naman-chordia-291b7a22a/");
   expect(hrefs.filter((h) => h.includes("linkedin.com") && !h.includes("291b7a22a"))).toEqual([]);
-  expect(hrefs.filter((h) => h.includes("github.com/NamanChordia07/proofline"))).toEqual([]);
+  expect(hrefs).toContain("https://github.com/NamanChordia07/Proofline");
+  expect(hrefs).toContain("tel:+918799955051");
+  await expect(page.getByText("+91 87999 55051").first()).toBeVisible();
+});
+
+test("the portrait is on the home page", async ({ page }) => {
+  await page.goto("/");
+  const photo = page.getByRole("img", { name: "Portrait of Naman Chordia" });
+  await expect(photo).toBeVisible();
+  expect(await photo.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+});
+
+test("command menu opens with Ctrl+K and navigates", async ({ page, isMobile }) => {
+  test.skip(isMobile, "keyboard shortcut is a desktop feature; the header button covers touch");
+  await page.goto("/");
+  const dialog = page.getByRole("dialog", { name: "Command menu" });
+  // The shortcut listener attaches on hydration; retry the key press until it does.
+  await expect(async () => {
+    await page.keyboard.press("Control+k");
+    await expect(dialog).toBeVisible({ timeout: 500 });
+  }).toPass();
+  await page.keyboard.type("proofline");
+  await expect(dialog.getByRole("option")).toHaveCount(1);
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/work\/proofline$/);
+  await expect(dialog).toBeHidden();
+});
+
+test("command menu opens from the header button", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open command menu" }).click();
+  const dialog = page.getByRole("dialog", { name: "Command menu" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("option", { name: /Copy email address/ })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
 });
 
 test("case studies are reachable from the home page", async ({ page }) => {
@@ -94,15 +141,15 @@ test("a claim reveals its source on focus", async ({ page }) => {
   await expect(claim.getByRole("tooltip")).toContainText("Source");
 });
 
-test("theme toggle switches and persists", async ({ page }) => {
-  await page.emulateMedia({ colorScheme: "light" });
+test("theme defaults to dark, switches and persists", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Switch to dark theme" }).click();
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await page.getByRole("button", { name: "Switch to light theme" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.getByRole("button", { name: "Switch to dark theme" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 });
 
 test("mobile menu opens and navigates", async ({ page, isMobile }) => {

@@ -22,13 +22,14 @@ describe("site content", () => {
     }
   });
 
-  it("every resume download and preview exists, and web copies carry no phone number", () => {
+  it("the resume download and preview exist, and the resume carries the phone number", () => {
     const pdf = join(root, "public", resume.file);
     expect(existsSync(pdf), resume.file).toBe(true);
     expect(readFileSync(pdf).subarray(0, 5).toString()).toBe("%PDF-");
     expect(existsSync(join(root, "public", resume.preview)), resume.preview).toBe(true);
-    const html = readFileSync(join(root, "resume/dist/Naman_Chordia_FDE_Resume.html"), "utf8");
-    expect(html).toContain("+91");
+    for (const file of ["Naman_Chordia_Resume", "Naman_Chordia_FDE_Resume"]) {
+      expect(readFileSync(join(root, `resume/dist/${file}.html`), "utf8"), file).toContain(site.phone);
+    }
   });
 
   it("experience entries have dated roles with points", () => {
@@ -38,6 +39,14 @@ describe("site content", () => {
         expect(role.points.length).toBeGreaterThan(0);
       }
     }
+  });
+
+  it("phone link matches the displayed number", () => {
+    expect(site.phoneHref).toBe(`tel:${site.phone.replace(/\s/g, "")}`);
+  });
+
+  it("the portrait exists", () => {
+    expect(existsSync(join(root, "public", site.photo))).toBe(true);
   });
 
   it("uses an absolute https site URL without a trailing slash", () => {

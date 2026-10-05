@@ -17,7 +17,7 @@ single biggest improvement still available.
 | 6 | Streamlit pricing app "split into config, validation, calculation and chart services" | Accurate description of the structure? Who uses it, how often? | Add users or frequency if known. |
 | 7 | ClueCode "270+ automated tests" | Your repo's status doc records 279 passing runs (138 web, 13 shared, 67 desktop unit, 11 security/a11y, 43 web E2E, 7 installer); the source has ~200 test declarations. | Keep "270+" only if that is your latest green run; otherwise "200+". |
 | 8 | Portfolio URL `namanchordia.vercel.app` | Is this the project name you will deploy under? | Change `person.links` in `resume/content.yaml` and rebuild. |
-| 9 | Proofline link `github.com/NamanChordia07/proofline` | That repo does not exist yet. | Create it (steps in `strategy/REPORT.md`) before sending, or the link 404s. |
+| 9 | Proofline link `github.com/NamanChordia07/Proofline` | Resolved Oct 2026: the repository is public with full history. | None. |
 | 10 | Cyber Cell "5+ workshops and CTFs, 150+ students" | Unchanged from your old resume. Still accurate? | |
 
 ## Numbers worth finding (each one upgrades a bullet)

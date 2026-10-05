@@ -5,7 +5,7 @@ says where the facts come from; nothing here is taken on faith from the old resu
 
 | Project | Tech depth | AI depth | SWE depth | Business value | Differentiation | Interview value | FDE | AI Eng | SDE | Status | Evidence | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Proofline** (LLM report verification) | 5 | 4 | 5 | 4 | 5 | 5 | 5 | 5 | 4 | Built and tested (Sep 2026) | `projects/proofline`, 71 tests, benchmark, 2 challenge sets | **BUILD → KEEP (lead AI/FDE project)** |
+| **Proofline** (LLM report verification) | 5 | 4 | 5 | 4 | 5 | 5 | 5 | 5 | 4 | Built and tested (Sep 2026) | `NamanChordia07/Proofline`, 71 tests, benchmark, 2 challenge sets | **BUILD → KEEP (lead AI/FDE project)** |
 | **ClueCode** (desktop AI assistant, subscriptions) | 5 | 3 | 5 | 3 | 4 | 5 | 4 | 3 | 5 | Live at cluecode.in | private repo `NamanChordia07/cluecode`, docs, ~200 test declarations / 279 recorded passing runs | **KEEP (lead SDE project)**, with positioning caveat below |
 | Forecast-review report automation (IDeaS) | 4 | 3 | 4 | 5 | 3 | 5 | 5 | 4 | 4 | Work, SIT/UAT per brief | your brief | **KEEP** as top work bullet |
 | G3 configuration checks with Playwright (IDeaS) | 3 | 1 | 4 | 4 | 3 | 4 | 5 | 2 | 4 | Work | your brief | **KEEP** |

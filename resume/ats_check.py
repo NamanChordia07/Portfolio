@@ -61,7 +61,7 @@ def fonts_and_images(pdf: Path) -> tuple[set[str], bool, int]:
 def check(variant: str, data: dict, keywords: dict, pdf: Path, public: bool) -> tuple[list[str], list[str], dict]:
     fails: list[str] = []
     notes: list[str] = []
-    r = assemble(data, variant, public)
+    r = assemble(data, variant)
     pages = len(PdfReader(str(pdf)).pages)
     if pages != 1:
         fails.append(f"{pages} pages")
@@ -78,10 +78,8 @@ def check(variant: str, data: dict, keywords: dict, pdf: Path, public: bool) -> 
         fails.append(f"headings out of order: {found_order}")
     if data["person"]["email"] not in text:
         fails.append("email not extracted")
-    if not public and data["person"]["phone"] not in text:
+    if data["person"]["phone"] not in text:
         fails.append("phone not extracted")
-    if public and data["person"]["phone"] in text:
-        fails.append("phone present in public copy")
     for link in data["person"]["links"]:
         if link["label"] not in text:
             fails.append(f"link not extracted: {link['label']}")
@@ -132,7 +130,7 @@ def main() -> int:
         for pdf, public in copies:
             fails, notes, info = check(variant, data, keywords, pdf, public)
             failed |= bool(fails)
-            label = "public copy (no phone)" if public else "application copy"
+            label = "public copy" if public else "application copy"
             status = "PASS" if not fails else "FAIL"
             lines.append(f"## {name} - {label}: {status}")
             lines.append("")

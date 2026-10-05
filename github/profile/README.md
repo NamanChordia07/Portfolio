@@ -1,17 +1,22 @@
-<!-- Profile README for github.com/NamanChordia07 (lives in the NamanChordia07/NamanChordia07 repository). -->
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0b6e57,100:4fd1ae&height=190&section=header&text=Naman%20Chordia&fontSize=56&fontColor=ffffff&fontAlignY=36&desc=AI%20%26%20Automation%20Developer%20%C2%B7%20Voice%20AI%20%C2%B7%20LLM%20Systems&descAlignY=58&descSize=17&animation=fadeIn" alt="Naman Chordia" width="100%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:09090b,55:2a140b,100:ff7a45&height=190&section=header&text=Naman%20Chordia&fontSize=56&fontColor=f2f0eb&fontAlignY=36&desc=AI%20%26%20Automation%20Developer%20%C2%B7%20Voice%20AI%20%C2%B7%20LLM%20Systems&descAlignY=58&descSize=17&animation=fadeIn" alt="Naman Chordia" width="100%" />
 </p>
 
 <p align="center">
   <a href="https://namanchordia.vercel.app">
-    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=19&duration=3200&pause=900&color=0B6E57&center=true&vCenter=true&width=640&lines=AI+%26+Automation+Developer+at+IDeaS+(a+SAS+company);I+build+AI+agents+that+talk+to+customers+on+the+phone;...and+the+checks+that+make+LLM+output+safe+to+ship;Open+to+Forward+Deployed%2C+Applied+AI+and+SDE+roles" alt="Typing intro" />
+    <img src="assets/naman.png" width="148" height="148" alt="Naman Chordia" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://namanchordia.vercel.app"><img src="https://img.shields.io/badge/Portfolio-namanchordia.vercel.app-0b6e57?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" /></a>
+  <a href="https://namanchordia.vercel.app">
+    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=19&duration=3200&pause=900&color=FF7A45&center=true&vCenter=true&width=640&lines=I+build+AI+that+works+outside+the+demo.;AI+%26+Automation+Developer+at+IDeaS+(a+SAS+company);I+build+AI+agents+that+talk+to+customers+on+the+phone;...and+the+checks+that+make+LLM+output+safe+to+ship;Open+to+Forward+Deployed%2C+Applied+AI+and+SDE+roles" alt="Typing intro" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://namanchordia.vercel.app"><img src="https://img.shields.io/badge/Portfolio-namanchordia.vercel.app-ff7a45?style=for-the-badge&logo=vercel&logoColor=white&labelColor=09090b" alt="Portfolio" /></a>
   <a href="https://www.linkedin.com/in/naman-chordia-291b7a22a/"><img src="https://img.shields.io/badge/LinkedIn-Naman%20Chordia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:namanchordia88@gmail.com"><img src="https://img.shields.io/badge/Email-namanchordia88%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
 </p>
@@ -30,6 +35,7 @@ building:
   - Automation that turns manual, cross-system work into tested software
 education: B.Tech Computer Engineering, VIIT Pune (CGPA 8.9/10)
 open_to: [Forward Deployed Engineer, Applied AI Engineer, Software Engineer]
+portfolio: https://namanchordia.vercel.app
 ```
 
 ### 🚀 Featured work
@@ -42,9 +48,9 @@ open_to: [Forward Deployed Engineer, Applied AI Engineer, Software Engineer]
       <p>An outbound AI agent that phones leads, runs an adaptive qualification script and hands qualified leads to sales. Streaming speech, barge-in, and an LLM whose every action is validated first. Co-built for a client; I owned telephony, call lifecycle and latency (<b>~2.9 s</b> median response, <b>121</b> tests).</p>
     </td>
     <td width="33%" valign="top">
-      <h4>🔎 <a href="https://namanchordia.vercel.app/work/proofline">Proofline</a></h4>
+      <h4>🔎 <a href="https://github.com/NamanChordia07/Proofline">Proofline</a></h4>
       <sub>Python · MCP · pytest · Hypothesis</sub>
-      <p>Checks every number an LLM writes into a business report against the data, explains how a wrong one is wrong, and repairs it. <b>98.9–100%</b> of injected errors caught on unseen phrasing, vs. 16–20% for a naive lookup. CLI, library and MCP server.</p>
+      <p>Checks every number an LLM writes into a business report against the data, explains how a wrong one is wrong, and repairs it. <b>98.9–100%</b> of injected errors caught on unseen phrasing, vs. 16–20% for a naive lookup. CLI, library and MCP server. <a href="https://namanchordia.vercel.app/work/proofline">Case study</a>.</p>
     </td>
     <td width="33%" valign="top">
       <h4>🖥️ <a href="https://cluecode.in">ClueCode</a></h4>
@@ -84,11 +90,11 @@ open_to: [Forward Deployed Engineer, Applied AI Engineer, Software Engineer]
 ### 📊 GitHub at a glance
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=NamanChordia07&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&theme=transparent&title_color=0b6e57&icon_color=0b6e57&text_color=8b949e" alt="GitHub stats" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=NamanChordia07&layout=compact&langs_count=8&hide_border=true&theme=transparent&title_color=0b6e57&text_color=8b949e" alt="Top languages" />
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=NamanChordia07&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&theme=transparent&title_color=ff7a45&icon_color=ff7a45&text_color=8b949e" alt="GitHub stats" />
+  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=NamanChordia07&layout=compact&langs_count=8&hide_border=true&theme=transparent&title_color=ff7a45&text_color=8b949e" alt="Top languages" />
 </p>
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=NamanChordia07&hide_border=true&theme=transparent&ring=0b6e57&fire=4fd1ae&currStreakLabel=0b6e57&sideLabels=8b949e&dates=8b949e&currStreakNum=8b949e&sideNums=8b949e" alt="GitHub streak" />
+  <img src="https://streak-stats.demolab.com?user=NamanChordia07&hide_border=true&theme=transparent&ring=ff7a45&fire=ff7a45&currStreakLabel=ff7a45&sideLabels=8b949e&dates=8b949e&currStreakNum=8b949e&sideNums=8b949e" alt="GitHub streak" />
 </p>
 
 <picture>
@@ -98,5 +104,5 @@ open_to: [Forward Deployed Engineer, Applied AI Engineer, Software Engineer]
 </picture>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:4fd1ae,100:0b6e57&height=100&section=footer" alt="" width="100%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff7a45,45:2a140b,100:09090b&height=100&section=footer" alt="" width="100%" />
 </p>

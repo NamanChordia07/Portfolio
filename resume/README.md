@@ -9,8 +9,8 @@ Four one-page resumes built from one source of truth: one combined version for t
 | `dist/Naman_Chordia_SDE_Resume.pdf` / `.docx` | Software Engineer, SDE, Backend / Full-Stack Engineer |
 | `dist/Naman_Chordia_Resume.pdf` / `.docx` | General (the website's copy is `../public/resume/Naman_Chordia_Resume.pdf`) |
 
-`dist/` copies include your phone number (for applications). Only the combined resume is copied to
-`../public/resume/` (served by the website), without the phone number.
+Every copy carries the full contact line (location, phone, email, links). Only the combined resume is copied to
+`../public/resume/` (served by the website).
 
 ## Edit and rebuild
 
