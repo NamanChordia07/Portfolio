@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
+import { ReadMore, ScrambleText } from "./Effects";
 import { ArrowRight, ArrowUpRight } from "./Icons";
 import { Reveal } from "./Reveal";
 
@@ -16,13 +17,17 @@ export function SectionHeading({ id, index, kicker, title, intro }: { id?: strin
         <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-subtle">
           {index && <span className="text-accent">{index}</span>}
           <span aria-hidden="true" className="h-px w-8 bg-line-strong" />
-          {kicker}
+          <ScrambleText text={kicker.toUpperCase()} />
         </p>
         <h2 id={id ? `${id}-title` : undefined} className="mt-5 font-display text-[2.6rem] leading-[1.02] text-fg sm:text-6xl">
           {title}
         </h2>
       </div>
-      {intro && <div className="text-[16.5px] leading-relaxed text-muted md:pb-2">{intro}</div>}
+      {intro && (
+        <div className="md:pb-2">
+          <ReadMore className="text-[16.5px] leading-relaxed text-muted">{intro}</ReadMore>
+        </div>
+      )}
     </Reveal>
   );
 }

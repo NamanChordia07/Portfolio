@@ -14,7 +14,7 @@ export async function ogImage({ kicker, title, subtitle }: { kicker: string; tit
     read("node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff"),
     read("node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf"),
     read("node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.ttf"),
-    read("public/images/naman.jpg"),
+    read("public/images/naman-portrait.jpg"),
   ]);
   const portrait = `data:image/jpeg;base64,${photo.toString("base64")}`;
   return new ImageResponse(
@@ -53,7 +53,7 @@ export async function ogImage({ kicker, title, subtitle }: { kicker: string; tit
             style={{
               display: "flex",
               flexDirection: "column",
-              width: 330,
+              width: 248,
               borderRadius: 28,
               border: "1px solid rgba(255,122,69,0.55)",
               background: "#111114",
@@ -62,8 +62,8 @@ export async function ogImage({ kicker, title, subtitle }: { kicker: string; tit
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={portrait} width={330} height={330} alt="" style={{ objectFit: "cover" }} />
-            <div style={{ display: "flex", flexDirection: "column", padding: "16px 20px", gap: 4 }}>
+            <img src={portrait} width={248} height={441} alt="" style={{ objectFit: "cover" }} />
+            <div style={{ display: "flex", flexDirection: "column", padding: "12px 18px", gap: 2 }}>
               <div style={{ fontSize: 22, color: "#f2f0eb" }}>Naman Chordia</div>
               <div style={{ fontSize: 16, color: "#a6a5ad" }}>{"AI & Automation Developer · Pune"}</div>
             </div>

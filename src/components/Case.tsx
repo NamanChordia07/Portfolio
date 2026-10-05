@@ -4,6 +4,7 @@ import type { CSSProperties, ReactNode } from "react";
 import type { Claim as ClaimData } from "@/content/site";
 
 import { Claim } from "./Claim";
+import { ReadMore, ScrambleText } from "./Effects";
 import { ArrowRight } from "./Icons";
 import { Reveal } from "./Reveal";
 import { Container } from "./Section";
@@ -46,9 +47,11 @@ export function CaseHeader({
         <h1 className="rise mt-6 font-display text-[3.4rem] leading-[0.95] text-fg sm:text-7xl lg:text-[6.25rem]" style={{ "--d": "0.08s" } as CSSProperties}>
           {title}
         </h1>
-        <p className="rise mt-7 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl" style={{ "--d": "0.16s" } as CSSProperties}>
-          {lede}
-        </p>
+        <div className="rise mt-7" style={{ "--d": "0.16s" } as CSSProperties}>
+          <ReadMore as="p" className="max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">
+            {lede}
+          </ReadMore>
+        </div>
         <dl
           className="rise mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4"
           style={{ "--d": "0.24s" } as CSSProperties}
@@ -73,7 +76,7 @@ export function CaseSection({ id, label, title, children }: { id?: string; label
           <div>
             <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-subtle lg:sticky lg:top-28">
               <span aria-hidden="true" className="h-px w-6 bg-accent" />
-              {label}
+              <ScrambleText text={label.toUpperCase()} />
             </p>
           </div>
           <div className="min-w-0">
@@ -91,7 +94,11 @@ export function CaseSection({ id, label, title, children }: { id?: string; label
 }
 
 export function Prose({ children }: { children: ReactNode }) {
-  return <div className="prose-body max-w-[70ch] text-[16.5px] leading-[1.8]">{children}</div>;
+  return (
+    <ReadMore className="prose-body max-w-[70ch] text-[16.5px] leading-[1.8]" lineHeight="1.8em">
+      {children}
+    </ReadMore>
+  );
 }
 
 export function Stats({ items }: { items: { claim?: ClaimData; value?: string; label: string }[] }) {
@@ -101,7 +108,7 @@ export function Stats({ items }: { items: { claim?: ClaimData; value?: string; l
         {items.map((s, i) => (
           <Reveal key={s.label} delay={0.06 * i} className="bg-bg px-4 py-8 sm:px-8 sm:py-10">
             <div className="font-display text-4xl leading-none text-fg sm:text-5xl">
-              {s.claim ? <Claim claim={s.claim} className="font-normal" /> : s.value}
+              {s.claim ? <Claim claim={s.claim} className="font-normal" animate /> : s.value}
             </div>
             <div className="mt-3 max-w-[260px] text-[13px] leading-snug text-muted">{s.label}</div>
           </Reveal>
@@ -113,12 +120,14 @@ export function Stats({ items }: { items: { claim?: ClaimData; value?: string; l
 
 export function Decision({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <Reveal className="spot mb-4 rounded-2xl border border-line bg-elev/40 p-6 last:mb-0 sm:p-7">
+    <Reveal className="spot mb-4 rounded-2xl border border-line bg-elev/40 p-6 last:mb-0 sm:p-7" >
       <h3 className="flex items-start gap-3 text-lg font-semibold tracking-[-0.01em] text-fg">
         <span aria-hidden="true" className="mt-[11px] h-px w-4 shrink-0 bg-accent" />
         {title}
       </h3>
-      <div className="prose-body mt-3 max-w-[68ch] text-[15.5px] leading-relaxed sm:pl-7">{children}</div>
+      <div className="mt-3 sm:pl-7">
+        <ReadMore className="prose-body max-w-[68ch] text-[15.5px] leading-relaxed">{children}</ReadMore>
+      </div>
     </Reveal>
   );
 }
@@ -128,6 +137,7 @@ export function NextCase({ href, title, note }: { href: string; title: string; n
     <Container className="py-16 sm:py-24">
       <Link
         href={href}
+        data-tilt=""
         className="spot group relative flex items-center justify-between gap-6 overflow-hidden rounded-[28px] border border-line bg-elev/50 p-7 transition-colors hover:border-line-strong sm:p-10"
       >
         <span>

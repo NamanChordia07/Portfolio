@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="https://namanchordia.vercel.app">
-    <img src="assets/naman.png" width="148" height="148" alt="Naman Chordia" />
+    <img src="assets/naman.png" width="200" alt="Naman Chordia" />
   </a>
 </p>
 

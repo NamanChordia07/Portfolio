@@ -24,11 +24,13 @@ Design notes:
 - **Look:** near-black (warm paper in light mode), one ember accent, Instrument Serif display type with
   italic accent words over Geist Sans and Mono. Dark is the default; the light theme is stored once chosen
   (no flash). Full-bleed layout up to 1560px.
-- **Interaction:** a pointer-following spotlight and card borders that light up under the cursor; a portrait card
-  that tilts in 3D with drifting fact chips; magnetic buttons; a ⌘K / Ctrl K command menu (navigate, copy email,
-  call, download the resume, switch theme); live CSS visuals on each project card that pause off screen; a timeline
-  that fills as you scroll; scroll reveals. Everything degrades to a still, complete page under reduced motion or
-  without JavaScript.
+- **Interaction:** the cursor carries a soft red light (bigger over anything clickable, brighter while scrolling;
+  on phones it follows the finger), and every click or tap throws a ring of sparks. Cards lean toward the pointer
+  and light their borders; the footer wordmark fills with ember under the cursor; numbers count up to their sourced
+  values; section labels decode into place; the tech marquee speeds up and reverses with scroll; a reading-progress
+  line runs along the top. Also: a portrait card that tilts in 3D, magnetic buttons, a ⌘K / Ctrl K command menu,
+  live CSS visuals on each project card, a scroll-filled timeline. On phones, long text shows two lines with
+  "Read more". Everything degrades to a still, complete page under reduced motion or without JavaScript.
 - **Every number has a receipt.** Figures render through `Claim`, which shows its source on hover or keyboard
   focus (a bottom card on phones).
 - **Real output, not mock-ups.** The Proofline case study and card embed the verifier's actual output, exported by

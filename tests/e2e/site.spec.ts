@@ -101,6 +101,47 @@ test("command menu opens with Ctrl+K and navigates", async ({ page, isMobile }) 
   await expect(dialog).toBeHidden();
 });
 
+test("the cursor carries a light and every click throws sparks", async ({ page, isMobile }) => {
+  test.skip(isMobile, "pointer light is a mouse feature; taps are covered by the burst below");
+  await page.goto("/");
+  await expect(page.locator(".cursor-light")).toHaveCount(1);
+  await expect(async () => {
+    await page.mouse.move(400 + Math.random() * 40, 420);
+    await expect(page.locator("html")).toHaveAttribute("data-cursor", /on|hover/, { timeout: 500 });
+  }).toPass();
+  await page.mouse.click(700, 860);
+  await expect(page.locator(".burst-layer .burst-ring").first()).toBeAttached();
+  await expect(page.locator(".burst-layer .burst-spark").first()).toBeAttached();
+  // bursts clean up after themselves
+  await expect(page.locator(".burst-layer > *")).toHaveCount(0, { timeout: 3000 });
+});
+
+test("numbers count up to their sourced values", async ({ page }) => {
+  await page.goto("/");
+  const band = page.locator('section[aria-label="By the numbers"] .claim').first();
+  await band.scrollIntoViewIfNeeded();
+  await expect(band).toContainText("~2.9 s", { timeout: 4000 });
+});
+
+test("long text collapses to two lines with Read more on phones", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "phones only; desktop always shows the full text");
+  await page.goto("/");
+  const toggle = page.locator("#work").getByRole("button", { name: "Read more" }).first();
+  await toggle.scrollIntoViewIfNeeded();
+  await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  const target = page.locator(`#${await toggle.getAttribute("aria-controls")}`.replace(/:/g, "\\:"));
+  const collapsed = (await target.boundingBox())!.height;
+  await toggle.click();
+  await expect(page.locator("#work").getByRole("button", { name: "Show less" }).first()).toHaveAttribute("aria-expanded", "true");
+  expect((await target.boundingBox())!.height).toBeGreaterThan(collapsed + 20);
+});
+
+test("desktop shows full text with no Read more toggles", async ({ page, isMobile }) => {
+  test.skip(isMobile, "desktop only");
+  await page.goto("/");
+  await expect(page.getByRole("button", { name: "Read more" })).toHaveCount(0);
+});
+
 test("command menu opens from the header button", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Open command menu" }).click();

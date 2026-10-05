@@ -3,7 +3,7 @@ import Link from "next/link";
 import { site } from "@/content/site";
 
 import { GitHub, LinkedIn, Mail, Phone } from "./Icons";
-import { LocalTime } from "./Interactive";
+import { LocalTime, Magnetic } from "./Interactive";
 
 const socials = [
   { href: site.github, label: "GitHub", icon: GitHub, external: true },
@@ -26,6 +26,7 @@ export function Footer() {
           <ul className="flex gap-2">
             {socials.map(({ href, label, icon: Icon, external }) => (
               <li key={label}>
+                <Magnetic strength={0.35}>
                 <a
                   href={href}
                   aria-label={label}
@@ -35,6 +36,7 @@ export function Footer() {
                 >
                   <Icon className="size-[18px]" />
                 </a>
+                </Magnetic>
               </li>
             ))}
           </ul>
@@ -42,7 +44,7 @@ export function Footer() {
       </div>
       <p
         aria-hidden="true"
-        className="mx-auto mt-10 max-w-[1560px] select-none px-4 text-center font-display text-[clamp(3.5rem,15.5vw,13rem)] leading-[0.82] tracking-[-0.04em] text-transparent sm:px-6"
+        className="spot-text mx-auto mt-10 max-w-[1560px] select-none px-4 text-center font-display text-[clamp(3.5rem,15.5vw,13rem)] leading-[0.82] tracking-[-0.04em] text-transparent sm:px-6"
         style={{ WebkitTextStroke: "1px var(--line-strong)" }}
       >
         Naman Chordia

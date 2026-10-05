@@ -213,18 +213,171 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* page-wide spotlight that follows the pointer (set by <Spotlight/>; hidden on touch) */
-.page-glow {
+/* ---------- the cursor's light ----------
+   A small red glow that follows the pointer (and the finger on touch screens), blended onto the page:
+   screen on dark (it lights things up), multiply on light (it tints them). It grows over anything
+   clickable, brightens while scrolling and flashes on click. Coordinates come from <Spotlight/>. */
+@property --cl-r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 150px;
+}
+@property --cl-a {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+:root {
+  --cl-rgb: 255 70 70;
+  --cl-strength: 0.34;
+  --cl-blend: screen;
+}
+:root[data-theme="light"] {
+  --cl-rgb: 239 68 68;
+  --cl-strength: 0.26;
+  --cl-blend: multiply;
+}
+.cursor-light {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 55;
   pointer-events: none;
-  background: radial-gradient(640px circle at var(--mx, 50%) var(--my, -20%), var(--glow), transparent 70%);
-  transition: opacity 0.4s ease;
+  opacity: 0;
+  mix-blend-mode: var(--cl-blend);
+  background:
+    radial-gradient(
+      circle var(--cl-r) at var(--mx, -500px) var(--my, -500px),
+      rgb(var(--cl-rgb) / calc(var(--cl-strength) * var(--cl-a))),
+      rgb(var(--cl-rgb) / calc(var(--cl-strength) * 0.35 * var(--cl-a))) 42%,
+      transparent 100%
+    ),
+    radial-gradient(640px circle at var(--mx, -500px) var(--my, -500px), var(--glow), transparent 70%);
+  transition:
+    opacity 0.4s ease,
+    --cl-r 0.45s var(--ease),
+    --cl-a 0.3s ease;
 }
-@media (hover: none) {
-  .page-glow {
+[data-cursor] .cursor-light {
+  opacity: 1;
+}
+[data-cursor="hover"] {
+  --cl-r: 210px;
+  --cl-a: 1.3;
+}
+[data-cursor-scroll] {
+  --cl-a: 1.55;
+}
+[data-cursor-flash] {
+  --cl-r: 270px;
+  --cl-a: 2.2;
+}
+
+/* click / tap bursts */
+.burst-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 66;
+  pointer-events: none;
+  overflow: hidden;
+}
+.burst-ring,
+.burst-core,
+.burst-spark {
+  position: absolute;
+  pointer-events: none;
+}
+.burst-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  box-shadow:
+    0 0 24px color-mix(in oklab, var(--accent) 55%, transparent),
+    inset 0 0 18px color-mix(in oklab, var(--accent) 35%, transparent);
+}
+.burst-core {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgb(var(--cl-rgb) / 0.9), transparent 70%);
+}
+.burst-spark {
+  width: 18px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.burst-spark-1 {
+  background: rgb(var(--cl-rgb));
+  box-shadow: 0 0 8px rgb(var(--cl-rgb));
+}
+.burst-spark-2 {
+  width: 8px;
+  background: var(--fg);
+  box-shadow: none;
+}
+
+/* reading progress along the top edge (scroll-driven; hidden where unsupported) */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 61;
+  pointer-events: none;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--accent), rgb(var(--cl-rgb)));
+  box-shadow: 0 0 12px var(--accent);
+  animation: progress linear both;
+  animation-timeline: scroll(root);
+}
+@keyframes progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+@supports not (animation-timeline: scroll()) {
+  .scroll-progress {
     display: none;
+  }
+}
+
+/* cards that lean toward the pointer; the transform exists only while tilting, so nothing inside
+   gets a new containing block the rest of the time (fixed-position tooltips stay put) */
+[data-tilt] {
+  transition: transform 0.6s var(--ease);
+}
+[data-tilt][data-tilting] {
+  transform: perspective(1400px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(0);
+  transition: transform 0.15s ease-out;
+}
+
+/* the footer wordmark fills with ember under the pointer */
+.spot-text {
+  background-image: radial-gradient(240px circle at var(--x, -999px) var(--y, -999px), var(--accent), transparent 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* hero words that react to hover */
+.hero-word {
+  display: inline-block;
+  transition:
+    transform 0.45s var(--ease),
+    color 0.3s ease;
+}
+.hero-word:hover {
+  transform: translateY(-0.07em) rotate(-2deg);
+  color: var(--accent);
+}
+
+/* "Read more" on phones: two lines, faded, until expanded */
+@media (max-width: 639px) {
+  .rm-clamp {
+    max-height: calc(var(--rm-lh, 1.65em) * var(--rm-lines, 2));
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, #000 40%, transparent);
   }
 }
 

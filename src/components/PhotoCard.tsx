@@ -9,9 +9,9 @@ import { MapPin } from "./Icons";
 import { LocalTime } from "./Interactive";
 
 const chips = [
-  { text: `AI voice agent · ${claims.vaLatency.value} median reply`, className: "-right-16 top-8", depth: 26 },
-  { text: `Proofline · ${claims.recall.value} errors caught`, className: "-left-20 top-[46%]", depth: -34 },
-  { text: `ClueCode · ${claims.ccTests.value} tests`, className: "-right-8 bottom-28", depth: 18 },
+  { text: `AI voice agent · ${claims.vaLatency.value} median reply`, className: "-right-24 top-[14%]", depth: 26 },
+  { text: `Proofline · ${claims.recall.value} errors caught`, className: "-left-28 top-[48%]", depth: -34 },
+  { text: `ClueCode · ${claims.ccTests.value} tests`, className: "-right-12 bottom-[20%]", depth: 18 },
 ];
 
 /**
@@ -40,7 +40,7 @@ export function PhotoCard() {
   }
 
   return (
-    <div ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} className="group/photo relative w-full max-w-[400px] [perspective:1100px] sm:mx-auto 2xl:max-w-[440px]">
+    <div ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} className="group/photo relative w-full max-w-[400px] [perspective:1100px] sm:mx-auto lg:w-[min(360px,calc((100svh-230px)*0.5625))] 2xl:w-[min(410px,calc((100svh-230px)*0.5625))] 2xl:max-w-none">
       <div
         aria-hidden="true"
         className="absolute -inset-10 rounded-full opacity-70 blur-3xl transition-opacity duration-700 group-hover/photo:opacity-100"
@@ -62,11 +62,11 @@ export function PhotoCard() {
           <Image
             src={site.photo}
             alt="Portrait of Naman Chordia"
-            width={400}
-            height={400}
+            width={900}
+            height={1600}
             priority
-            sizes="(min-width: 1536px) 440px, 400px"
-            className="aspect-square w-full object-cover saturate-[0.85] transition-[filter,transform] duration-700 ease-[var(--ease)] group-hover/photo:scale-[1.03] group-hover/photo:saturate-100"
+            sizes="(min-width: 1536px) 410px, (min-width: 1024px) 360px, 400px"
+            className="aspect-[9/16] h-auto w-full object-cover saturate-[0.92] transition-[filter,transform] duration-700 ease-[var(--ease)] group-hover/photo:saturate-110"
           />
           <div
             aria-hidden="true"
@@ -78,7 +78,7 @@ export function PhotoCard() {
               <span className="block text-[15px] font-medium text-fg">Naman Chordia</span>
               <span className="block text-xs text-muted">AI &amp; Automation Developer · IDeaS</span>
             </span>
-            <span className="flex shrink-0 flex-col items-end gap-0.5 font-mono text-[11px] text-subtle">
+            <span className="flex shrink-0 flex-col items-end gap-0.5 font-mono text-[11px] text-subtle max-sm:hidden">
               <span className="flex items-center gap-1">
                 <MapPin className="size-3" /> Pune
               </span>
