@@ -4,6 +4,7 @@ import type { CSSProperties, ReactNode } from "react";
 
 import { Claim } from "@/components/Claim";
 import { ArrowDown, ArrowRight, ArrowUpRight, Download, FileText, GitHub, Layers, LinkedIn, Mail, Phone, Sparkle, Workflow } from "@/components/Icons";
+import { ReadMore, ScrambleText, VelocityMarquee } from "@/components/Effects";
 import { CopyButton, Magnetic } from "@/components/Interactive";
 import { PhotoCard } from "@/components/PhotoCard";
 import { Reveal } from "@/components/Reveal";
@@ -52,19 +53,20 @@ function Hero() {
               <span className="pulse-dot size-1.5 rounded-full bg-accent" aria-hidden="true" />
               Available for new roles
             </span>
-            <span className="font-mono text-xs uppercase tracking-[0.16em] text-subtle">{site.shortRole}</span>
+            <ScrambleText text={site.shortRole.toUpperCase()} className="font-mono text-xs tracking-[0.16em] text-subtle" />
           </p>
           <h1 id="hero-title" className="mt-8 font-display text-[3.35rem] leading-[0.95] text-fg sm:text-[5rem] lg:text-[5.75rem] 2xl:text-[7.25rem]">
             {words.map((w, i) => (
               <span key={w} className="rise mr-[0.2em] inline-block" style={d(0.06 + i * 0.06)}>
-                {w}
+                <span className="hero-word">{w}</span>
               </span>
             ))}
             <em className="rise inline-block" style={d(0.42)}>
               outside the demo.
             </em>
           </h1>
-          <p className="rise mt-8 max-w-[580px] text-[17px] leading-relaxed text-muted sm:text-lg 2xl:max-w-[680px] 2xl:text-xl" style={d(0.55)}>
+          <div className="rise mt-8" style={d(0.55)}>
+          <ReadMore as="p" className="max-w-[580px] text-[17px] leading-relaxed text-muted sm:text-lg 2xl:max-w-[680px] 2xl:text-xl">
             I&apos;m Naman, an AI &amp; Automation Developer at IDeaS (a SAS company). I co-built a real-time{" "}
             <Link href="/work/voice-sales-agent" className="link">
               AI voice sales agent
@@ -78,7 +80,8 @@ function Hero() {
               ClueCode
             </Link>
             , a subscription desktop AI app, solo.
-          </p>
+          </ReadMore>
+          </div>
           <p className="rise mt-5 flex flex-wrap items-center gap-x-2 text-[15px] text-muted" style={d(0.62)}>
             <span>Open to</span>
             <span className="sr-only">Forward Deployed Engineer, Applied AI Engineer and Software Engineer roles.</span>
@@ -133,7 +136,7 @@ function Hero() {
             </li>
           </ul>
         </div>
-        <div className="fade-in order-first max-w-[300px] sm:max-w-none lg:order-none" style={d(0.3)}>
+        <div className="fade-in order-first max-w-[205px] sm:max-w-none lg:order-none" style={d(0.3)}>
           <PhotoCard />
         </div>
       </Container>
@@ -154,14 +157,7 @@ function Marquee() {
     <div className="marquee relative border-y border-line bg-sunk/50 py-5">
       <p className="sr-only">Tools I work with: {stack.join(", ")}.</p>
       <div aria-hidden="true" className="mask-x overflow-hidden">
-        <div className="marquee-track flex w-max">
-          {[...stack, ...stack].map((t, i) => (
-            <span key={i} className="flex items-center gap-10 pr-10 font-mono text-[13px] uppercase tracking-[0.16em] text-muted">
-              {t}
-              <span className="text-accent">✦</span>
-            </span>
-          ))}
-        </div>
+        <VelocityMarquee items={stack} />
       </div>
     </div>
   );
@@ -222,6 +218,7 @@ function WorkCard({ item, featured = false }: { item: WorkItem; featured?: boole
   const notes = item.facts.filter((f): f is string => typeof f === "string").slice(0, featured ? 1 : 0);
   return (
     <article
+      data-tilt=""
       className={`spot group relative flex h-full flex-col rounded-[28px] border border-line bg-elev/60 p-2.5 transition-[border-color,transform] duration-500 hover:border-line-strong has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent ${
         featured ? "lg:grid lg:grid-cols-[1fr_1.05fr] lg:gap-2.5" : ""
       }`}
@@ -239,7 +236,9 @@ function WorkCard({ item, featured = false }: { item: WorkItem; featured?: boole
             {item.title}
           </Link>
         </h3>
-        <p className={`mt-4 leading-relaxed text-muted ${featured ? "max-w-xl text-[16.5px]" : "text-[15px]"}`}>{item.summary}</p>
+        <ReadMore as="p" className={`mt-4 leading-relaxed text-muted ${featured ? "max-w-xl text-[16.5px]" : "text-[15px]"}`}>
+          {item.summary}
+        </ReadMore>
         <ul className="relative z-10 mt-6 flex flex-wrap gap-2">
           {facts.map((f) => (
             <li key={f.value} className="flex items-center gap-2 rounded-full border border-line bg-bg/50 px-3 py-1.5 text-[13px] text-muted">
@@ -294,7 +293,7 @@ function Numbers() {
         {items.map((it, i) => (
           <Reveal key={it.label} delay={0.06 * i} className="bg-bg px-6 py-10 sm:px-8">
             <p className="font-display text-5xl leading-none text-fg sm:text-[3.4rem]">
-              <Claim claim={it.claim} className="font-normal" />
+              <Claim claim={it.claim} className="font-normal" animate />
             </p>
             <p className="mt-4 max-w-[240px] text-sm leading-relaxed text-muted">{it.label}</p>
           </Reveal>
@@ -369,12 +368,16 @@ function Areas() {
           const Icon = areaIcons[i]!;
           return (
             <Reveal key={a.title} delay={0.07 * i} className="h-full">
-              <div className="spot flex h-full flex-col rounded-3xl border border-line bg-elev/60 p-6 sm:p-7">
-                <span className="grid size-11 place-items-center rounded-2xl border border-accent/30 bg-accent-soft text-accent">
+              <div data-tilt="" className="spot group flex h-full flex-col rounded-3xl border border-line bg-elev/60 p-6 sm:p-7">
+                <span className="grid size-11 place-items-center rounded-2xl border border-accent/30 bg-accent-soft text-accent transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110">
                   <Icon className="size-5" />
                 </span>
                 <h3 className="mt-6 text-xl font-semibold tracking-[-0.015em] text-fg">{a.title}</h3>
-                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-muted">{a.body}</p>
+                <div className="mt-3 flex-1">
+                  <ReadMore as="p" className="text-[15px] leading-relaxed text-muted">
+                    {a.body}
+                  </ReadMore>
+                </div>
                 <div className="mt-6 flex flex-wrap gap-1.5">
                   {a.tools.map((t) => (
                     <Tag key={t}>{t}</Tag>
@@ -390,7 +393,9 @@ function Areas() {
           <Reveal as="li" key={p.title} delay={0.07 * i}>
             <span className="font-display text-5xl italic leading-none text-accent">{String(i + 1).padStart(2, "0")}</span>
             <h3 className="mt-4 text-lg font-semibold text-fg">{p.title}</h3>
-            <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.body}</p>
+            <ReadMore as="p" className="mt-2 text-[15px] leading-relaxed text-muted">
+              {p.body}
+            </ReadMore>
           </Reveal>
         ))}
       </ol>
@@ -424,9 +429,9 @@ function Contact() {
             style={{ background: "radial-gradient(60% 80% at 100% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 70%)" }}
           />
           <div className="relative">
-            <p className="max-w-lg text-[17px] leading-relaxed text-muted">
+            <ReadMore as="p" className="max-w-lg text-[17px] leading-relaxed text-muted">
               I&apos;m open to {site.openTo} Email or call; I reply within a day.
-            </p>
+            </ReadMore>
             <a
               href={`mailto:${site.email}`}
               className="mt-8 block font-display text-[1.7rem] leading-tight text-fg transition-colors [overflow-wrap:anywhere] hover:text-accent sm:text-5xl"
@@ -460,6 +465,7 @@ function Contact() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-tilt=""
                 className="spot group flex h-full items-center gap-4 rounded-[28px] border border-line bg-elev/60 p-6 transition-colors hover:border-line-strong"
               >
                 <span className="grid size-12 shrink-0 place-items-center rounded-2xl border border-line bg-bg text-fg">

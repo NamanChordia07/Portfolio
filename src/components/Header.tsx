@@ -43,7 +43,7 @@ export function Header() {
         <div className="flex h-14 items-center justify-between pl-2.5 pr-2 sm:pl-3">
           <Link href="/" className="group flex items-center gap-2.5 rounded-full pr-2" aria-label="Naman Chordia, home">
             <span className="relative block size-8 overflow-hidden rounded-full ring-1 ring-line-strong transition-transform duration-500 group-hover:scale-105">
-              <Image src={site.photo} alt="" width={64} height={64} className="size-full object-cover" priority />
+              <Image src={site.avatar} alt="" width={64} height={64} className="size-full object-cover" priority />
             </span>
             <span className="text-[15px] font-medium tracking-tight text-fg">
               Naman Chordia
