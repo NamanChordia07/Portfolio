@@ -17,8 +17,8 @@ export function Flow({ steps, label }: { steps: FlowStep[]; label: string }) {
     <ol aria-label={label} className="flex flex-col items-stretch gap-2 md:flex-row md:items-stretch md:gap-0">
       {steps.map((s, i) => (
         <li key={s.title} className="flex flex-col items-stretch md:flex-1 md:flex-row md:items-center">
-          <div className={`flex-1 rounded-xl border p-3.5 ${tones[s.tone ?? "default"]}`}>
-            <div className="font-mono text-[11px] uppercase tracking-wider text-subtle">{String(i + 1).padStart(2, "0")}</div>
+          <div className={`flex-1 rounded-2xl border p-4 ${tones[s.tone ?? "default"]}`}>
+            <div className="font-mono text-[11px] uppercase tracking-wider text-accent">{String(i + 1).padStart(2, "0")}</div>
             <div className="mt-1 text-sm font-medium text-fg">{s.title}</div>
             {s.detail && <div className="mt-1 text-[13px] leading-snug text-muted">{s.detail}</div>}
           </div>
@@ -38,12 +38,12 @@ export function Flow({ steps, label }: { steps: FlowStep[]; label: string }) {
 /** A labelled group of boxes, used for system maps. */
 export function Box({ title, items, tone = "default", className = "" }: { title: string; items: string[]; tone?: keyof typeof tones; className?: string }) {
   return (
-    <div className={`rounded-xl border p-4 ${tones[tone]} ${className}`}>
+    <div className={`rounded-2xl border p-5 ${tones[tone]} ${className}`}>
       <div className="text-sm font-medium text-fg">{title}</div>
       <ul className="mt-2 space-y-1 text-[13px] leading-snug text-muted">
         {items.map((it) => (
           <li key={it} className="flex gap-2">
-            <span aria-hidden="true" className="mt-[7px] size-1 shrink-0 rounded-full bg-subtle" />
+            <span aria-hidden="true" className="mt-[7px] size-1 shrink-0 rounded-full bg-accent" />
             {it}
           </li>
         ))}

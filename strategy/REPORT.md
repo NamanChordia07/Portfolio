@@ -70,7 +70,7 @@ Spring Boot work), and the relevant-coursework line.
 
 ## 7. Projects actually built
 
-**Proofline** (`projects/proofline`, ~2,100 lines of source plus tests):
+**Proofline** (`NamanChordia07/Proofline`, ~2,100 lines of source plus tests):
 
 - fact-sheet computation (ratio-of-sums, bases from column suffixes or the previous period, IDs and derivations);
 - number parsing with display-precision intervals, hedges, K/M/lakh/crore, bps and points;

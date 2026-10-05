@@ -8,7 +8,7 @@ import { claims } from "@/content/site";
 import { demo, pct } from "@/lib/demo";
 
 // Set to the public repository URL once Proofline is published; until then the page links nothing dead.
-const REPO: string | null = null;
+const REPO: string | null = "https://github.com/NamanChordia07/Proofline";
 
 export const metadata: Metadata = {
   title: "Proofline: verifying the numbers in LLM-written reports",

@@ -3,13 +3,18 @@ import "./globals.css";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata, Viewport } from "next";
+import { Instrument_Serif } from "next/font/google";
 import type { ReactNode } from "react";
 
+import { CommandMenu } from "@/components/CommandMenu";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { Spotlight, Toaster } from "@/components/Interactive";
 import { MotionRoot } from "@/components/Reveal";
 import { themeScript } from "@/components/ThemeToggle";
 import { site } from "@/content/site";
+
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-instrument", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -24,6 +29,7 @@ export const metadata: Metadata = {
     "Applied AI Engineer",
     "Software Engineer",
     "LLM evaluation",
+    "AI voice agent",
     "automation",
     "Playwright",
     "Next.js",
@@ -47,10 +53,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf8" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0c0e" },
-  ],
+  themeColor: "#09090b",
   width: "device-width",
   initialScale: 1,
 };
@@ -62,6 +65,8 @@ const personJsonLd = {
   url: site.url,
   jobTitle: "AI & Automation Developer",
   email: `mailto:${site.email}`,
+  telephone: site.phone.replace(/\s/g, ""),
+  image: `${site.url}${site.photo}`,
   address: { "@type": "PostalAddress", addressLocality: "Pune", addressCountry: "IN" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Vishwakarma Institute of Information Technology" },
   worksFor: { "@type": "Organization", name: "IDeaS Revenue Solutions", url: "https://ideas.com" },
@@ -71,7 +76,7 @@ const personJsonLd = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
@@ -79,14 +84,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-dvh antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-fg focus:px-3 focus:py-2 focus:text-bg"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-fg"
         >
           Skip to content
         </a>
         <MotionRoot>
+          <Spotlight />
           <Header />
-          <main id="main">{children}</main>
+          <main id="main" className="relative">
+            {children}
+          </main>
           <Footer />
+          <CommandMenu />
+          <Toaster />
         </MotionRoot>
       </body>
     </html>

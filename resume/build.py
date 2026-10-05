@@ -6,10 +6,10 @@ version for the website.
 
 Outputs
 -------
-dist/<file>.pdf    application copy (with phone number)
+dist/<file>.pdf    application copy
 dist/<file>.docx   editable Word copy (for portals that want .docx)
 dist/<file>.html   the exact HTML the PDF is printed from
-../public/resume/<file>.pdf   website copy (variants marked ``public: true``), phone number omitted
+../public/resume/<file>.pdf   website copy (variants marked ``public: true``)
 """
 
 from __future__ import annotations
@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import html
 import os
+import shutil
 import sys
 from pathlib import Path
 from typing import Any
@@ -56,11 +57,11 @@ def ranked(items: list[dict[str, Any]], variant: str, fallback: str | None = Non
 # --- structure shared by the HTML and DOCX renderers ----------------------------------------
 
 
-def assemble(data: dict[str, Any], variant: str, public: bool) -> dict[str, Any]:
+def assemble(data: dict[str, Any], variant: str) -> dict[str, Any]:
     v = data["variants"][variant]
     fb = v.get("fallback")
     person = data["person"]
-    line1 = [person["location"]] + ([] if public else [person["phone"]]) + [person["email"]]
+    line1 = [person["location"], person["phone"], person["email"]]
     contact = [line1, [link["label"] for link in person["links"]]]
     experience = []
     for org in data["experience"]:
@@ -342,26 +343,22 @@ def main() -> int:
     DIST.mkdir(exist_ok=True)
     PUBLIC.mkdir(parents=True, exist_ok=True)
     jobs = []
+    public = []
     for variant in args.variants.split(","):
         name = data["variants"][variant]["file"]
-        for public in (False, True) if data["variants"][variant].get("public") else (False,):
-            r = assemble(data, variant, public)
-            html_path = ROOT / (f".{name}.public.html" if public else f"dist/{name}.html")
-            html_doc = render_html(r)
-            if not public:
-                html_doc = html_doc.replace('url("fonts/', 'url("../fonts/')
-            html_path.write_text(html_doc, encoding="utf-8")
-            pdf_path = (PUBLIC if public else DIST) / f"{name}.pdf"
-            jobs.append((html_path, pdf_path))
-            if not public:
-                render_docx(r, DIST / f"{name}.docx")
+        r = assemble(data, variant)
+        html_path = DIST / f"{name}.html"
+        html_path.write_text(render_html(r).replace('url("fonts/', 'url("../fonts/'), encoding="utf-8")
+        jobs.append((html_path, DIST / f"{name}.pdf"))
+        render_docx(r, DIST / f"{name}.docx")
+        if data["variants"][variant].get("public"):
+            public.append(PUBLIC / f"{name}.pdf")
     print_pdfs(jobs)
-    for html_path, _ in jobs:
-        if html_path.name.startswith("."):
-            html_path.unlink()
-    previews([pdf for _, pdf in jobs if pdf.parent == PUBLIC])
+    for pdf in public:
+        shutil.copyfile(DIST / pdf.name, pdf)
+    previews(public)
     failed = False
-    for _, pdf in jobs:
+    for pdf in [pdf for _, pdf in jobs] + public:
         n = page_count(pdf)
         print(f"{pdf.relative_to(ROOT.parent)}: {n} page(s)")
         failed |= n != 1

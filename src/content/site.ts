@@ -11,11 +11,14 @@ export const site = {
   shortRole: "Software Engineer · AI & Automation",
   location: "Pune, India",
   email: "namanchordia88@gmail.com",
+  phone: "+91 87999 55051",
+  phoneHref: "tel:+918799955051",
+  photo: "/images/naman.jpg",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://namanchordia.vercel.app").replace(/\/$/, ""),
   github: "https://github.com/NamanChordia07",
   linkedin: "https://www.linkedin.com/in/naman-chordia-291b7a22a/",
   description:
-    "Software engineer building automation and AI systems for real-world workflows, and the checks that make them safe to ship. Proofline, ClueCode, and enterprise automation at IDeaS (a SAS company).",
+    "Software engineer building AI systems that work outside the demo: a real-time AI voice sales agent, Proofline (LLM report verification), ClueCode, and enterprise automation at IDeaS (a SAS company).",
   openTo: "Forward Deployed, Applied AI and Software Engineering roles, in India, remote or international.",
   currently: "AI & Automation Developer at IDeaS Revenue Solutions (a SAS company)",
 } as const;
@@ -23,7 +26,7 @@ export const site = {
 export const claims = {
   recall: {
     value: "98.9–100%",
-    source: "Share of injected numeric errors caught on three held-out phrasing families, first run each (projects/proofline/docs/BENCHMARK.md).",
+    source: "Share of injected numeric errors caught on three held-out phrasing families, first run each (github.com/NamanChordia07/Proofline, docs/BENCHMARK.md).",
   },
   falseAlarms: {
     value: "1.1–4.5%",
@@ -138,17 +141,6 @@ export type WorkItem = {
 
 export const work: WorkItem[] = [
   {
-    slug: "proofline",
-    title: "Proofline",
-    kicker: "Open source · Applied AI · 2026",
-    summary:
-      "Checks every number an LLM writes into a business report against the data, explains how a wrong one is wrong, and repairs it. A CLI that can gate a pipeline, a Python library, and an MCP server agents can call.",
-    facts: [claims.recall, claims.naive, claims.plTests],
-    stack: ["Python", "MCP", "Gemini", "Claude", "pytest", "Hypothesis"],
-    year: "2026",
-    links: [],  // the source repository is not public yet; the case study links it once it is
-  },
-  {
     slug: "voice-sales-agent",
     title: "AI Voice Sales Agent",
     kicker: "Client project · Voice AI · 2026",
@@ -158,6 +150,17 @@ export const work: WorkItem[] = [
     stack: ["Python", "FastAPI", "OpenAI", "PostgreSQL", "WebSockets", "FreJun"],
     year: "2026",
     links: [{ label: "Source", href: "https://github.com/NamanChordia07/ai-voice-sales-agent" }],
+  },
+  {
+    slug: "proofline",
+    title: "Proofline",
+    kicker: "Open source · Applied AI · 2026",
+    summary:
+      "Checks every number an LLM writes into a business report against the data, explains how a wrong one is wrong, and repairs it. A CLI that can gate a pipeline, a Python library, and an MCP server agents can call.",
+    facts: [claims.recall, claims.naive, claims.plTests],
+    stack: ["Python", "MCP", "Gemini", "Claude", "pytest", "Hypothesis"],
+    year: "2026",
+    links: [{ label: "Source", href: "https://github.com/NamanChordia07/Proofline" }],
   },
   {
     slug: "cluecode",
@@ -205,6 +208,27 @@ export const principles = [
   { title: "Start from the workflow", body: "Find out what people actually do, and what breaks, before choosing a tool. Most wins are plain automation." },
   { title: "Measure before you ship", body: "If a model is involved, decide how you will know it is right. Build the check, then the feature." },
   { title: "Make failure visible", body: "Unverifiable is not the same as correct. Surface it, log it, and give a human the evidence." },
+] as const;
+
+export const stack = [
+  "Python",
+  "TypeScript",
+  "OpenAI",
+  "Gemini",
+  "Claude",
+  "MCP",
+  "FastAPI",
+  "Next.js",
+  "React",
+  "Playwright",
+  "PostgreSQL",
+  "Electron",
+  "Spring Boot",
+  "Angular",
+  "Docker",
+  "Power Automate",
+  "WebSockets",
+  "pandas",
 ] as const;
 
 export const resume = {
