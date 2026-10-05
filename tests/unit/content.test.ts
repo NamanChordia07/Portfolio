@@ -3,7 +3,7 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { claims, experience, resumes, site, work } from "@/content/site";
+import { claims, experience, resume, site, work } from "@/content/site";
 import { demo, segments } from "@/lib/demo";
 
 const root = join(__dirname, "..", "..");
@@ -23,12 +23,10 @@ describe("site content", () => {
   });
 
   it("every resume download and preview exists, and web copies carry no phone number", () => {
-    for (const r of resumes) {
-      const pdf = join(root, "public", r.file);
-      expect(existsSync(pdf), r.file).toBe(true);
-      expect(readFileSync(pdf).subarray(0, 5).toString()).toBe("%PDF-");
-      expect(existsSync(join(root, "public", r.preview)), r.preview).toBe(true);
-    }
+    const pdf = join(root, "public", resume.file);
+    expect(existsSync(pdf), resume.file).toBe(true);
+    expect(readFileSync(pdf).subarray(0, 5).toString()).toBe("%PDF-");
+    expect(existsSync(join(root, "public", resume.preview)), resume.preview).toBe(true);
     const html = readFileSync(join(root, "resume/dist/Naman_Chordia_FDE_Resume.html"), "utf8");
     expect(html).toContain("+91");
   });

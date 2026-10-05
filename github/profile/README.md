@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://namanchordia.vercel.app"><img src="https://img.shields.io/badge/Portfolio-namanchordia.vercel.app-0b6e57?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" /></a>
-  <a href="https://www.linkedin.com/in/naman-chordia"><img src="https://img.shields.io/badge/LinkedIn-naman--chordia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  <a href="https://www.linkedin.com/in/naman-chordia-291b7a22a/"><img src="https://img.shields.io/badge/LinkedIn-Naman%20Chordia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:namanchordia88@gmail.com"><img src="https://img.shields.io/badge/Email-namanchordia88%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
 </p>
 
@@ -42,7 +42,7 @@ open_to: [Forward Deployed Engineer, Applied AI Engineer, Software Engineer]
       <p>An outbound AI agent that phones leads, runs an adaptive qualification script and hands qualified leads to sales. Streaming speech, barge-in, and an LLM whose every action is validated first. Co-built for a client; I owned telephony, call lifecycle and latency (<b>~2.9 s</b> median response, <b>121</b> tests).</p>
     </td>
     <td width="33%" valign="top">
-      <h4>🔎 <a href="https://github.com/NamanChordia07/proofline">Proofline</a></h4>
+      <h4>🔎 <a href="https://namanchordia.vercel.app/work/proofline">Proofline</a></h4>
       <sub>Python · MCP · pytest · Hypothesis</sub>
       <p>Checks every number an LLM writes into a business report against the data, explains how a wrong one is wrong, and repairs it. <b>98.9–100%</b> of injected errors caught on unseen phrasing, vs. 16–20% for a naive lookup. CLI, library and MCP server.</p>
     </td>

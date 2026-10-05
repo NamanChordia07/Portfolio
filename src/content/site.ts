@@ -13,7 +13,7 @@ export const site = {
   email: "namanchordia88@gmail.com",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://namanchordia.vercel.app").replace(/\/$/, ""),
   github: "https://github.com/NamanChordia07",
-  linkedin: "https://www.linkedin.com/in/naman-chordia",
+  linkedin: "https://www.linkedin.com/in/naman-chordia-291b7a22a/",
   description:
     "Software engineer building automation and AI systems for real-world workflows, and the checks that make them safe to ship. Proofline, ClueCode, and enterprise automation at IDeaS (a SAS company).",
   openTo: "Forward Deployed, Applied AI and Software Engineering roles, in India, remote or international.",
@@ -146,7 +146,7 @@ export const work: WorkItem[] = [
     facts: [claims.recall, claims.naive, claims.plTests],
     stack: ["Python", "MCP", "Gemini", "Claude", "pytest", "Hypothesis"],
     year: "2026",
-    links: [{ label: "Source", href: "https://github.com/NamanChordia07/proofline" }],
+    links: [],  // the source repository is not public yet; the case study links it once it is
   },
   {
     slug: "voice-sales-agent",
@@ -207,29 +207,12 @@ export const principles = [
   { title: "Make failure visible", body: "Unverifiable is not the same as correct. Surface it, log it, and give a human the evidence." },
 ] as const;
 
-export const resumes = [
-  {
-    id: "fde",
-    title: "Forward Deployed Engineer",
-    focus: "Enterprise automation, integration across systems, end-to-end delivery, applied AI.",
-    file: "/resume/Naman_Chordia_FDE_Resume.pdf",
-    preview: "/resume/previews/Naman_Chordia_FDE_Resume.png",
-  },
-  {
-    id: "ai",
-    title: "AI Engineer",
-    focus: "LLM systems, evaluation and guardrails, multimodal product work, automation.",
-    file: "/resume/Naman_Chordia_AI_Engineer_Resume.pdf",
-    preview: "/resume/previews/Naman_Chordia_AI_Engineer_Resume.png",
-  },
-  {
-    id: "sde",
-    title: "Software Engineer",
-    focus: "Java/Spring Boot and Angular, TypeScript full-stack, backend design, testing.",
-    file: "/resume/Naman_Chordia_SDE_Resume.pdf",
-    preview: "/resume/previews/Naman_Chordia_SDE_Resume.png",
-  },
-] as const;
+export const resume = {
+  title: "Resume",
+  focus: "One page: AI & automation at IDeaS, the AI voice sales agent, Proofline and ClueCode.",
+  file: "/resume/Naman_Chordia_Resume.pdf",
+  preview: "/resume/previews/Naman_Chordia_Resume.png",
+} as const;
 
 export const education = {
   school: "Vishwakarma Institute of Information Technology, Pune",

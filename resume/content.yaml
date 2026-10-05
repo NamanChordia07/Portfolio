@@ -18,9 +18,19 @@ person:
   links:
     - { label: namanchordia.vercel.app, url: "https://namanchordia.vercel.app" }
     - { label: github.com/NamanChordia07, url: "https://github.com/NamanChordia07" }
-    - { label: linkedin.com/in/naman-chordia, url: "https://www.linkedin.com/in/naman-chordia" }
+    - { label: linkedin.com/in/naman-chordia-291b7a22a, url: "https://www.linkedin.com/in/naman-chordia-291b7a22a/" }
 
 variants:
+  web:
+    # The one resume shown on the website: general wording (borrows FDE phrasing), not role-tailored.
+    file: Naman_Chordia_Resume
+    public: true
+    fallback: fde
+    headline: Software Engineer · AI & Automation
+    summary: >-
+      AI & Automation Developer at IDeaS (a SAS company) building LLM pipelines, browser automation and real-time
+      voice AI; co-built an AI voice sales agent, built Proofline, and shipped ClueCode, a production SaaS, solo.
+    sections: [summary, experience, projects, skills, education, leadership]
   fde:
     file: Naman_Chordia_FDE_Resume
     headline: Software Engineer · Enterprise Automation, Integration & Applied AI
@@ -74,7 +84,7 @@ experience:
               Wrote Playwright end-to-end automation that checks client configuration (account numbers, integration
               types) across Salesforce, the G3 revenue-management UI and its database, in Docker.
           - id: pricing_app
-            in: [ai, sde]
+            in: [ai, sde, web]
             rank: { fde: 4, ai: 2, sde: 3 }
             fde: >-
               Built a Streamlit tool (pandas, Altair) that automates best-available-rate trends, property/chain extraction
@@ -158,7 +168,7 @@ projects:
           reordering prompts for caching, one deadline per turn and streamed playback; 121 automated tests.
   - id: proofline
     name: Proofline
-    link: { label: github.com/NamanChordia07/proofline, url: "https://github.com/NamanChordia07/proofline" }
+    link: { label: namanchordia.vercel.app/work/proofline, url: "https://namanchordia.vercel.app/work/proofline" }
     tech: Python, MCP, pytest, Hypothesis
     dates: Sep 2026
     rank: { fde: 1, ai: 1, sde: 2 }
@@ -174,7 +184,7 @@ projects:
           Built a zero-dependency Python library and CLI that parses numbers with display-precision semantics, attributes
           each claim to a metric, entity and comparison basis, and verifies it against computed facts.
       - id: pl_eval
-        in: [ai]
+        in: [ai, web]
         text: >-
           Built the benchmark with independent ground truth (3 domains, 9 injected error types, held-out phrasing):
           98.9–100% recall at 1.1–4.5% false alarms on unseen phrasing, vs. 16–20% recall for a naive value lookup.
@@ -221,6 +231,12 @@ projects:
           with 270+ automated tests: unit, Postgres integration, Electron security and WCAG 2.1 AA end-to-end suites.
 
 skills:
+  web:
+    - [Languages, "Python, Java, TypeScript, JavaScript, SQL"]
+    - [AI & LLMs, "OpenAI, Gemini and Claude APIs, real-time voice agents (STT/TTS), MCP, evaluation and guardrails"]
+    - [Backend & integration, "FastAPI, Spring Boot, REST and WebSocket APIs, webhooks, PostgreSQL, telephony APIs"]
+    - [Frontend & automation, "Angular, React, Next.js, Electron, Playwright, Power Automate, Streamlit"]
+    - [Tooling, "Docker, Git, GitHub Actions, Vercel, pytest, Linux"]
   fde:
     - [Languages, "Python, Java, TypeScript, JavaScript, SQL"]
     - [Integration & automation, "FastAPI, REST, WebSockets, webhooks, telephony (FreJun, Twilio), Playwright, Power Automate"]

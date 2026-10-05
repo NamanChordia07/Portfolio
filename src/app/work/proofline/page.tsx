@@ -7,7 +7,8 @@ import { ProoflineDemo } from "@/components/ProoflineDemo";
 import { claims } from "@/content/site";
 import { demo, pct } from "@/lib/demo";
 
-const REPO = "https://github.com/NamanChordia07/proofline";
+// Set to the public repository URL once Proofline is published; until then the page links nothing dead.
+const REPO: string | null = null;
 
 export const metadata: Metadata = {
   title: "Proofline: verifying the numbers in LLM-written reports",
@@ -56,11 +57,20 @@ export default function ProoflinePage() {
             label: "Links",
             value: (
               <span className="flex flex-col gap-1">
-                <a className="link" href={REPO} target="_blank" rel="noopener noreferrer">
-                  Source on GitHub ↗
-                </a>
-                <a className="link" href={`${REPO}/blob/main/docs/BENCHMARK.md`} target="_blank" rel="noopener noreferrer">
-                  Benchmark write-up ↗
+                {REPO ? (
+                  <>
+                    <a className="link" href={REPO} target="_blank" rel="noopener noreferrer">
+                      Source on GitHub ↗
+                    </a>
+                    <a className="link" href={`${REPO}/blob/main/docs/BENCHMARK.md`} target="_blank" rel="noopener noreferrer">
+                      Benchmark write-up ↗
+                    </a>
+                  </>
+                ) : (
+                  <span className="text-muted">Source going public soon; the demo below runs on its real output.</span>
+                )}
+                <a className="link" href="#demo">
+                  Live demo ↓
                 </a>
               </span>
             ),

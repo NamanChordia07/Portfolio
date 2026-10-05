@@ -1,4 +1,5 @@
-"""Build the three role-specific resumes from content.yaml.
+"""Build the resumes from content.yaml: three role-specific versions for applications, and one combined
+version for the website.
 
     python build.py            # all variants: dist/*.pdf, dist/*.docx, dist/*.html, ../public/resume/*.pdf
     python build.py --check    # also fail if any PDF is longer than one page
@@ -8,7 +9,7 @@ Outputs
 dist/<file>.pdf    application copy (with phone number)
 dist/<file>.docx   editable Word copy (for portals that want .docx)
 dist/<file>.html   the exact HTML the PDF is printed from
-../public/resume/<file>.pdf   website copy, phone number omitted (it is crawlable)
+../public/resume/<file>.pdf   website copy (variants marked ``public: true``), phone number omitted
 """
 
 from __future__ import annotations
@@ -32,16 +33,24 @@ def load() -> dict[str, Any]:
     return yaml.safe_load((ROOT / "content.yaml").read_text(encoding="utf-8"))
 
 
-def pick(item: dict[str, Any], variant: str) -> str | None:
-    """The bullet text for a variant, or None if the bullet is excluded."""
-    if "in" in item and variant not in item["in"]:
+def pick(item: dict[str, Any], variant: str, fallback: str | None = None) -> str | None:
+    """The bullet text for a variant, or None if the bullet is excluded.
+
+    A variant with a ``fallback`` (the combined resume) borrows that variant's wording and inclusion where it has
+    none of its own.
+    """
+    if "in" in item and variant not in item["in"] and (fallback is None or fallback not in item["in"]):
         return None
-    text = item.get(variant) or item.get("text")
+    text = item.get(variant) or (item.get(fallback) if fallback else None) or item.get("text")
     return " ".join(text.split()) if text else None
 
 
-def ranked(items: list[dict[str, Any]], variant: str) -> list[dict[str, Any]]:
-    return sorted(items, key=lambda i: i.get("rank", {}).get(variant, 99))
+def ranked(items: list[dict[str, Any]], variant: str, fallback: str | None = None) -> list[dict[str, Any]]:
+    def key(i: dict[str, Any]) -> int:
+        rank = i.get("rank", {})
+        return int(rank.get(variant, rank.get(fallback, 99) if fallback else 99))
+
+    return sorted(items, key=key)
 
 
 # --- structure shared by the HTML and DOCX renderers ----------------------------------------
@@ -49,6 +58,7 @@ def ranked(items: list[dict[str, Any]], variant: str) -> list[dict[str, Any]]:
 
 def assemble(data: dict[str, Any], variant: str, public: bool) -> dict[str, Any]:
     v = data["variants"][variant]
+    fb = v.get("fallback")
     person = data["person"]
     line1 = [person["location"]] + ([] if public else [person["phone"]]) + [person["email"]]
     contact = [line1, [link["label"] for link in person["links"]]]
@@ -56,12 +66,12 @@ def assemble(data: dict[str, Any], variant: str, public: bool) -> dict[str, Any]
     for org in data["experience"]:
         roles = []
         for role in org["roles"]:
-            bullets = [t for b in ranked(role["bullets"], variant) if (t := pick(b, variant))]
+            bullets = [t for b in ranked(role["bullets"], variant, fb) if (t := pick(b, variant, fb))]
             roles.append({"title": role["title"], "dates": role["dates"], "bullets": bullets})
         experience.append({"company": org["company"], "location": org["location"], "roles": roles})
     projects = []
-    for p in ranked(data["projects"], variant):
-        bullets = [t for b in p["bullets"] if (t := pick(b, variant))]
+    for p in ranked(data["projects"], variant, fb):
+        bullets = [t for b in p["bullets"] if (t := pick(b, variant, fb))]
         projects.append({**p, "bullets": bullets})
     return {
         "name": person["name"],
@@ -72,7 +82,7 @@ def assemble(data: dict[str, Any], variant: str, public: bool) -> dict[str, Any]
         "sections": v["sections"],
         "experience": experience,
         "projects": projects,
-        "skills": data["skills"][variant],
+        "skills": data["skills"].get(variant) or data["skills"][fb],
         "education": data["education"],
         "leadership": [item["text"] for item in data["leadership"]],
     }
@@ -326,7 +336,7 @@ def page_count(pdf: Path) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="fail if any PDF exceeds one page")
-    ap.add_argument("--variants", default="fde,ai,sde")
+    ap.add_argument("--variants", default="fde,ai,sde,web")
     args = ap.parse_args()
     data = load()
     DIST.mkdir(exist_ok=True)
@@ -334,7 +344,7 @@ def main() -> int:
     jobs = []
     for variant in args.variants.split(","):
         name = data["variants"][variant]["file"]
-        for public in (False, True):
+        for public in (False, True) if data["variants"][variant].get("public") else (False,):
             r = assemble(data, variant, public)
             html_path = ROOT / (f".{name}.public.html" if public else f"dist/{name}.html")
             html_doc = render_html(r)

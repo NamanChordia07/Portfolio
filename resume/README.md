@@ -1,15 +1,16 @@
 # Resumes
 
-Three role-specific one-page resumes built from one source of truth.
+Four one-page resumes built from one source of truth: one combined version for the website and three role-specific versions for applications.
 
 | file | for |
 |---|---|
 | `dist/Naman_Chordia_FDE_Resume.pdf` / `.docx` | Forward Deployed Engineer, Solutions / Integration Engineer |
 | `dist/Naman_Chordia_AI_Engineer_Resume.pdf` / `.docx` | Applied AI Engineer, AI Engineer, LLM Engineer |
 | `dist/Naman_Chordia_SDE_Resume.pdf` / `.docx` | Software Engineer, SDE, Backend / Full-Stack Engineer |
+| `dist/Naman_Chordia_Resume.pdf` / `.docx` | General (the website's copy is `../public/resume/Naman_Chordia_Resume.pdf`) |
 
-`dist/` copies include your phone number (for applications). `../public/resume/` copies are
-served by the website and omit it.
+`dist/` copies include your phone number (for applications). Only the combined resume is copied to
+`../public/resume/` (served by the website), without the phone number.
 
 ## Edit and rebuild
 
