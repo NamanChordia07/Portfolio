@@ -40,19 +40,28 @@ for (const path of pages) {
   }
 }
 
-test("resume PDFs download as PDFs", async ({ request }) => {
-  for (const file of ["Naman_Chordia_FDE_Resume", "Naman_Chordia_AI_Engineer_Resume", "Naman_Chordia_SDE_Resume"]) {
-    const res = await request.get(`/resume/${file}.pdf`);
-    expect(res.status(), file).toBe(200);
-    expect(res.headers()["content-type"]).toContain("application/pdf");
-    expect((await res.body()).subarray(0, 5).toString()).toBe("%PDF-");
+test("the resume downloads as a PDF", async ({ request }) => {
+  const res = await request.get("/resume/Naman_Chordia_Resume.pdf");
+  expect(res.status()).toBe(200);
+  expect(res.headers()["content-type"]).toContain("application/pdf");
+  expect((await res.body()).subarray(0, 5).toString()).toBe("%PDF-");
+  for (const old of ["Naman_Chordia_FDE_Resume", "Naman_Chordia_AI_Engineer_Resume", "Naman_Chordia_SDE_Resume"]) {
+    expect((await request.get(`/resume/${old}.pdf`)).status(), old).toBe(404);
   }
 });
 
-test("resume page links to every PDF", async ({ page }) => {
+test("resume page offers exactly one resume", async ({ page }) => {
   await page.goto("/resume");
   const hrefs = await page.locator('a[download][href$=".pdf"]').evaluateAll((els) => els.map((e) => e.getAttribute("href")));
-  expect(new Set(hrefs).size).toBe(3);
+  expect(new Set(hrefs)).toEqual(new Set(["/resume/Naman_Chordia_Resume.pdf"]));
+});
+
+test("contact links point at the right profiles", async ({ page }) => {
+  await page.goto("/");
+  const hrefs = await page.locator("a[href]").evaluateAll((els) => els.map((e) => e.getAttribute("href") ?? ""));
+  expect(hrefs).toContain("https://www.linkedin.com/in/naman-chordia-291b7a22a/");
+  expect(hrefs.filter((h) => h.includes("linkedin.com") && !h.includes("291b7a22a"))).toEqual([]);
+  expect(hrefs.filter((h) => h.includes("github.com/NamanChordia07/proofline"))).toEqual([]);
 });
 
 test("case studies are reachable from the home page", async ({ page }) => {

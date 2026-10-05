@@ -51,5 +51,7 @@ The split repository includes its own CI (`projects/proofline/.github/workflows/
 
 ## Resumes
 
-See `resume/README.md`. Short version: edit `resume/content.yaml`, then `python build.py --check`,
-`python layout.py dist/*.html`, `python ats_check.py`.
+Four one-page versions come from `resume/content.yaml`: a combined resume (the only one on the website,
+`public/resume/Naman_Chordia_Resume.pdf`, phone number omitted) and FDE, AI Engineer and SDE versions for
+applications (`resume/dist/`, with phone number and .docx). See `resume/README.md`. Short version: edit
+`resume/content.yaml`, then `python build.py --check`, `python layout.py dist/*.html`, `python ats_check.py`.

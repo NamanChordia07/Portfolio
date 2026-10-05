@@ -4,7 +4,7 @@ import { Claim } from "@/components/Claim";
 import { HeroReceipt } from "@/components/HeroReceipt";
 import { Reveal } from "@/components/Reveal";
 import { ArrowLink, Container, Section, Tag } from "@/components/Section";
-import { areas, claims, education, experience, principles, resumes, site, work, type WorkItem } from "@/content/site";
+import { areas, claims, education, experience, principles, resume, site, work, type WorkItem } from "@/content/site";
 
 export default function Home() {
   return (
@@ -56,7 +56,7 @@ function Hero() {
               href="/resume"
               className="rounded-full border border-line-strong px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:bg-sunk"
             >
-              Resumes
+              Resume
             </Link>
             <a href={`mailto:${site.email}`} className="px-2 py-2.5 text-sm text-muted transition-colors hover:text-fg">
               {site.email}
@@ -277,18 +277,16 @@ function Contact() {
           </div>
         </div>
         <div className="rounded-2xl border border-line p-6">
-          <h3 className="font-medium text-fg">Resumes</h3>
-          <p className="mt-1 text-sm text-muted">One page each, tailored to the role.</p>
-          <ul className="mt-4 divide-y divide-line">
-            {resumes.map((r) => (
-              <li key={r.id} className="flex items-center justify-between gap-4 py-3">
-                <span className="text-[15px] text-fg">{r.title}</span>
-                <a href={r.file} className="font-mono text-xs text-muted underline decoration-line-strong underline-offset-4 hover:text-fg" download>
-                  PDF ↓
-                </a>
-              </li>
-            ))}
-          </ul>
+          <h3 className="font-medium text-fg">Resume</h3>
+          <p className="mt-1 text-sm text-muted">{resume.focus}</p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a href={resume.file} download className="rounded-full bg-fg px-4 py-2 text-sm font-medium text-bg transition-opacity hover:opacity-90">
+              Download PDF
+            </a>
+            <a href="/resume" className="rounded-full border border-line-strong px-4 py-2 text-sm text-fg transition-colors hover:bg-sunk">
+              Preview
+            </a>
+          </div>
         </div>
       </div>
     </Section>
