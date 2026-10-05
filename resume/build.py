@@ -66,9 +66,12 @@ def assemble(data: dict[str, Any], variant: str) -> dict[str, Any]:
     experience = []
     for org in data["experience"]:
         roles = []
-        for role in org["roles"]:
+        short = org["company"].split(" (")[0]
+        for i, role in enumerate(org["roles"]):
             bullets = [t for b in ranked(role["bullets"], variant, fb) if (t := pick(b, variant, fb))]
-            roles.append({"title": role["title"], "dates": role["dates"], "bullets": bullets})
+            # later roles at the same company name it, so parsers do not merge them into the first role
+            display = role["title"] if i == 0 else f"{role['title']}, {short}"
+            roles.append({"title": role["title"], "display": display, "dates": role["dates"], "bullets": bullets})
         experience.append({"company": org["company"], "location": org["location"], "roles": roles})
     projects = []
     for p in ranked(data["projects"], variant, fb):
@@ -163,7 +166,7 @@ def render_html(r: dict[str, Any]) -> str:
                     )
                     bullets = "".join(f"<li>{e(b)}</li>" for b in role["bullets"])
                     roles.append(
-                        f"{head}<div class='row role'><span>{e(role['title'])}</span><span class='right'>{e(role['dates'])}</span></div>"
+                        f"{head}<div class='row role'><span>{e(role['display'])}</span><span class='right'>{e(role['dates'])}</span></div>"
                         f"<ul>{bullets}</ul>"
                     )
                 items.append(f"<div class='entry'>{''.join(roles)}</div>")
@@ -287,7 +290,7 @@ def render_docx(r: dict[str, Any], path: Path) -> None:
             for org in r["experience"]:
                 row(org["company"], org["location"])
                 for role in org["roles"]:
-                    row(role["title"], role["dates"], bold_left=False)
+                    row(role["display"], role["dates"], bold_left=False)
                     bullets(role["bullets"])
         elif section == "projects":
             heading("Projects")
