@@ -94,16 +94,16 @@ export const experience: Job[] = [
         title: "AI & Automation Developer",
         dates: "Nov 2025 – Present",
         points: [
-          "Built a Python pipeline that generates client forecast-review reports (forecast vs. projections) as PDF, Word and Excel with LLM-written commentary; modular services, Dockerised, through SIT, UAT and hypercare.",
-          "Automated end-to-end checks of client setup on the G3 revenue-management platform with Playwright, validating account numbers and integration types across Salesforce, the product UI and its database.",
-          "Built a Streamlit analytics tool (pandas, Altair) for best-available-rate trends and pricing-decision validation, structured as configuration, validation, calculation and chart services.",
+          "Engineered a Dockerized Python pipeline of 4 modular services that generates client forecast-review reports in 3 formats (PDF, Word, Excel) with LLM-written commentary, delivered through SIT, UAT and hypercare.",
+          "Developed Playwright end-to-end checks that validate client setup (account numbers, integration types) across 3 systems: Salesforce, the G3 revenue-management UI and its database.",
+          "Created a Streamlit analytics app (pandas, Altair) of 4 services (config, validation, calculation, charts) for best-available-rate trends and pricing-decision validation.",
         ],
       },
       {
         title: "Business Intelligence & Automation Intern",
         dates: "Jul 2025 – Oct 2025",
         points: [
-          "Automated a shared customer-care mailbox with scheduled Power Automate flows that log client and system emails to Excel and reconcile replies from Sent Items.",
+          "Streamlined a shared customer-care mailbox with scheduled Power Automate flows that log incoming emails to Excel and reconcile replies from Sent Items, saving the team about 3 hours of manual tracking.",
         ],
       },
       {
@@ -111,7 +111,7 @@ export const experience: Job[] = [
         dates: "Jan 2025 – Jun 2025",
         points: [
           "Migrated the legacy JSP/Struts “At-a-Glance” dashboard to Angular and Spring Boot: Angular components and REST APIs over optimized SQL and Java Streams.",
-          "Extended the APIs from single-day to custom date ranges and shipped the new UI behind a database-driven feature toggle for a controlled rollout.",
+          "Extended the APIs from single-day to custom date ranges and released the new UI behind a database-driven feature toggle for a staged rollout.",
         ],
       },
     ],
@@ -123,7 +123,7 @@ export const experience: Job[] = [
       {
         title: "Security Software Intern",
         dates: "Jul 2024 – Dec 2024",
-        points: ["Detected and mitigated XSS, SQL-injection and misconfiguration risks in internal audits; automated vulnerability scanning."],
+        points: ["Identified and mitigated 3 risk classes (XSS, SQL injection, misconfiguration) in internal security audits; automated vulnerability scanning."],
       },
     ],
   },
@@ -191,7 +191,7 @@ export const areas = [
   {
     title: "Applied AI you can trust",
     body: "LLM features with the evaluation, guardrails and fallbacks that let them ship: grounded generation, verification, model fallback, prompt-injection defence.",
-    tools: ["OpenAI", "Gemini", "Claude", "voice agents", "MCP", "evals", "Python"],
+    tools: ["OpenAI", "Gemini", "Claude", "LangChain", "LangGraph", "voice agents", "MCP", "evals", "Python"],
   },
   {
     title: "Enterprise automation & integration",
@@ -201,7 +201,7 @@ export const areas = [
   {
     title: "Product engineering",
     body: "Full-stack systems that hold up: auth, payments, data models with real constraints, desktop security, and test suites that catch regressions before users do.",
-    tools: ["TypeScript", "Next.js", "Electron", "Java", "Spring Boot", "Angular", "PostgreSQL"],
+    tools: ["TypeScript", "Next.js", "Electron", "Java", "Spring Boot", "Angular", "PostgreSQL", "CI/CD"],
   },
 ] as const;
 
@@ -217,6 +217,8 @@ export const stack = [
   "OpenAI",
   "Gemini",
   "Claude",
+  "LangChain",
+  "LangGraph",
   "MCP",
   "FastAPI",
   "Next.js",
@@ -227,6 +229,7 @@ export const stack = [
   "Spring Boot",
   "Angular",
   "Docker",
+  "GitHub Actions",
   "Power Automate",
   "WebSockets",
   "pandas",

@@ -16,12 +16,14 @@ Every copy carries the full contact line (location, phone, email, links). Only t
 
 ```bash
 python3 -m venv .venv && . .venv/bin/activate
-pip install python-docx playwright pypdf pyyaml pdfminer.six pypdfium2 pillow
+pip install python-docx playwright pypdf pyyaml pdfminer.six pypdfium2 pillow pyspellchecker
 # Playwright needs a Chromium: set CHROME_PATH, or run `playwright install chromium` once.
 
 python build.py --check     # PDFs + DOCX; fails if any PDF is not exactly one page
 python layout.py dist/*.html   # line count and last-line fill per bullet (flags orphans)
 python ats_check.py         # ATS parse test + JD keyword coverage -> ATS_REPORT.md
+python score.py             # Enhancv/Resumly-style content score: quantified bullets, repetition, spelling,
+                            # action verbs, ownership, structure, form, keywords (fails below 90)
 python render_pages.py dist/Naman_Chordia_FDE_Resume.pdf /tmp/pages   # PNG preview
 ```
 
